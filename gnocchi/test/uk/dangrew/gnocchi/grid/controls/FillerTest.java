@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.dangrew.gnocchi.grid.GridModel;
+import uk.dangrew.gnocchi.grid.model.GridModel;
 
 public class FillerTest {
 
@@ -44,29 +44,23 @@ public class FillerTest {
       
       systemUnderTest.fill();
       
-      for ( int i = 0; i < 10; i++ ) {
-         assertThat( grid.at( 0, i ), is( notNullValue() ) );
-         assertThat( grid.at( 1, i ), is( notNullValue() ) );
-         assertThat( grid.at( 2, i ), is( notNullValue() ) );
-         assertThat( grid.at( 3, i ), is( notNullValue() ) );
-         assertThat( grid.at( 5, i ), is( notNullValue() ) );
-         assertThat( grid.at( 6, i ), is( notNullValue() ) );
-         assertThat( grid.at( 8, i ), is( notNullValue() ) );
-         assertThat( grid.at( 9, i ), is( notNullValue() ) );
-      }
-      
-      for ( int i = 1; i < 10; i++ ) {
-         assertThat( grid.at( 4, i ), is( nullValue() ) );
-      }
       assertThat( grid.at( 4, 0 ), is( o1 ) );
+      assertThat( grid.at( 7, 0 ), is( o2 ) );
+   }//End Method
+   
+   @Test public void shouldFillGap(){
+      systemUnderTest.fill();
+      grid.set( null, 0, 0 );
       
-      for ( int i = 5; i < 10; i++ ) {
-         assertThat( grid.at( 7, i ), is( nullValue() ) );
-      }
-      assertThat( grid.at( 7, 4 ), is( o2 ) );
-      for ( int i = 0; i < 5; i++ ) {
-         assertThat( grid.at( 7, i ), is( notNullValue() ) );
-      }
+      Object o3 = grid.at( 0, 3 );
+      Object o2 = grid.at( 0, 2 );
+      Object o1 = grid.at( 0, 1 );
+      
+      systemUnderTest.fill();
+      assertThat( grid.at( 0, 3 ), is( notNullValue() ) );
+      assertThat( grid.at( 0, 2 ), is( o3 ) );
+      assertThat( grid.at( 0, 1 ), is( o2 ) );
+      assertThat( grid.at( 0, 0 ), is( o1 ) );
    }//End Method
 
 }//End Class

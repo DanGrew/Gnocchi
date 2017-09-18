@@ -8,6 +8,9 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.dangrew.gnocchi.grid.model.GridModel;
+import uk.dangrew.gnocchi.grid.model.GridPosition;
+
 public class GridModelTest {
    
    private static final int WIDTH = 10;
@@ -44,6 +47,59 @@ public class GridModelTest {
       Object o = new Object();
       systemUnderTest.set( o, 5, 6 );
       assertThat( systemUnderTest.at( 5, 6 ), is( o ) );
+      assertThat( systemUnderTest.of( o ), is( new GridPosition( 5, 6 ) ) );
+   }//End Method
+   
+   @Test public void shouldMoveObjectWhenPositionSet(){
+      Object object = new Object();
+      systemUnderTest.set( object, 4, 5 );
+      assertThat( systemUnderTest.at( 4, 5 ), is( object ) );
+      assertThat( systemUnderTest.of( object ), is( new GridPosition( 4, 5 ) ) );
+      
+      systemUnderTest.set( object, 3, 5 );
+      assertThat( systemUnderTest.at( 4, 5 ), is( nullValue() ) );
+      assertThat( systemUnderTest.at( 3, 5 ), is( object ) );
+      assertThat( systemUnderTest.of( object ), is( new GridPosition( 3, 5 ) ) );
+   }//End Method
+   
+   @Test public void shouldRemoveObject(){
+      Object object = new Object();
+      systemUnderTest.set( object, 4, 5 );
+      assertThat( systemUnderTest.at( 4, 5 ), is( object ) );
+      assertThat( systemUnderTest.of( object ), is( new GridPosition( 4, 5 ) ) );
+      
+      systemUnderTest.remove( object );
+      assertThat( systemUnderTest.at( 4, 5 ), is( nullValue() ) );
+      assertThat( systemUnderTest.of( object ), is( nullValue() ) );
+   }//End Method
+   
+   @Test public void shouldIgnoreRemoveOnObjectOutside(){
+      Object object = new Object();
+      systemUnderTest.remove( object );
+   }//End Method
+   
+   @Test public void shouldDetermineEmptyLocation(){
+      Object object = new Object();
+      
+      assertThat( systemUnderTest.isEmpty( 5, 6 ), is( true ) );
+      systemUnderTest.set( object, 5, 6 );
+      assertThat( systemUnderTest.isEmpty( 5, 6 ), is( false ) );
+      
+      systemUnderTest.set( object, 3, 2 );
+      assertThat( systemUnderTest.isEmpty( 5, 6 ), is( true ) );
+      assertThat( systemUnderTest.isEmpty( 3, 2 ), is( false ) );
+   }//End Method
+   
+   @Test public void shouldProvideIndexConvenience(){
+      assertThat( systemUnderTest.lastWidthIndex(), is( systemUnderTest.width() - 1 ) );
+      assertThat( systemUnderTest.lastHeightIndex(), is( systemUnderTest.height() - 1 ) );
+   }//End Method
+   
+   @Test public void shouldProvideIterators(){
+      fail();
    }//End Method
 
+   @Test public void shouldProvideSnapshot(){
+      fail();
+   }//End Method
 }//End Method

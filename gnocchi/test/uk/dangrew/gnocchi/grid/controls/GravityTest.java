@@ -7,10 +7,13 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.dangrew.gnocchi.grid.GridModel;
+import uk.dangrew.gnocchi.grid.model.GridModel;
 
 public class GravityTest {
 
@@ -24,59 +27,50 @@ public class GravityTest {
       systemUnderTest = new Gravity( grid );
    }//End Method
 
-   @Test public void shouldPullObjectToBottom() {
-      feeder.feed( 3 );
-      Object object = grid.at( 3, 0 );
-      
-      assertObjectInPosition( object, 0, true );
-      assertThat( systemUnderTest.pull( 3, 0 ), is ( true ) );
-      
-      assertObjectInPosition( object, 9, true );
+   @Test public void shouldIgnorNothingToPullDown(){
+      systemUnderTest.pullDown( 0 );
+      assertThatObjectsInColumn( 0 );
    }//End Method
    
-   @Test public void shouldPullObjectToNextHighest() {
-      feeder.feed( 3 );
-      Object first = grid.at( 3, 0 );
-      assertThat( systemUnderTest.pull( 3, 0 ), is ( true ) );
+   @Test public void shouldPullSingleDown(){
+      feeder.feed( 0 );
+      assertThatObjectsInColumn( 0, 9 );
       
-      feeder.feed( 3 );
-      Object second = grid.at( 3, 0 );
-      assertThat( first, is( not( second ) ) );
-      
-      assertThat( systemUnderTest.pull( 3, 0 ), is ( true ) );
-      assertObjectInPosition( first, 9, false );
-      assertObjectInPosition( second, 8, false );
+      systemUnderTest.pullDown( 0 );
+      assertThatObjectsInColumn( 0, 0 );
    }//End Method
    
-   @Test public void shouldNotChangeObjectPositionWhenNowhereToPull() {
-      for ( int i = 0; i < 10; i++ ) {
-         feeder.feed( 3 );
-         systemUnderTest.pull( 3, 0 );
+   @Test public void shouldPullMultipleDown(){
+      feeder.feed( 0 );
+      grid.set( new Object(), 0, 8 );
+      assertThatObjectsInColumn( 0, 9, 8 );
+      
+      systemUnderTest.pullDown( 0 );
+      assertThatObjectsInColumn( 0, 0, 1 );
+   }//End Method
+   
+   @Test public void shouldPullMultipleDownToFillMultipleGaps(){
+      for ( int h = 0; h < grid.height(); h++ ) {
+         grid.set( new Object(), 0, h );
       }
       
-      for ( int i = 0; i < 10; i++ ) {
-         assertThat( grid.at( 3, i ), is( notNullValue() ) );
-      }
+      grid.set( null, 0, 3 );
+      grid.set( null, 0, 7 );
       
-      Object object = grid.at( 3, 0 );
-      assertThat( systemUnderTest.pull( 3, 0 ), is ( false ) );
-      assertThat( grid.at( 3, 0 ), is( object ) );
+      systemUnderTest.pullDown( 0 );
+      
+      assertThatObjectsInColumn( 0, 0, 1, 2, 3, 4, 5, 6, 7 );
    }//End Method
    
-   private void assertObjectInPosition( Object object, int h, boolean emptyElsewhere ) {
-      for ( int i = 0; i < 10; i++ ) {
-         if ( i == h ) {
-            assertThat( grid.at( 3, i ), is( notNullValue() ) );   
-         } else if ( emptyElsewhere ){
-            assertThat( grid.at( 3, i ), is( nullValue() ) );
+   private void assertThatObjectsInColumn( int column, Integer... rows ) {
+      List< Integer > expectedPresentRows = Arrays.asList( rows );
+      for ( int h = 0; h < grid.height(); h++ ) {
+         if ( expectedPresentRows.contains( h ) ) {
+            assertThat( grid.at( column, h ), is( notNullValue() ) );
          } else {
-            assertThat( grid.at( 3, i ), is( not( object ) ) );
+            assertThat( grid.at( column, h ), is( nullValue() ) );
          }
       }
-   }//End Method
-   
-   @Test public void shouldRejectPositionOutsideGrid(){
-      fail();
    }//End Method
 
 }//End Class

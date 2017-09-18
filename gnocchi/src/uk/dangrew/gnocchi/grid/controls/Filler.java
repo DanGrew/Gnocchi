@@ -1,6 +1,6 @@
 package uk.dangrew.gnocchi.grid.controls;
 
-import uk.dangrew.gnocchi.grid.GridModel;
+import uk.dangrew.gnocchi.grid.model.GridModel;
 
 public class Filler {
 
@@ -18,12 +18,14 @@ public class Filler {
 
    public void fill() {
       for ( int w = 0; w < grid.width(); w++ ) {
-         Object object = feeder.feed( w );
-         while( object != null ) {
-            gravity.pull( w, 0 );
-            object = feeder.feed( w );
+         for ( int h = 0; h < grid.height(); h++ ) {
+            if ( !grid.isEmpty( w, h ) ) {
+               continue;
+            }
+            feeder.feed( w );
+            gravity.pullDown( w );
          }
       }
    }//End Method
-
+   
 }//End Class

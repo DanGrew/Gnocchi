@@ -1,6 +1,6 @@
 package uk.dangrew.gnocchi.grid.controls;
 
-import uk.dangrew.gnocchi.grid.GridModel;
+import uk.dangrew.gnocchi.grid.model.GridModel;
 
 public class Gravity {
 
@@ -9,26 +9,27 @@ public class Gravity {
    public Gravity( GridModel grid ) {
       this.grid = grid;
    }//End Class
+   
+   public void pullDown( int w ) {
+      for ( int h = 0; h < grid.height(); h++ ) {
+         if ( grid.at( w, h ) == null ) {
+            moveNextAboveDown( w, h );
+         }
+      }
+   }//End Method
 
-   public boolean pull( int w, int h ) {
-      Object object = grid.at( w, h );
-      if ( object == null ) {
-         return false;
-      }
-      
-      if ( grid.at( w, h + 1 ) != null ) {
-         return false;
-      }
-      
-      for ( int i = h + 1; i < grid.height(); i++ ) {
-         if ( grid.at( w, i ) != null ) {
+   private void moveNextAboveDown( int w, int h ) {
+      Object above = null;
+      for ( int i = h; i < grid.height(); i++ ) {
+         above = grid.at( w, i + 1 ); 
+         if ( above != null ) {
             break;
          }
-         
-         grid.set( null, w, i - 1 );
-         grid.set( object, w, i );
       }
-      return true;
+      if ( above == null ) {
+         return;
+      }
+      grid.set( above, w, h );
    }//End Method
 
 }//End Class

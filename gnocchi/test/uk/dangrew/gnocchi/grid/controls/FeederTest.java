@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.dangrew.gnocchi.grid.GridModel;
+import uk.dangrew.gnocchi.grid.model.GridModel;
 
 public class FeederTest {
 
@@ -21,17 +21,17 @@ public class FeederTest {
    }//End Method
 
    @Test public void shouldFeedColumnWhenEmpty() {
-      assertThat( grid.at( 4, 0 ), is( nullValue() ) );
+      assertThat( grid.at( 4, 9 ), is( nullValue() ) );
       assertThat( systemUnderTest.feed( 4 ), is ( notNullValue() ) );
-      assertThat( grid.at( 4, 0 ), is( notNullValue() ) );
+      assertThat( grid.at( 4, 9 ), is( notNullValue() ) );
    }//End Method
    
    @Test public void shouldNotFeedColumnWhenFull() {
       shouldFeedColumnWhenEmpty();
       
-      Object object = grid.at( 4, 0 );
+      Object object = grid.at( 4, 9 );
       assertThat( systemUnderTest.feed( 4 ), is ( nullValue() ) );
-      assertThat( grid.at( 4, 0 ), is( object ) );
+      assertThat( grid.at( 4, 9 ), is( object ) );
    }//End Method
 
 }//End Class
