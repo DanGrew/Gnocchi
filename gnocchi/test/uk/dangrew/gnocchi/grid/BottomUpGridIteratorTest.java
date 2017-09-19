@@ -8,29 +8,31 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.BottomUpGridIterator;
 import uk.dangrew.gnocchi.grid.model.GridModel;
+import uk.dangrew.gnocchi.grid.square.Square;
 
 public class BottomUpGridIteratorTest {
 
    private GridModel grid;
-   private Object o00;
-   private Object o01;
-   private Object o02;
-   private Object o10;
-   private Object o11;
-   private Object o12;
+   private Square o00;
+   private Square o01;
+   private Square o02;
+   private Square o10;
+   private Square o11;
+   private Square o12;
    
    private BottomUpGridIterator systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       grid = new GridModel( 2, 3 );
-      grid.set( o00 = new Object(), 0, 0 );
-      grid.set( o01 = new Object(), 0, 1 );
-      grid.set( o02 = new Object(), 0, 2 );
-      grid.set( o10 = new Object(), 1, 0 );
-      grid.set( o11 = new Object(), 1, 1 );
-      grid.set( o12 = new Object(), 1, 2 );
+      grid.set( o00 = new Square( Color.RED ), 0, 0 );
+      grid.set( o01 = new Square( Color.RED ), 0, 1 );
+      grid.set( o02 = new Square( Color.RED ), 0, 2 );
+      grid.set( o10 = new Square( Color.RED ), 1, 0 );
+      grid.set( o11 = new Square( Color.RED ), 1, 1 );
+      grid.set( o12 = new Square( Color.RED ), 1, 2 );
       
       systemUnderTest = new BottomUpGridIterator( grid );
    }//End Method

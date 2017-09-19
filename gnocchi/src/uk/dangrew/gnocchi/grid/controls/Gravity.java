@@ -1,6 +1,7 @@
 package uk.dangrew.gnocchi.grid.controls;
 
 import uk.dangrew.gnocchi.grid.model.GridModel;
+import uk.dangrew.gnocchi.grid.square.Square;
 
 public class Gravity {
 
@@ -19,7 +20,7 @@ public class Gravity {
    }//End Method
 
    private void moveNextAboveDown( int w, int h ) {
-      Object above = null;
+      Square above = null;
       for ( int i = h; i < grid.height(); i++ ) {
          above = grid.at( w, i + 1 ); 
          if ( above != null ) {

@@ -7,8 +7,10 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.model.GridSnapshot;
+import uk.dangrew.gnocchi.grid.square.Square;
 
 public class GridSnapshotTest {
 
@@ -35,7 +37,7 @@ public class GridSnapshotTest {
    @Test public void shouldRepresentIndividualChanges() {
       grid.fill();
       systemUnderTest = grid.snapshot();
-      grid.model().set( new Object(), 3, 4 );
+      grid.model().set( new Square( Color.RED ), 3, 4 );
       
       for ( int w = 0; w < grid.model().width(); w++ ) {
          for ( int h = 0; h < grid.model().height(); h++ ) {

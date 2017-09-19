@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.ui.animator.GravityAnimator;
 import uk.dangrew.gnocchi.ui.animator.PopAnimator;
 import uk.dangrew.gnocchi.ui.grid.GridWidget;
@@ -47,7 +48,7 @@ public class GameEngineTest {
    }//End Method
    
    @Test public void shouldPopObject(){
-      Object object = new Object();
+      Square object = Square.randomSquare();
       systemUnderTest.pop( object );
       
       InOrder order = inOrder( gravityAnimator, popAnimator );

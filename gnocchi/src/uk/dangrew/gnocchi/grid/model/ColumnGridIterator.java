@@ -2,6 +2,8 @@ package uk.dangrew.gnocchi.grid.model;
 
 import java.util.Iterator;
 
+import uk.dangrew.gnocchi.grid.square.Square;
+
 public class ColumnGridIterator implements Iterator< GridEntry >{
 
    private final GridModel grid;
@@ -20,7 +22,7 @@ public class ColumnGridIterator implements Iterator< GridEntry >{
    }//End Method
 
    @Override public GridEntry next() {
-      Object next = grid.at( w, h );
+      Square next = grid.at( w, h );
       GridPosition position = new GridPosition( w, h );
       
       h++;

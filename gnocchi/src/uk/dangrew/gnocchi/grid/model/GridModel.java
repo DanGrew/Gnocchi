@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import uk.dangrew.gnocchi.grid.square.Square;
+
 public class GridModel {
 
    private final int width;
    private final int height;
-   private final Map< Object, GridPosition > objects;
-   private final Map< GridPosition, Object > positions;
+   private final Map< Square, GridPosition > objects;
+   private final Map< GridPosition, Square > positions;
    
    public GridModel( int width, int height ) {
       this.width = width;
@@ -19,7 +21,7 @@ public class GridModel {
       this.positions = new HashMap<>();
    }//End Constructor
    
-   public Object at( int w, int h ) {
+   public Square at( int w, int h ) {
       if ( w < 0 || w >= width ) {
          return null;
       }
@@ -29,17 +31,18 @@ public class GridModel {
       return positions.get( new GridPosition( w, h ) );
    }//End Method
    
-   public GridPosition of( Object object ) {
+   public GridPosition of( Square object ) {
       return objects.get( object );
    }//End Method
    
-   public void set( Object object, int w, int h ) {
+   public void set( Square object, int w, int h ) {
       GridPosition currentPosition = objects.get( object );
       if ( currentPosition != null ) {
          positions.put( currentPosition, null );
       }
       
       GridPosition position = new GridPosition( w, h );
+      object.moveTo( position );
       objects.put( object, position );
       positions.put( position, object );
    }//End Method
@@ -48,7 +51,7 @@ public class GridModel {
       return at( w, h ) == null;
    }//End Method
    
-   public void remove( Object object ) {
+   public void remove( Square object ) {
       GridPosition position = objects.get( object );
       if ( position != null ) {
          positions.remove( position );

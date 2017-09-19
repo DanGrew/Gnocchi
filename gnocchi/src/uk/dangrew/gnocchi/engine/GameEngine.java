@@ -1,6 +1,7 @@
 package uk.dangrew.gnocchi.engine;
 
 import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.ui.animator.GravityAnimator;
 import uk.dangrew.gnocchi.ui.animator.PopAnimator;
 import uk.dangrew.gnocchi.ui.grid.GridWidget;
@@ -13,10 +14,16 @@ public class GameEngine {
    
    public GameEngine() {
       this( 
-               new Grid( 10, 10 ), 
-               new GridWidget(), 
+               new Grid( 10, 10 ) 
+      );
+   }//End Constructor
+   
+   private GameEngine( Grid grid ) {
+      this( 
+               grid, 
+               new GridWidget( grid ), 
                new GravityAnimator(),
-               new PopAnimator()
+               new PopAnimator( grid.model() )
       );
    }//End Constructor
    
@@ -41,7 +48,7 @@ public class GameEngine {
       gravityAnimator.fillGrid();
    }//End Method
    
-   public void pop( Object object ) {
+   public void pop( Square object ) {
       popAnimator.pop( object );
       gravityAnimator.fillGrid();
    }//End Method

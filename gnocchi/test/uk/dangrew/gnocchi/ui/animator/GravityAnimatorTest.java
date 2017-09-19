@@ -28,7 +28,7 @@ public class GravityAnimatorTest {
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
       
-      gridWidget = new GridWidget();
+      gridWidget = new GridWidget( grid );
       
       systemUnderTest = new GravityAnimator( animation );
       systemUnderTest.associate( grid, gridWidget );

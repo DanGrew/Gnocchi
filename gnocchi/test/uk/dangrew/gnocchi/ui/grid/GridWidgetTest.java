@@ -18,7 +18,7 @@ public class GridWidgetTest {
    @Ignore
    @Test public void manual() throws InterruptedException {
       grid = new Grid( 10, 10 );
-      TestApplication.launch( () -> systemUnderTest = new GridWidget() );
+      TestApplication.launch( () -> systemUnderTest = new GridWidget( grid ) );
       
       PlatformImpl.runLater( () -> {
          GridSnapshot snapshot = grid.snapshot();

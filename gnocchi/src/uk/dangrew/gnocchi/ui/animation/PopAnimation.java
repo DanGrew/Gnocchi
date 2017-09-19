@@ -1,6 +1,7 @@
 package uk.dangrew.gnocchi.ui.animation;
 
 import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.ui.grid.GridWidget;
 
 public class PopAnimation {
@@ -13,7 +14,7 @@ public class PopAnimation {
       this.gridWidget = gridWidget;
    }//End Class
    
-   public void animate( Object object ) {
+   public void animate( Square object ) {
       gridWidget.removeWidget( object );
    }//End Method
 

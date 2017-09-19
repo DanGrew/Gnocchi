@@ -1,11 +1,9 @@
 package uk.dangrew.gnocchi.grid.controls;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
+import uk.dangrew.gnocchi.grid.square.Square;
 
 public class GravityTest {
 
@@ -42,7 +42,7 @@ public class GravityTest {
    
    @Test public void shouldPullMultipleDown(){
       feeder.feed( 0 );
-      grid.set( new Object(), 0, 8 );
+      grid.set( new Square( Color.RED ), 0, 8 );
       assertThatObjectsInColumn( 0, 9, 8 );
       
       systemUnderTest.pullDown( 0 );
@@ -51,7 +51,7 @@ public class GravityTest {
    
    @Test public void shouldPullMultipleDownToFillMultipleGaps(){
       for ( int h = 0; h < grid.height(); h++ ) {
-         grid.set( new Object(), 0, h );
+         grid.set( new Square( Color.RED ), 0, h );
       }
       
       grid.set( null, 0, 3 );

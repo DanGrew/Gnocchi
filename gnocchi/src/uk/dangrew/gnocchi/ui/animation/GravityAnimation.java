@@ -26,7 +26,7 @@ public class GravityAnimation {
          GridEntry current = iterator.next();
          while ( !animate( snapshot, current, iterator ) ){
             current = iterator.next();
-            if ( current == null ) {
+            if ( current.object == null ) {
                break;
             }
          }

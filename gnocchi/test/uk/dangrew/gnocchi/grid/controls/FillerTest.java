@@ -8,7 +8,9 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
+import uk.dangrew.gnocchi.grid.square.Square;
 
 public class FillerTest {
 
@@ -37,8 +39,8 @@ public class FillerTest {
    }//End Method
    
    @Test public void shouldOnlyFillUpToExistingElements(){
-      Object o1 = new Object();
-      Object o2 = new Object();
+      Square o1 = new Square( Color.RED );
+      Square o2 = new Square( Color.RED );
       grid.set( o1, 4, 0 );
       grid.set( o2, 7, 4 );
       
