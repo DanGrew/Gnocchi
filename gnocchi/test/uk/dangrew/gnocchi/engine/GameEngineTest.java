@@ -1,58 +1,42 @@
 package uk.dangrew.gnocchi.engine;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import uk.dangrew.gnocchi.grid.Grid;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.ui.animator.GravityAnimator;
-import uk.dangrew.gnocchi.ui.animator.PopAnimator;
-import uk.dangrew.gnocchi.ui.grid.GridWidget;
+import uk.dangrew.gnocchi.ui.grid.GridArea;
 
 public class GameEngineTest {
 
-   @Mock private Grid grid;
-   @Mock private GridWidget gridWidget;
-   @Mock private GravityAnimator gravityAnimator;
-   @Mock private PopAnimator popAnimator;
+   @Mock private GridArea grid;
    private GameEngine systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      systemUnderTest = new GameEngine( 
-               grid, gridWidget, 
-               gravityAnimator, popAnimator
-      );
+      systemUnderTest = new GameEngine();
    }//End Method
 
-   @Test public void shouldAssociateWithAnimators() {
-      verify( gravityAnimator ).associate( grid, gridWidget );
-      verify( popAnimator ).associate( grid, gridWidget );
-   }//End Method
-   
    @Test public void shouldFillGridOnLaunch(){
+      systemUnderTest.setGridArea( grid );
       systemUnderTest.launch();
-      verify( gravityAnimator ).fillGrid();
+      verify( grid ).fillGrid();
    }//End Method
 
-   @Test public void shouldProvideDisplay(){
-      assertThat( systemUnderTest.display(), is( gridWidget ) );
+   @Test public void shouldProvideInputDriver(){
+      assertThat( systemUnderTest.inputDriver(), is( notNullValue() ) );
    }//End Method
    
    @Test public void shouldPopObject(){
+      systemUnderTest.setGridArea( grid );
       Square object = Square.randomSquare();
       systemUnderTest.pop( object );
-      
-      InOrder order = inOrder( gravityAnimator, popAnimator );
-      order.verify( popAnimator ).pop( object );
-      order.verify( gravityAnimator ).fillGrid();
+      verify( grid ).pop( object );
    }//End Method
 }//End Class

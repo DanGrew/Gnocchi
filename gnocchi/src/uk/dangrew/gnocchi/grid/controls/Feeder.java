@@ -22,7 +22,7 @@ public class Feeder {
       if ( grid.at( w, grid.lastHeightIndex() ) != null ) {
          return null;
       }
-      Square object = new Square( colours.next() );
+      Square object = new Square( colours.next( grid.colourVariation() ) );
       grid.set( object, w, grid.lastHeightIndex() );
       return object;
    }//End Method

@@ -33,9 +33,9 @@ public class SquareHighlighterTest {
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
       
-      sw1 = spy( new SquareWidget( s1 = new Square( new GridPosition( 3, 4 ), Color.RED ), new GridPosition( 3, 4 ) ) );
-      sw2 = spy( new SquareWidget( s2 = new Square( new GridPosition( 2, 1 ), Color.RED ), new GridPosition( 2, 1 ) ) );
-      sw3 = spy( new SquareWidget( s3 = new Square( new GridPosition( 0, 0 ), Color.RED ), new GridPosition( 0, 0 ) ) );
+      sw1 = spy( new SquareWidget( s1 = new Square( new GridPosition( 3, 4 ), Color.RED ), 0, 0, 0, 0 ) );
+      sw2 = spy( new SquareWidget( s2 = new Square( new GridPosition( 2, 1 ), Color.RED ), 0, 0, 0, 0 ) );
+      sw3 = spy( new SquareWidget( s3 = new Square( new GridPosition( 0, 0 ), Color.RED ), 0, 0, 0, 0 ) );
       systemUnderTest = new SquareHighlighter( floodFill );
       
       systemUnderTest.monitor( sw1 );

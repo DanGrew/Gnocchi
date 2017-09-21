@@ -17,8 +17,9 @@ import uk.dangrew.gnocchi.grid.model.GridSnapshot;
 
 public class GridTest {
 
+   private static final int COLOURS = 4;
    private static final int WIDTH = 10;
-   private static final int HEIGHT = 10;
+   private static final int HEIGHT = 11;
    
    @Mock private GridModel model;
    @Mock private Filler filler;
@@ -30,8 +31,10 @@ public class GridTest {
    }//End Method
    
    @Test public void shouldConstructOwnGrid(){
-      systemUnderTest = new Grid( WIDTH, HEIGHT );
+      systemUnderTest = new Grid( COLOURS, WIDTH, HEIGHT );
+      assertThat( systemUnderTest.model().colourVariation(), is( COLOURS ) );
       assertThat( systemUnderTest.model().width(), is( WIDTH ) );
+      assertThat( systemUnderTest.model().height(), is( HEIGHT ) );
    }//End Method
    
    @Test public void shouldProvideModel(){

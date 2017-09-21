@@ -18,7 +18,7 @@ import uk.dangrew.gnocchi.ui.grid.GridWidget;
 public class GravityAnimatorTest {
 
    @Mock private Grid grid;
-   private GridWidget gridWidget;
+   @Mock private GridWidget gridWidget;
    
    @Mock private GridSnapshot snapshot;
    @Mock private GravityAnimation animation;
@@ -27,8 +27,6 @@ public class GravityAnimatorTest {
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      
-      gridWidget = new GridWidget( grid );
       
       systemUnderTest = new GravityAnimator( animation );
       systemUnderTest.associate( grid, gridWidget );

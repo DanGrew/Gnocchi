@@ -18,7 +18,7 @@ public class GridSnapshotTest {
    private GridSnapshot systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      grid = new Grid( 10, 10 );
+      grid = new Grid( 4, 10, 10 );
    }//End Method
 
    @Test public void shouldProvideSnapshotOfItems() {

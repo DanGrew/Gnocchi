@@ -18,7 +18,7 @@ public class FillerTest {
    private Filler systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      grid = new GridModel( 10, 10 );
+      grid = new GridModel( 4, 10, 10 );
       systemUnderTest = new Filler( grid );
    }//End Method
 

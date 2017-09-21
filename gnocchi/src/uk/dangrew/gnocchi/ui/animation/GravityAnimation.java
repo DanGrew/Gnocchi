@@ -12,8 +12,14 @@ import uk.dangrew.gnocchi.ui.grid.GridWidget;
 
 public class GravityAnimation {
    
+   private final FallingPathTransitionCreator transitionCreator;
+   
    private Grid grid;
    private GridWidget gridWidget;
+   
+   public GravityAnimation() {
+      this.transitionCreator = new FallingPathTransitionCreator();
+   }//End Constructor
    
    public void associate( Grid grid, GridWidget gridWidget ) {
       this.grid = grid;
@@ -54,8 +60,8 @@ public class GravityAnimation {
    }//End Method
    
    private PathTransition constructAnimation( Rectangle widget, GridPosition from, GridPosition to ){
-      return new FallingPathTransitionCreator().create( 
-               widget, from, to, grid.model().height() 
+      return transitionCreator.create( 
+               widget, from, to, grid.model().width(), grid.model().height() 
       );
    }//End Method
 

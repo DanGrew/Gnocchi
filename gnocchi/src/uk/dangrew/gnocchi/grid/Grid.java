@@ -9,8 +9,8 @@ public class Grid {
    private final Filler filler;
    private final GridModel model;
    
-   public Grid( int width, int height ) {
-      this( new GridModel( width, height ) );
+   public Grid( int colourVariation, int width, int height ) {
+      this( new GridModel( colourVariation, width, height ) );
    }//End Constructor
    
    private Grid( GridModel model ) {

@@ -26,7 +26,7 @@ public class BottomUpGridIteratorTest {
    private BottomUpGridIterator systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      grid = new GridModel( 2, 3 );
+      grid = new GridModel( 3, 2, 3 );
       grid.set( o00 = new Square( Color.RED ), 0, 0 );
       grid.set( o01 = new Square( Color.RED ), 0, 1 );
       grid.set( o02 = new Square( Color.RED ), 0, 2 );

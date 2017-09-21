@@ -2,19 +2,18 @@ package uk.dangrew.gnocchi.ui.square;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
 
 public class SquareWidget extends Rectangle {
    
    private final Square object;
    
-   public SquareWidget( Square object, GridPosition position ) {
-      super( position.w * 60, position.h * 60, 50, 50 );
+   public SquareWidget( Square object, double x, double y, double w, double h ) {
+      super( x, y, w, h );
       this.object = object;
-      setArcHeight( 10 );
-      setArcWidth( 10 );
-      setFill( object.colour() );
+      this.setArcHeight( 10 );
+      this.setArcWidth( 10 );
+      this.setFill( object.colour() );
    }//End Constructor
    
    public Square association(){

@@ -15,16 +15,18 @@ import uk.dangrew.gnocchi.grid.square.Square;
 
 public class GridModelTest {
    
+   private static final int COLOURS = 4;
    private static final int WIDTH = 10;
    private static final int HEIGHT = 20;
 
    private GridModel systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      systemUnderTest = new GridModel( WIDTH, HEIGHT );
+      systemUnderTest = new GridModel( COLOURS, WIDTH, HEIGHT );
    }//End Method
 
    @Test public void shouldProvideDimensions(){
+      assertThat( systemUnderTest.colourVariation(), is( COLOURS ) );
       assertThat( systemUnderTest.width(), is( WIDTH ) );
       assertThat( systemUnderTest.height(), is( HEIGHT ) );
    }//End Method
@@ -64,6 +66,19 @@ public class GridModelTest {
       assertThat( systemUnderTest.at( 3, 5 ), is( object ) );
       assertThat( systemUnderTest.of( object ), is( new GridPosition( 3, 5 ) ) );
       assertThat( object.position(), is( new GridPosition( 3, 5 ) ) );
+   }//End Method
+   
+   @Test public void shouldNotMoveObjectWhenSetToNull(){
+      Square object = new Square( Color.AQUA );
+      systemUnderTest.set( object, 4, 5 );
+      assertThat( systemUnderTest.at( 4, 5 ), is( object ) );
+      assertThat( systemUnderTest.of( object ), is( new GridPosition( 4, 5 ) ) );
+      assertThat( object.position(), is( new GridPosition( 4, 5 ) ) );
+      
+      systemUnderTest.set( null, 4, 5 );
+      assertThat( systemUnderTest.at( 4, 5 ), is( nullValue() ) );
+      assertThat( systemUnderTest.of( object ), is( nullValue() ) );
+      assertThat( object.position(), is( new GridPosition( 4, 5 ) ) );
    }//End Method
    
    @Test public void shouldRemoveObject(){

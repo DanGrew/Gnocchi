@@ -8,12 +8,14 @@ import uk.dangrew.gnocchi.grid.square.Square;
 
 public class GridModel {
 
+   private final int colourVariation;
    private final int width;
    private final int height;
    private final Map< Square, GridPosition > objects;
    private final Map< GridPosition, Square > positions;
    
-   public GridModel( int width, int height ) {
+   public GridModel( int colourVariation, int width, int height ) {
+      this.colourVariation = colourVariation;
       this.width = width;
       this.height = height;
       
@@ -42,9 +44,16 @@ public class GridModel {
       }
       
       GridPosition position = new GridPosition( w, h );
-      object.moveTo( position );
-      objects.put( object, position );
-      positions.put( position, object );
+      Square existing = positions.remove( position );
+      objects.remove( existing );
+      
+      if ( object == null ) {
+         positions.put( position, null );
+      } else {
+         object.moveTo( position );
+         objects.put( object, position );
+         positions.put( position, object );
+      }
    }//End Method
    
    public boolean isEmpty( int w, int h ) {
@@ -89,6 +98,10 @@ public class GridModel {
 
    public GridSnapshot snapshot() {
       return new GridSnapshot( this );
+   }//End Method
+
+   public int colourVariation() {
+      return colourVariation;
    }//End Method
 
 }//End Class

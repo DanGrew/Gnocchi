@@ -23,9 +23,9 @@ public class FeederTest {
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      when( colours.next() ).thenReturn( Color.RED );
+      when( colours.next( 4 ) ).thenReturn( Color.RED );
       
-      grid = new GridModel( 10, 10 );
+      grid = new GridModel( 4, 10, 10 );
       systemUnderTest = new Feeder( colours, grid );
    }//End Method
 

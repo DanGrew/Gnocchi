@@ -37,7 +37,7 @@ public class FloodFillTest {
       s8 = new Square( Color.BLUE );
       s9 = new Square( Color.BLUE );
       
-      grid = new GridModel( 10, 10 );
+      grid = new GridModel( 4, 10, 10 );
       systemUnderTest = new FloodFill( grid );
    }//End Method
 

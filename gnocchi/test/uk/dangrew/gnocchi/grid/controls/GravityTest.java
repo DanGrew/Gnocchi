@@ -22,7 +22,7 @@ public class GravityTest {
    private Gravity systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      grid = new GridModel( 10, 10 );
+      grid = new GridModel( 4, 10, 10 );
       feeder = new Feeder( grid );
       systemUnderTest = new Gravity( grid );
    }//End Method

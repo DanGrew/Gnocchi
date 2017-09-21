@@ -1,56 +1,32 @@
 package uk.dangrew.gnocchi.engine;
 
-import uk.dangrew.gnocchi.grid.Grid;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.ui.animator.GravityAnimator;
-import uk.dangrew.gnocchi.ui.animator.PopAnimator;
-import uk.dangrew.gnocchi.ui.grid.GridWidget;
+import uk.dangrew.gnocchi.input.InputDriver;
+import uk.dangrew.gnocchi.ui.grid.GridArea;
 
 public class GameEngine {
 
-   private final GridWidget display;
-   private final GravityAnimator gravityAnimator;
-   private final PopAnimator popAnimator;
+   private final InputDriver inputDriver;
+   private GridArea grid;
    
    public GameEngine() {
-      this( 
-               new Grid( 10, 10 ) 
-      );
+      this.inputDriver = new InputDriver( this );
    }//End Constructor
    
-   private GameEngine( Grid grid ) {
-      this( 
-               grid, 
-               new GridWidget( grid ), 
-               new GravityAnimator(),
-               new PopAnimator( grid.model() )
-      );
-   }//End Constructor
+   public void setGridArea( GridArea area ){
+      this.grid = area;
+   }//End Method
    
-   GameEngine( 
-            Grid grid, 
-            GridWidget gridWidget, 
-            GravityAnimator gravityAnimator,
-            PopAnimator popAnimator
-   ) {
-      this.display = gridWidget;
-      this.gravityAnimator = gravityAnimator;
-      this.gravityAnimator.associate( grid, gridWidget );
-      this.popAnimator = popAnimator;
-      this.popAnimator.associate( grid, gridWidget );
-   }//End Constructor
-   
-   public GridWidget display() {
-      return display;
+   public InputDriver inputDriver(){
+      return inputDriver;
    }//End Method
 
    public void launch() {
-      gravityAnimator.fillGrid();
+      grid.fillGrid();
    }//End Method
    
    public void pop( Square object ) {
-      popAnimator.pop( object );
-      gravityAnimator.fillGrid();
+      grid.pop( object );
    }//End Method
 
 }//End Class
