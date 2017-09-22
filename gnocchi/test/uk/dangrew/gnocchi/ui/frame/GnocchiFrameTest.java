@@ -14,7 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.gnocchi.engine.GameEngine;
-import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.game.GameBuilder;
 import uk.dangrew.gnocchi.ui.frame.content.GridSelectionContent;
 import uk.dangrew.gnocchi.ui.grid.GridWidget;
 import uk.dangrew.kode.launch.TestApplication;
@@ -41,15 +41,15 @@ public class GnocchiFrameTest {
    
    @Test public void shouldShowGridAndApplyEngine() {
       shouldShowGridSelection();
-      systemUnderTest.showGrid( new Grid( 3, 10, 10 ) );
-      verify( engine ).launch( Mockito.any(), Mockito.any() );
+      systemUnderTest.showGrid( new GameBuilder() );
+      verify( engine ).launch( Mockito.any() );
       assertThat( systemUnderTest.getChildren(), hasSize( 1 ) );
       assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridWidget.class ) ) );
    }//End Method
    
    @Test public void shouldShowGridSelectionAfterGrid() {
       shouldShowGridSelection();
-      systemUnderTest.showGrid( new Grid( 3, 10, 10 ) );
+      systemUnderTest.showGrid( new GameBuilder() );
       assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridWidget.class ) ) );
       systemUnderTest.showGridSelection();
       assertThat( systemUnderTest.content(), is( systemUnderTest.gridSelection() ) );

@@ -4,31 +4,28 @@ import java.util.Iterator;
 
 import javafx.animation.PathTransition;
 import javafx.scene.shape.Rectangle;
-import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.game.Game;
 import uk.dangrew.gnocchi.grid.model.GridEntry;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.model.GridSnapshot;
-import uk.dangrew.gnocchi.ui.grid.GridWidget;
 
 public class GravityAnimation {
    
    private final FallingPathTransitionCreator transitionCreator;
    
-   private Grid grid;
-   private GridWidget gridWidget;
+   private Game game;
    
    public GravityAnimation() {
       this.transitionCreator = new FallingPathTransitionCreator();
    }//End Constructor
    
-   public void associate( Grid grid, GridWidget gridWidget ) {
-      this.grid = grid;
-      this.gridWidget = gridWidget;
+   public void hook( Game game ) {
+      this.game = game;
    }//End Class
    
    public void animate( GridSnapshot snapshot ){
-      for ( int i = 0; i < grid.model().height(); i++ ) {
-         Iterator< GridEntry > iterator = grid.model().columnIterator( i );
+      for ( int i = 0; i < game.model().height(); i++ ) {
+         Iterator< GridEntry > iterator = game.model().columnIterator( i );
          GridEntry current = iterator.next();
          while ( !animate( snapshot, current, iterator ) ){
             current = iterator.next();
@@ -42,14 +39,14 @@ public class GravityAnimation {
    private boolean animate( GridSnapshot snapshot, GridEntry current, Iterator< GridEntry > iterator ) {
       GridPosition from = snapshot.of( current.object );
       if ( from == null ) {
-         from = new GridPosition( current.position.w, grid.model().height() );
+         from = new GridPosition( current.position.w, game.model().height() );
       }
       GridPosition to = current.position;
       if ( from.equals( to ) ) {
          return false;
       }
       
-      Rectangle widget = gridWidget.widgetFor( current.object );
+      Rectangle widget = game.ui().widgetFor( current.object );
       
       PathTransition animation = constructAnimation( widget, from, to );
       if ( iterator.hasNext() ) {
@@ -61,7 +58,7 @@ public class GravityAnimation {
    
    private PathTransition constructAnimation( Rectangle widget, GridPosition from, GridPosition to ){
       return transitionCreator.create( 
-               widget, from, to, grid.model().width(), grid.model().height() 
+               widget, from, to, game.model().width(), game.model().height() 
       );
    }//End Method
 

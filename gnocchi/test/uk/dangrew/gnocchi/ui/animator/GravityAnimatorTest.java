@@ -10,15 +10,13 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.game.Game;
 import uk.dangrew.gnocchi.grid.model.GridSnapshot;
 import uk.dangrew.gnocchi.ui.animation.GravityAnimation;
-import uk.dangrew.gnocchi.ui.grid.GridWidget;
 
 public class GravityAnimatorTest {
 
-   @Mock private Grid grid;
-   @Mock private GridWidget gridWidget;
+   @Mock private Game game;
    
    @Mock private GridSnapshot snapshot;
    @Mock private GravityAnimation animation;
@@ -29,21 +27,21 @@ public class GravityAnimatorTest {
       MockitoAnnotations.initMocks( this );
       
       systemUnderTest = new GravityAnimator( animation );
-      systemUnderTest.hook( grid, gridWidget );
+      systemUnderTest.hook( game );
    }//End Method
 
    @Test public void shouldAssociateWithAnimation(){
-      verify( animation ).associate( grid, gridWidget );
+      verify( animation ).hook( game );
    }//End Method
    
    @Test public void shouldSnapshotFileAndAnimate() {
-      when( grid.snapshot() ).thenReturn( snapshot );
+      when( game.snapshot() ).thenReturn( snapshot );
       
       systemUnderTest.fillGrid();
       
-      InOrder order = inOrder( grid, animation );
-      order.verify( grid ).snapshot();
-      order.verify( grid ).fill();
+      InOrder order = inOrder( game, animation );
+      order.verify( game ).snapshot();
+      order.verify( game ).fill();
       order.verify( animation ).animate( snapshot );
    }//End Method
 

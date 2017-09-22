@@ -7,7 +7,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.game.GameBuilder;
 import uk.dangrew.gnocchi.ui.frame.GnocchiFrame;
 import uk.dangrew.gnocchi.ui.grid.GridMeasurements;
 import uk.dangrew.gnocchi.ui.resources.GridIcons;
@@ -66,7 +66,12 @@ public class GridSelectionContent extends GridPane {
       button.setMaxWidth( iconDimension );
       button.setMaxHeight( iconDimension );
       button.setAlignment( Pos.CENTER );
-      button.setOnAction( e -> frame.showGrid( new Grid( icon.colourVariation(), icon.width(), icon.height() ) ) );
+      button.setOnAction( e -> frame.showGrid( 
+               new GameBuilder()
+                  .withNumberOfColours( icon.colourVariation() )
+                  .withWidth( icon.width() )
+                  .withHeight( icon.height() ) 
+      ) );
       return button;
    }//End Method
    

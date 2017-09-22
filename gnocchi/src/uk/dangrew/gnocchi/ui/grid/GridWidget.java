@@ -10,8 +10,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import uk.dangrew.gnocchi.algorithm.FloodFill;
-import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.input.InputDriver;
 import uk.dangrew.gnocchi.ui.square.SquareHighlighter;
@@ -22,14 +21,14 @@ public class GridWidget extends Pane {
    private final GridMeasurements measurements;
    private final InputDriver inputDriver;
    
-   private final Grid grid;
+   private final GridModel model;
    private final Map< Object, SquareWidget > widgets;
    private final SquareHighlighter highlighter;
    
-   public GridWidget( Grid grid, InputDriver inputDriver ) {
-      this.grid = grid;
+   public GridWidget( GridModel model, InputDriver inputDriver ) {
+      this.model = model;
       this.widgets = new HashMap<>();
-      this.highlighter = new SquareHighlighter( grid.model() );
+      this.highlighter = new SquareHighlighter( model );
       this.inputDriver = inputDriver;
       this.measurements = new GridMeasurements();
       
@@ -43,7 +42,7 @@ public class GridWidget extends Pane {
    public Rectangle widgetFor( Square object ) {
       SquareWidget widget = widgets.get( object );
       if ( widget == null ) {
-         widget = measurements.constructSquareWidget( object, grid.model().width(), grid.model().height() );
+         widget = measurements.constructSquareWidget( object, model.width(), model.height() );
          inputDriver.popAction( widget );
          highlighter.monitor( widget );
          widgets.put( object, widget );

@@ -6,9 +6,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.engine.GameEngine;
-import uk.dangrew.gnocchi.grid.Grid;
+import uk.dangrew.gnocchi.game.Game;
+import uk.dangrew.gnocchi.game.GameBuilder;
 import uk.dangrew.gnocchi.ui.frame.content.GridSelectionContent;
-import uk.dangrew.gnocchi.ui.grid.GridWidget;
 import uk.dangrew.kode.javafx.style.JavaFxStyle;
 
 public class GnocchiFrame extends GridPane {
@@ -35,11 +35,11 @@ public class GnocchiFrame extends GridPane {
       setMainArea( gridSelection );
    }//End Method
    
-   public void showGrid( Grid grid ) {
-      GridWidget gridWidget = new GridWidget( grid, engine.inputDriver() );
-      engine.launch( grid, gridWidget );
+   public void showGrid( GameBuilder builder ) {
+      Game game = new Game( engine.inputDriver(), builder );
+      engine.launch( game );
       getChildren().clear();
-      setMainArea( gridWidget );
+      setMainArea( game.ui() );
    }//End Method
    
    private void setMainArea( Node node ) {

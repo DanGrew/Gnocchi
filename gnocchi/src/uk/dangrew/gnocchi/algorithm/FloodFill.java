@@ -11,20 +11,20 @@ import uk.dangrew.gnocchi.grid.square.Square;
 
 public class FloodFill {
 
-   public List< Square > flood( GridModel grid, int w, int h ) {
+   public List< Square > flood( GridModel model, int w, int h ) {
       Set< GridPosition > searched = new HashSet<>();
       List< Square > found = new ArrayList<>();
       
-      Square source = grid.at( w, h );
+      Square source = model.at( w, h );
       if ( source != null ) {
          GridPosition start = new GridPosition( w, h );
-         search( grid, start, start, searched, found );
+         search( model, start, start, searched, found );
       }
       return found;
    }//End Method
    
    private void search( 
-            GridModel grid, 
+            GridModel model, 
             GridPosition source, 
             GridPosition position, 
             Set< GridPosition > searched, 
@@ -35,8 +35,8 @@ public class FloodFill {
       }
       
       searched.add( position );
-      Square selectedSquare = grid.at( source.w, source.h );
-      Square positionSquare = grid.at( position.w, position.h );
+      Square selectedSquare = model.at( source.w, source.h );
+      Square positionSquare = model.at( position.w, position.h );
       if ( positionSquare == null ) {
          return;
       }
@@ -46,10 +46,10 @@ public class FloodFill {
       }
       
       found.add( positionSquare );
-      search( grid, source, new GridPosition( position.w + 1, position.h ), searched, found );
-      search( grid, source, new GridPosition( position.w - 1, position.h ), searched, found );
-      search( grid, source, new GridPosition( position.w, position.h + 1), searched, found );
-      search( grid, source, new GridPosition( position.w, position.h - 1 ), searched, found );
+      search( model, source, new GridPosition( position.w + 1, position.h ), searched, found );
+      search( model, source, new GridPosition( position.w - 1, position.h ), searched, found );
+      search( model, source, new GridPosition( position.w, position.h + 1), searched, found );
+      search( model, source, new GridPosition( position.w, position.h - 1 ), searched, found );
    }//End Method
 
 }//End Class
