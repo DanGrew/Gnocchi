@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import uk.dangrew.gnocchi.algorithm.FloodFill;
+import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
 
@@ -12,8 +13,14 @@ public class SquareHighlighter {
 
    private final Map< Square, SquareWidget > widgets;
    private final FloodFill floodFill;
+   private final GridModel grid;
    
-   public SquareHighlighter( FloodFill floodFill ) {
+   public SquareHighlighter( GridModel grid ) {
+      this( grid, new FloodFill() );
+   }//End Constructor
+   
+   SquareHighlighter( GridModel grid, FloodFill floodFill ) {
+      this.grid = grid;
       this.floodFill = floodFill;
       this.widgets = new HashMap<>();
    }//End Constructor
@@ -33,7 +40,7 @@ public class SquareHighlighter {
    
    private void flood( SquareWidget widget ) {
       GridPosition position = widget.association().position();
-      List< Square > connected = floodFill.flood( position.w, position.h );
+      List< Square > connected = floodFill.flood( grid, position.w, position.h );
       connected.forEach( s -> { 
          if ( widgets.get( s ) != null ) {
             widgets.get( s ).highlight(); 
@@ -43,7 +50,7 @@ public class SquareHighlighter {
    
    private void flush( SquareWidget widget ) {
       GridPosition position = widget.association().position();
-      List< Square > connected = floodFill.flood( position.w, position.h );
+      List< Square > connected = floodFill.flood( grid, position.w, position.h );
       connected.forEach( s -> { 
          if ( widgets.get( s ) != null ) {
             widgets.get( s ).unhighlight(); 

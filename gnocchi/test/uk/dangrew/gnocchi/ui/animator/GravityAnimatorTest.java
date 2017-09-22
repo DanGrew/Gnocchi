@@ -29,7 +29,7 @@ public class GravityAnimatorTest {
       MockitoAnnotations.initMocks( this );
       
       systemUnderTest = new GravityAnimator( animation );
-      systemUnderTest.associate( grid, gridWidget );
+      systemUnderTest.hook( grid, gridWidget );
    }//End Method
 
    @Test public void shouldAssociateWithAnimation(){

@@ -38,7 +38,7 @@ public class FloodFillTest {
       s9 = new Square( Color.BLUE );
       
       grid = new GridModel( 4, 10, 10 );
-      systemUnderTest = new FloodFill( grid );
+      systemUnderTest = new FloodFill();
    }//End Method
 
    @Test public void shouldMatchImmediatelyConnected() {
@@ -55,7 +55,7 @@ public class FloodFillTest {
       grid.set( s4, 5, 6 );
       grid.set( s5, 5, 4 );
       
-      assertThat( systemUnderTest.flood( 5, 5 ), containsInAnyOrder( 
+      assertThat( systemUnderTest.flood( grid, 5, 5 ), containsInAnyOrder( 
                s1, s2, s3, s4, s5 
       ) );
    }//End Method
@@ -74,7 +74,7 @@ public class FloodFillTest {
       grid.set( s4, 5, 7 );
       grid.set( s5, 5, 3 );
       
-      assertThat( systemUnderTest.flood( 5, 5 ), containsInAnyOrder( 
+      assertThat( systemUnderTest.flood( grid, 5, 5 ), containsInAnyOrder( 
                s1 
       ) );
    }//End Method
@@ -97,7 +97,7 @@ public class FloodFillTest {
       grid.set( s8, 5, 4 );
       grid.set( s9, 5, 3 );
       
-      assertThat( systemUnderTest.flood( 5, 5 ), containsInAnyOrder( 
+      assertThat( systemUnderTest.flood( grid, 5, 5 ), containsInAnyOrder( 
                s1, s2, s3, s4, s5, s6, s7, s8, s9 
       ) );
    }//End Method
@@ -119,7 +119,7 @@ public class FloodFillTest {
       grid.set( s8, 3, 4 );
       grid.set( s9, 3, 5 );
       
-      assertThat( systemUnderTest.flood( 0, 0 ), containsInAnyOrder( 
+      assertThat( systemUnderTest.flood( grid, 0, 0 ), containsInAnyOrder( 
                s1, s2, s3, s4, s5, s6, s7, s8, s9 
       ) );
    }//End Method

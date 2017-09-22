@@ -29,7 +29,7 @@ public class GridWidget extends Pane {
    public GridWidget( Grid grid, InputDriver inputDriver ) {
       this.grid = grid;
       this.widgets = new HashMap<>();
-      this.highlighter = new SquareHighlighter( new FloodFill( grid.model() ) );
+      this.highlighter = new SquareHighlighter( grid.model() );
       this.inputDriver = inputDriver;
       this.measurements = new GridMeasurements();
       

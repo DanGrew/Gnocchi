@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import uk.dangrew.gnocchi.engine.GameEngine;
 import uk.dangrew.gnocchi.grid.Grid;
 import uk.dangrew.gnocchi.ui.frame.content.GridSelectionContent;
-import uk.dangrew.gnocchi.ui.grid.GridArea;
+import uk.dangrew.gnocchi.ui.grid.GridWidget;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class GnocchiFrameTest {
@@ -42,16 +42,15 @@ public class GnocchiFrameTest {
    @Test public void shouldShowGridAndApplyEngine() {
       shouldShowGridSelection();
       systemUnderTest.showGrid( new Grid( 3, 10, 10 ) );
-      verify( engine ).setGridArea( Mockito.any() );
-      verify( engine ).launch();
+      verify( engine ).launch( Mockito.any(), Mockito.any() );
       assertThat( systemUnderTest.getChildren(), hasSize( 1 ) );
-      assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridArea.class ) ) );
+      assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridWidget.class ) ) );
    }//End Method
    
    @Test public void shouldShowGridSelectionAfterGrid() {
       shouldShowGridSelection();
       systemUnderTest.showGrid( new Grid( 3, 10, 10 ) );
-      assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridArea.class ) ) );
+      assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridWidget.class ) ) );
       systemUnderTest.showGridSelection();
       assertThat( systemUnderTest.content(), is( systemUnderTest.gridSelection() ) );
    }//End Method

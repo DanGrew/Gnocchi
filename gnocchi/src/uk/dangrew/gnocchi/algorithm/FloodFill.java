@@ -11,25 +11,25 @@ import uk.dangrew.gnocchi.grid.square.Square;
 
 public class FloodFill {
 
-   private final GridModel grid;
-   
-   public FloodFill( GridModel grid ) {
-      this.grid = grid;
-   }//End Constructor
-
-   public List< Square > flood( int w, int h ) {
+   public List< Square > flood( GridModel grid, int w, int h ) {
       Set< GridPosition > searched = new HashSet<>();
       List< Square > found = new ArrayList<>();
       
       Square source = grid.at( w, h );
       if ( source != null ) {
          GridPosition start = new GridPosition( w, h );
-         search( start, start, searched, found );
+         search( grid, start, start, searched, found );
       }
       return found;
    }//End Method
    
-   private void search( GridPosition source, GridPosition position, Set< GridPosition > searched, List< Square > found ){
+   private void search( 
+            GridModel grid, 
+            GridPosition source, 
+            GridPosition position, 
+            Set< GridPosition > searched, 
+            List< Square > found 
+   ){
       if ( searched.contains( position ) ) {
          return;
       }
@@ -46,10 +46,10 @@ public class FloodFill {
       }
       
       found.add( positionSquare );
-      search( source, new GridPosition( position.w + 1, position.h ), searched, found );
-      search( source, new GridPosition( position.w - 1, position.h ), searched, found );
-      search( source, new GridPosition( position.w, position.h + 1), searched, found );
-      search( source, new GridPosition( position.w, position.h - 1 ), searched, found );
+      search( grid, source, new GridPosition( position.w + 1, position.h ), searched, found );
+      search( grid, source, new GridPosition( position.w - 1, position.h ), searched, found );
+      search( grid, source, new GridPosition( position.w, position.h + 1), searched, found );
+      search( grid, source, new GridPosition( position.w, position.h - 1 ), searched, found );
    }//End Method
 
 }//End Class

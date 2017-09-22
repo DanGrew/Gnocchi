@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.engine.GameEngine;
 import uk.dangrew.gnocchi.grid.Grid;
 import uk.dangrew.gnocchi.ui.frame.content.GridSelectionContent;
-import uk.dangrew.gnocchi.ui.grid.GridArea;
+import uk.dangrew.gnocchi.ui.grid.GridWidget;
 import uk.dangrew.kode.javafx.style.JavaFxStyle;
 
 public class GnocchiFrame extends GridPane {
@@ -36,11 +36,10 @@ public class GnocchiFrame extends GridPane {
    }//End Method
    
    public void showGrid( Grid grid ) {
-      GridArea area = new GridArea( grid, engine.inputDriver() );
-      engine.setGridArea( area );
-      engine.launch();
+      GridWidget gridWidget = new GridWidget( grid, engine.inputDriver() );
+      engine.launch( grid, gridWidget );
       getChildren().clear();
-      setMainArea( area );
+      setMainArea( gridWidget );
    }//End Method
    
    private void setMainArea( Node node ) {

@@ -19,7 +19,7 @@ public class GravityAnimator {
       this.animation = animation;
    }//End Constructor
    
-   public void associate( Grid grid, GridWidget gridWidget ) {
+   public void hook( Grid grid, GridWidget gridWidget ) {
       this.grid = grid;
       this.animation.associate( grid, gridWidget );
    }//End Method
