@@ -12,7 +12,7 @@ public class PopAnimation {
    }//End Class
    
    public void animate( Square object ) {
-      game.ui().removeWidget( object );
+      game.gridUi().removeWidget( object );
    }//End Method
 
 }//End Class

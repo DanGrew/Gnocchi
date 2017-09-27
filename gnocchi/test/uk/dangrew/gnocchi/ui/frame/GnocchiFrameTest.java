@@ -1,58 +1,55 @@
 package uk.dangrew.gnocchi.ui.frame;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import uk.dangrew.gnocchi.engine.GameEngine;
-import uk.dangrew.gnocchi.game.GameBuilder;
-import uk.dangrew.gnocchi.ui.frame.content.GridSelectionContent;
-import uk.dangrew.gnocchi.ui.grid.GridWidget;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Rectangle;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class GnocchiFrameTest {
 
-   @Mock private GameEngine engine;
    private GnocchiFrame systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       TestApplication.startPlatform();
       MockitoAnnotations.initMocks( this );
-      systemUnderTest = new GnocchiFrame( engine );
+      systemUnderTest = new GnocchiFrame();
    }//End Method
 
-   @Test public void shouldProvideGridSelection(){
-      assertThat( systemUnderTest.gridSelection(), is( notNullValue() ) );
-      assertThat( systemUnderTest.gridSelection(), is( instanceOf( GridSelectionContent.class ) ) );
+   @Test public void shouldShowContentAndProperties() {
+      Node grid = new Rectangle();
+      Node properties = new Rectangle();
+      
+      systemUnderTest.setContent( grid, properties );
+      assertThat( systemUnderTest.getChildren().contains( grid ), is( true ) );
+      assertThat( systemUnderTest.getChildren().contains( properties ), is( true ) );
+      
+      assertThat( GridPane.getRowSpan( grid ), is( 2 ) );
+      
+      shouldProvideLogo();
    }//End Method
    
-   @Test public void shouldShowGridSelection() {
-      assertThat( systemUnderTest.content(), is( systemUnderTest.gridSelection() ) );
+   @Test public void shouldShowContentWithoutProperties() {
+      Node grid = new Rectangle();
+      
+      systemUnderTest.setContent( grid, null );
+      assertThat( systemUnderTest.getChildren().contains( grid ), is( true ) );
+      
+      assertThat( GridPane.getRowSpan( grid ), is( 2 ) );
+      
+      shouldProvideLogo();
    }//End Method
    
-   @Test public void shouldShowGridAndApplyEngine() {
-      shouldShowGridSelection();
-      systemUnderTest.showGrid( new GameBuilder() );
-      verify( engine ).launch( Mockito.any() );
-      assertThat( systemUnderTest.getChildren(), hasSize( 1 ) );
-      assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridWidget.class ) ) );
+   @Test public void shouldProvideLogo(){
+      assertThat( systemUnderTest.logo(), is( notNullValue() ) );
+      assertThat( systemUnderTest.getChildren().contains( systemUnderTest.logo() ), is( true ) );
    }//End Method
    
-   @Test public void shouldShowGridSelectionAfterGrid() {
-      shouldShowGridSelection();
-      systemUnderTest.showGrid( new GameBuilder() );
-      assertThat( systemUnderTest.getChildren().get( 0 ), is( instanceOf( GridWidget.class ) ) );
-      systemUnderTest.showGridSelection();
-      assertThat( systemUnderTest.content(), is( systemUnderTest.gridSelection() ) );
-   }//End Method
-
 }//End Class

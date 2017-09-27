@@ -1,24 +1,25 @@
-package uk.dangrew.gnocchi.grid.controls;
+package uk.dangrew.gnocchi.game.type.colours;
 
+import uk.dangrew.gnocchi.game.mechanics.Feeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.mechanics.ColorGenerator;
 
-public class Feeder {
+public class ColoursGtFeeder implements Feeder {
    
    private final ColorGenerator colours;
    private final GridModel grid;
 
-   public Feeder( GridModel grid ) {
+   public ColoursGtFeeder( GridModel grid ) {
       this( new ColorGenerator(), grid );
    }//End Constructor
    
-   Feeder( ColorGenerator colours, GridModel grid ) {
+   ColoursGtFeeder( ColorGenerator colours, GridModel grid ) {
       this.colours = colours;
       this.grid = grid;
    }//End Constructor
 
-   public Square feed( int w ) {
+   @Override public Square feed( int w ) {
       if ( grid.at( w, grid.lastHeightIndex() ) != null ) {
          return null;
       }

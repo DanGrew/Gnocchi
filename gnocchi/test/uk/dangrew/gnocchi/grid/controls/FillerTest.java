@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 
@@ -19,7 +20,7 @@ public class FillerTest {
 
    @Before public void initialiseSystemUnderTest() {
       grid = new GridModel( 4, 10, 10 );
-      systemUnderTest = new Filler( grid );
+      systemUnderTest = new Filler( grid, new ColoursGtFeeder( grid ) );
    }//End Method
 
    @Test public void shouldFillGrid() {

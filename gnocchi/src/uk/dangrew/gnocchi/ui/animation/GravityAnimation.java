@@ -46,7 +46,7 @@ public class GravityAnimation {
          return false;
       }
       
-      Rectangle widget = game.ui().widgetFor( current.object );
+      Rectangle widget = game.gridUi().widgetFor( current.object );
       
       PathTransition animation = constructAnimation( widget, from, to );
       if ( iterator.hasNext() ) {

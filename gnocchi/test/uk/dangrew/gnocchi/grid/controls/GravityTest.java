@@ -12,18 +12,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.game.mechanics.Feeder;
+import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 
 public class GravityTest {
 
    private GridModel grid;
-   private Feeder feeder;
+   private Feeder coloursGtFeeder;
    private Gravity systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       grid = new GridModel( 4, 10, 10 );
-      feeder = new Feeder( grid );
+      coloursGtFeeder = new ColoursGtFeeder( grid );
       systemUnderTest = new Gravity( grid );
    }//End Method
 
@@ -33,7 +35,7 @@ public class GravityTest {
    }//End Method
    
    @Test public void shouldPullSingleDown(){
-      feeder.feed( 0 );
+      coloursGtFeeder.feed( 0 );
       assertThatObjectsInColumn( 0, 9 );
       
       systemUnderTest.pullDown( 0 );
@@ -41,7 +43,7 @@ public class GravityTest {
    }//End Method
    
    @Test public void shouldPullMultipleDown(){
-      feeder.feed( 0 );
+      coloursGtFeeder.feed( 0 );
       grid.set( new Square( Color.RED ), 0, 8 );
       assertThatObjectsInColumn( 0, 9, 8 );
       

@@ -1,5 +1,6 @@
 package uk.dangrew.gnocchi.grid.controls;
 
+import uk.dangrew.gnocchi.game.mechanics.Feeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 
 public class Filler {
@@ -9,10 +10,10 @@ public class Filler {
    private final Feeder feeder;
    private final Gravity gravity;
    
-   public Filler( GridModel grid ) {
+   public Filler( GridModel grid, Feeder feeder ) {
       this.grid = grid;
       
-      this.feeder = new Feeder( grid );
+      this.feeder = feeder;
       this.gravity = new Gravity( grid );
    }//End Constructor
 

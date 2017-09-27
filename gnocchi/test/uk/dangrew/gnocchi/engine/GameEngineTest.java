@@ -4,10 +4,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
+
+import uk.dangrew.gnocchi.ui.frame.content.GameLauncherController;
 
 public class GameEngineTest {
 
@@ -15,7 +18,7 @@ public class GameEngineTest {
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      systemUnderTest = new GameEngine();
+      systemUnderTest = new GameEngine( mock( GameLauncherController.class ) );
    }//End Method
 
    @Test public void shouldFillGridOnLaunch(){
@@ -28,9 +31,5 @@ public class GameEngineTest {
    
    @Test public void shouldPopObject(){
       fail();
-//      systemUnderTest.setGridArea( grid );
-//      Square object = Square.randomSquare();
-//      systemUnderTest.pop( object );
-//      verify( grid ).pop( object );
    }//End Method
 }//End Class

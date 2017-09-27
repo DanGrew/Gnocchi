@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.controls.Filler;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
@@ -22,7 +23,7 @@ public class GridSnapshotTest {
 
    @Before public void initialiseSystemUnderTest() {
       grid = new GridModel( 4, 10, 10 );
-      filler = new Filler( grid );
+      filler = new Filler( grid, new ColoursGtFeeder( grid ) );
    }//End Method
 
    @Test public void shouldProvideSnapshotOfItems() {

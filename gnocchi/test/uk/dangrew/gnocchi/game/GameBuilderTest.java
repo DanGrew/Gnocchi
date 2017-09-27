@@ -6,6 +6,9 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.dangrew.gnocchi.game.type.GameType;
+import uk.dangrew.gnocchi.game.type.colours.ColoursGtProperties;
+
 public class GameBuilderTest {
 
    private GameBuilder systemUnderTest;
@@ -32,4 +35,16 @@ public class GameBuilderTest {
       assertThat( systemUnderTest.height(), is( 18 ) );
    }//End Method 
 
+   @Test public void shouldConfigureGameType() {
+      assertThat( systemUnderTest.type(), is( GameBuilder.DEFAULT_GAME_TYPE ) );
+      assertThat( systemUnderTest.ofType( GameType.Chains ), is( systemUnderTest ) );
+      assertThat( systemUnderTest.type(), is( GameType.Chains ) );
+   }//End Method 
+   
+   @Test public void shouldConfigureGameProperties() {
+      assertThat( systemUnderTest.properties(), is( GameBuilder.DEFAULT_PROPERTIES ) );
+      Object properties = new ColoursGtProperties();
+      assertThat( systemUnderTest.withProperties( properties ), is( systemUnderTest ) );
+      assertThat( systemUnderTest.properties(), is( properties ) );
+   }//End Method 
 }//End Class

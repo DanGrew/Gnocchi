@@ -1,4 +1,4 @@
-package uk.dangrew.gnocchi.grid.controls;
+package uk.dangrew.gnocchi.game.type.colours;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -12,10 +12,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.game.mechanics.Feeder;
+import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.mechanics.ColorGenerator;
 
-public class FeederTest {
+public class ColoursGtFeederTest {
 
    @Mock private ColorGenerator colours;
    private GridModel grid;
@@ -26,7 +28,7 @@ public class FeederTest {
       when( colours.next( 4 ) ).thenReturn( Color.RED );
       
       grid = new GridModel( 4, 10, 10 );
-      systemUnderTest = new Feeder( colours, grid );
+      systemUnderTest = new ColoursGtFeeder( colours, grid );
    }//End Method
 
    @Test public void shouldFeedColumnWhenEmpty() {

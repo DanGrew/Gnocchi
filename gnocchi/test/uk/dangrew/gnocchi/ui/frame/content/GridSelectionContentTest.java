@@ -7,10 +7,10 @@ import org.junit.Test;
 
 public class GridSelectionContentTest {
 
-   private GridSelectionContent systemUnderTest;
+   private GridSelection systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      systemUnderTest = new GridSelectionContent( null );
+      systemUnderTest = new GridSelection( null );
    }//End Method
 
    @Test public void test() {
