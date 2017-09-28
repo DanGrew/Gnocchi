@@ -18,7 +18,7 @@ public class ColoursGtMechanics implements GameMechanics {
       }
       this.feeder = new ColoursGtFeeder( model );
       this.properties = ColoursGtProperties.class.cast( externalProperties );
-      this.logic = new ColoursGtLogic( properties, model );
+      this.logic = new ColoursGtLogic( properties );
       this.ui = new ColoursGtPropertiesUi( properties );
    }//End Constructor
 

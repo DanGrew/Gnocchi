@@ -32,4 +32,22 @@ public class GameEngineTest {
    @Test public void shouldPopObject(){
       fail();
    }//End Method
+   
+   @Test public void shouldUseMoveForEverySuccessfulPop(){
+      fail();
+//      when( floodFill.flood( model, r1.position().w, r1.position().h ) )
+//         .thenReturn( Arrays.asList( r1 ) )
+//         .thenReturn( Arrays.asList( r1, r2 ) )
+//         .thenReturn( Arrays.asList( r1, r2, r3 ) )
+//         .thenReturn( Arrays.asList( r1, r2, g1 ) );
+//      
+//      systemUnderTest.pop( r1 );
+//      assertThat( properties.movesRemaining().get(), is( 5 ) );
+//      systemUnderTest.pop( r1 );
+//      assertThat( properties.movesRemaining().get(), is( 5 ) );
+//      systemUnderTest.pop( r1 );
+//      assertThat( properties.movesRemaining().get(), is( 4 ) );
+//      systemUnderTest.pop( r1 );
+//      assertThat( properties.movesRemaining().get(), is( 3 ) );
+   }//End Method
 }//End Class

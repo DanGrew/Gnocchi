@@ -1,6 +1,7 @@
 package uk.dangrew.gnocchi.game.mechanics;
 
 import javafx.scene.Node;
+import uk.dangrew.gnocchi.game.type.GameProperties;
 
 public interface GameMechanics {
 
@@ -8,7 +9,7 @@ public interface GameMechanics {
 
    public Logic logic();
 
-   public Object properties();
+   public GameProperties properties();
    
    public Node ui();
 

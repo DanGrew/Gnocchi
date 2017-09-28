@@ -39,7 +39,7 @@ public class GridWidget extends Pane {
       this.setBorder( new Border( new BorderStroke( Color.WHITE, BorderStrokeStyle.SOLID, null, new BorderWidths( 5 ) ) ) );
    }//End Class
    
-   public Rectangle widgetFor( Square object ) {
+   public SquareWidget widgetFor( Square object ) {
       SquareWidget widget = widgets.get( object );
       if ( widget == null ) {
          widget = measurements.constructSquareWidget( object, model.width(), model.height() );

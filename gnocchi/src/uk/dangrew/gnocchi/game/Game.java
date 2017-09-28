@@ -1,14 +1,13 @@
 package uk.dangrew.gnocchi.game;
 
-import java.util.List;
-
 import javafx.scene.Node;
 import uk.dangrew.gnocchi.game.mechanics.GameMechanics;
 import uk.dangrew.gnocchi.game.mechanics.GameState;
+import uk.dangrew.gnocchi.game.mechanics.Logic;
+import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.gnocchi.grid.controls.Filler;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridSnapshot;
-import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.input.InputDriver;
 import uk.dangrew.gnocchi.ui.grid.GridWidget;
 
@@ -46,8 +45,12 @@ public class Game {
       filler.fill();
    }//End Method 
    
-   public List< Square > pop( Square object ) {
-      return mechanics.logic().pop( object );
+   public Logic logic() {
+      return mechanics.logic();
+   }//End Method
+   
+   public GameProperties properties(){
+      return mechanics.properties();
    }//End Method
    
    public GameState state(){

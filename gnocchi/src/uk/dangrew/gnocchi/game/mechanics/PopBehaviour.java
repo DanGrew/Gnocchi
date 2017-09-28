@@ -2,8 +2,9 @@ package uk.dangrew.gnocchi.game.mechanics;
 
 import uk.dangrew.gnocchi.grid.square.Square;
 
-public interface Feeder {
+public interface PopBehaviour {
 
-   public Square feed( int w );
-
+   public boolean pop( Square object );
+   
 }//End Interface
+

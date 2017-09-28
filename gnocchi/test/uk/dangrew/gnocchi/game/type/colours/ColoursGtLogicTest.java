@@ -30,9 +30,6 @@ public class ColoursGtLogicTest {
    private Square b2;
    private Square g1;
    
-   @Mock private GridModel model;
-   @Mock private FloodFill floodFill;
-   
    private ColoursGtProperties properties;
    private Logic systemUnderTest;
 
@@ -55,64 +52,25 @@ public class ColoursGtLogicTest {
       properties.increaseRemaining( Color.BLUE, 5 );
       properties.increaseMoves( 5 );
       
-      systemUnderTest = new ColoursGtLogic( properties, model, floodFill );
+      systemUnderTest = new ColoursGtLogic( properties );
    }//End Method
 
-   @Test public void shouldUseMoveForEverySuccessfulPop(){
-      when( floodFill.flood( model, r1.position().w, r1.position().h ) )
-         .thenReturn( Arrays.asList( r1 ) )
-         .thenReturn( Arrays.asList( r1, r2 ) )
-         .thenReturn( Arrays.asList( r1, r2, r3 ) )
-         .thenReturn( Arrays.asList( r1, r2, g1 ) );
-      
-      systemUnderTest.pop( r1 );
-      assertThat( properties.movesRemaining().get(), is( 5 ) );
-      systemUnderTest.pop( r1 );
-      assertThat( properties.movesRemaining().get(), is( 5 ) );
-      systemUnderTest.pop( r1 );
-      assertThat( properties.movesRemaining().get(), is( 4 ) );
-      systemUnderTest.pop( r1 );
-      assertThat( properties.movesRemaining().get(), is( 3 ) );
-   }//End Method
-   
-   @Test public void shouldPopColoursMatchesFromGrid() {
-      when( floodFill.flood( model, r1.position().w, r1.position().h ) ).thenReturn( Arrays.asList( r1, r2, r3 ) );
-      assertThat( systemUnderTest.pop( r1 ), is( Arrays.asList( r1, r2, r3 ) ) );
-      verify( model ).remove( r1 );
-      verify( model ).remove( r2 );
-      verify( model ).remove( r3 );
-   }//End Method
-   
-   @Test public void shouldNotPopTwoOrLess(){
-      when( floodFill.flood( model, r1.position().w, r1.position().h ) )
-         .thenReturn( Arrays.asList( r1 ) )
-         .thenReturn( Arrays.asList( r1, r2 ) );
-      assertThat( systemUnderTest.pop( r1 ), is( Arrays.asList() ) );
-      assertThat( systemUnderTest.pop( r1 ), is( Arrays.asList() ) );
-      verify( model, never() ).remove( Mockito.any() );
-   }//End Method
-   
    @Test public void shouldProgressEachPop(){
-      when( floodFill.flood( model, r1.position().w, r1.position().h ) ).thenReturn( Arrays.asList( r1, r2, r3 ) );
-      assertThat( systemUnderTest.pop( r1 ), is( Arrays.asList( r1, r2, r3 ) ) );
+      systemUnderTest.popAll( Arrays.asList( r1, r2, r3 ) );
       assertThat( properties.remainingFor( Color.AQUA ), is( 2 ) );
       assertThat( properties.remainingFor( Color.BLUE ), is( 5 ) );
       assertThat( properties.remainingFor( Color.GREEN ), is( 0 ) );
    }//End Method
    
    @Test public void shouldPopMultiColouredMatch(){
-      when( floodFill.flood( model, r1.position().w, r1.position().h ) )
-         .thenReturn( Arrays.asList( r1, r2, r3, b1, b2 ) );
-      assertThat( systemUnderTest.pop( r1 ), is( Arrays.asList( r1, r2, r3, b1, b2 ) ) );
+      systemUnderTest.popAll( Arrays.asList( r1, r2, r3, b1, b2 ) );
       assertThat( properties.remainingFor( Color.AQUA ), is( 2 ) );
       assertThat( properties.remainingFor( Color.BLUE ), is( 3 ) );
       assertThat( properties.remainingFor( Color.GREEN ), is( 0 ) );
    }//End Method
    
    @Test public void shouldIgnoreProgressOnNonTarget(){
-      when( floodFill.flood( model, r1.position().w, r1.position().h ) )
-         .thenReturn( Arrays.asList( r1, r2, g1 ) );
-      assertThat( systemUnderTest.pop( r1 ), is( Arrays.asList( r1, r2, g1 ) ) );
+      systemUnderTest.popAll( Arrays.asList( r1, r2, g1 ) );
       assertThat( properties.remainingFor( Color.AQUA ), is( 3 ) );
       assertThat( properties.remainingFor( Color.BLUE ), is( 5 ) );
       assertThat( properties.remainingFor( Color.GREEN ), is( 0 ) );
