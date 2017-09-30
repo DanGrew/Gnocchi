@@ -9,11 +9,11 @@ import javafx.util.Duration;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.ui.grid.GridMeasurements;
 
-public class FallingPathTransitionCreator {
+public class FallingPathTransitionFactory {
    
    private final GridMeasurements measurements;
    
-   public FallingPathTransitionCreator() {
+   public FallingPathTransitionFactory() {
       this.measurements = new GridMeasurements();
    }//End Constructor
    
@@ -34,13 +34,13 @@ public class FallingPathTransitionCreator {
       path.getElements().add( new LineTo( to.w * widgetSize + horizontalOffset, ( gridHeight - to.h ) * widgetSize + verticalOffset ) );
       
       int squaresToTravel = from.h - to.h;
-      double verticalDuration =  squaresToTravel * gravity;
+      double verticalDuration =  squaresToTravel * gravity * 2;
       double delayPerSquare = ( to.w * gravity );
       double horizontalDelay = delayPerSquare * squaresToTravel / gridHeight;
       
       PathTransition pathTransition = new PathTransition();
       pathTransition.setDelay( Duration.millis( horizontalDelay ) );
-      pathTransition.setDuration( Duration.millis( verticalDuration ) );
+      pathTransition.setDuration( Duration.millis( gravity * 4 ) );//verticalDuration ) );
       pathTransition.setPath( path );
       pathTransition.setNode( widget );
       pathTransition.setOrientation( PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT );

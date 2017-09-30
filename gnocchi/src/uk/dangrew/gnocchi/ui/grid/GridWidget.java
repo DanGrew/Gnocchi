@@ -3,13 +3,14 @@ package uk.dangrew.gnocchi.ui.grid;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sun.javafx.application.PlatformImpl;
+
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.input.InputDriver;
@@ -54,7 +55,7 @@ public class GridWidget extends Pane {
    public void removeWidget( Square object ) {
       SquareWidget widget = widgets.remove( object );
       highlighter.remove( object );
-      getChildren().remove( widget );
+      PlatformImpl.runAndWait( () -> getChildren().remove( widget ) );
    }//End Method
 
 }//End Class
