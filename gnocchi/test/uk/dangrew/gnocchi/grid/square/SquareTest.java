@@ -19,6 +19,10 @@ public class SquareTest {
 
    @Test public void shouldProvideColour() {
       assertThat( systemUnderTest.colour(), is( Color.ORANGE ) );
+      assertThat( systemUnderTest.colourProperty().get(), is( systemUnderTest.colour() ) );
+      systemUnderTest.setColour( Color.RED );
+      assertThat( systemUnderTest.colour(), is( Color.RED ) );
+      assertThat( systemUnderTest.colourProperty().get(), is( systemUnderTest.colour() ) );
    }//End Method
    
    @Test public void shouldMatchAnotherSquare(){
@@ -33,6 +37,20 @@ public class SquareTest {
       assertThat( systemUnderTest.position(), is( new GridPosition( 0, 1 ) ) );
       systemUnderTest.moveTo( new GridPosition( 4, 9 ) );
       assertThat( systemUnderTest.position(), is( new GridPosition( 4, 9 ) ) );
+   }//End Method
+   
+   @Test public void shouldProvideSquareType(){
+      assertThat( systemUnderTest.type(), is( SquareType.Regular ) );
+      assertThat( systemUnderTest.typeProperty().get(), is( SquareType.Regular ) );
+      systemUnderTest.setType( SquareType.HorizontalBlast );
+      assertThat( systemUnderTest.type(), is( SquareType.HorizontalBlast ) );
+      assertThat( systemUnderTest.typeProperty().get(), is( SquareType.HorizontalBlast ) );
+   }//End Method
+   
+   @Test public void shouldProvideMatcher(){
+      assertThat( systemUnderTest.typeMatcher(), is( SquareType.Regular.matcher() ) );
+      systemUnderTest.setType( SquareType.CrossBlast );
+      assertThat( systemUnderTest.typeMatcher(), is( SquareType.CrossBlast.matcher() ) );
    }//End Method
 
 }//End Class

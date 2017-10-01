@@ -1,6 +1,8 @@
 package uk.dangrew.gnocchi.algorithm;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -130,6 +132,32 @@ public class FloodFillTest {
    
    @Test public void shouldIgnoreNullFlood(){
       fail();
+   }//End Method
+   
+   @Test public void shouldClearMatchesIfLessThanLimit(){
+      for ( int w = 0; w < grid.width(); w++ ) {
+         for ( int h = 0; h < grid.width(); h++ ) {
+            grid.set( new Square( Color.RED ), w, h );
+         }   
+      }
+      
+      grid.set( s1, 5, 5 );
+      assertThat( systemUnderTest.match( grid, 5, 5 ), is( empty() ) );
+      
+      grid.set( s2, 6, 5 );
+      assertThat( systemUnderTest.match( grid, 5, 5 ), is( empty() ) );
+      grid.set( s3, 4, 5 );
+      assertThat( systemUnderTest.match( grid, 5, 5 ), containsInAnyOrder( 
+               s1, s2, s3
+      ) );
+      grid.set( s4, 5, 6 );
+      assertThat( systemUnderTest.match( grid, 5, 5 ), containsInAnyOrder( 
+               s1, s2, s3, s4
+      ) );
+      grid.set( s5, 5, 4 );
+      assertThat( systemUnderTest.flood( grid, 5, 5 ), containsInAnyOrder( 
+               s1, s2, s3, s4, s5 
+      ) );
    }//End Method
 
 }//End Class

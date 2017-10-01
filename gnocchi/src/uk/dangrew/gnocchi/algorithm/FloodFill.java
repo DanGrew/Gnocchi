@@ -9,8 +9,16 @@ import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
 
-public class FloodFill {
+public class FloodFill implements SquareMatcher {
 
+   @Override public List< Square > match( GridModel model, int w, int h ) {
+      List< Square > matches = flood( model, w, h );
+      if ( matches.size() < 3 ) {
+         matches.clear();
+      }
+      return matches;
+   }//End Method
+   
    public List< Square > flood( GridModel model, int w, int h ) {
       Set< GridPosition > searched = new HashSet<>();
       List< Square > found = new ArrayList<>();

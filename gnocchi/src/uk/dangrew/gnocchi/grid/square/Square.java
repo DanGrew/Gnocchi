@@ -1,11 +1,16 @@
 package uk.dangrew.gnocchi.grid.square;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.algorithm.SquareMatcher;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 
 public class Square {
 
-   private final Color colour;
+   private final ObjectProperty< Color > colour;
+   private final ObjectProperty< SquareType > type;
    private GridPosition position;
    
    public Square( Color colour ) {
@@ -14,11 +19,20 @@ public class Square {
    
    public Square( GridPosition position, Color colour ) {
       this.position = position;
-      this.colour = colour;
+      this.colour = new SimpleObjectProperty<>( colour );
+      this.type = new SimpleObjectProperty<>( SquareType.Regular );
    }//End Constructor
 
    public Color colour() {
+      return colour.get();
+   }//End Method
+   
+   public ReadOnlyObjectProperty< Color > colourProperty() {
       return colour;
+   }//End Method
+   
+   public void setColour( Color colour ) {
+      this.colour.set( colour );
    }//End Method
    
    public void moveTo( GridPosition position ) {
@@ -29,8 +43,28 @@ public class Square {
       return position;
    }//End Method
    
+   public SquareType type() {
+      return type.get();
+   }//End Method
+   
+   public ReadOnlyObjectProperty< SquareType > typeProperty() {
+      return type;
+   }//End Method
+   
+   public void setType( SquareType type ) {
+      this.type.set( type );
+   }//End Method
+   
+   public SquareMatcher typeMatcher() {
+      return type().matcher();
+   }//End Method
+   
    public boolean matches( Square square ) {
-      return square.colour.equals( colour );
+      return square.colour().equals( colour() );
+   }//End Method
+   
+   @Override public String toString() {
+      return position.toString();
    }//End Method
    
    public static Square randomSquare(){

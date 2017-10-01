@@ -54,6 +54,7 @@ public class GridWidget extends Pane {
 
    public void removeWidget( Square object ) {
       SquareWidget widget = widgets.remove( object );
+      widget.detachFromSystem();
       highlighter.remove( object );
       PlatformImpl.runAndWait( () -> getChildren().remove( widget ) );
    }//End Method

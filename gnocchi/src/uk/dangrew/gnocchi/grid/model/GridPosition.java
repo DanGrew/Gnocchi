@@ -39,7 +39,7 @@ public class GridPosition {
    }//End Method
    
    @Override public String toString() {
-      return "( " + w + ", " + h + ")";
+      return "( " + w + ", " + h + " )";
    }//End Method
 
 }//End Class

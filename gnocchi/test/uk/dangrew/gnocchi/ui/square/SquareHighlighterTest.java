@@ -14,6 +14,8 @@ import org.mockito.MockitoAnnotations;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.algorithm.FloodFill;
+import uk.dangrew.gnocchi.algorithm.SquareMatcher;
+import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
@@ -29,7 +31,7 @@ public class SquareHighlighterTest {
    private Square s3;
    
    @Mock private GridModel grid;
-   @Mock private FloodFill floodFill;
+   @Mock private MatchChainer matchChainer;
    private SquareHighlighter systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
@@ -38,7 +40,7 @@ public class SquareHighlighterTest {
       sw1 = spy( new SquareWidget( s1 = new Square( new GridPosition( 3, 4 ), Color.RED ), 0, 0, 0, 0 ) );
       sw2 = spy( new SquareWidget( s2 = new Square( new GridPosition( 2, 1 ), Color.RED ), 0, 0, 0, 0 ) );
       sw3 = spy( new SquareWidget( s3 = new Square( new GridPosition( 0, 0 ), Color.RED ), 0, 0, 0, 0 ) );
-      systemUnderTest = new SquareHighlighter( grid, floodFill );
+      systemUnderTest = new SquareHighlighter( grid, matchChainer );
       
       systemUnderTest.monitor( sw1 );
       systemUnderTest.monitor( sw2 );
@@ -46,7 +48,7 @@ public class SquareHighlighterTest {
    }//End Method
 
    @Test public void shouldHighlightAnySquareFlooded() {
-      when( floodFill.flood( grid, 3, 4 ) ).thenReturn( Arrays.asList( s2, s3 ) );
+      when( matchChainer.match( grid, 3, 4 ) ).thenReturn( Arrays.asList( s2, s3 ) );
       
       sw1.getOnMouseEntered().handle( new MouseEvent( null, null, null, 0, 0, 0, 0, null, 0, true, true, true, true, true, true, true, true, true, true, null ) );
       verify( sw2 ).highlight();

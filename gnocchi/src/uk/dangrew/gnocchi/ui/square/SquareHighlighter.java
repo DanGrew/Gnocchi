@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uk.dangrew.gnocchi.algorithm.FloodFill;
+import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
@@ -12,16 +12,16 @@ import uk.dangrew.gnocchi.grid.square.Square;
 public class SquareHighlighter {
 
    private final Map< Square, SquareWidget > widgets;
-   private final FloodFill floodFill;
+   private final MatchChainer matcher;
    private final GridModel grid;
    
    public SquareHighlighter( GridModel grid ) {
-      this( grid, new FloodFill() );
+      this( grid, new MatchChainer() );
    }//End Constructor
    
-   SquareHighlighter( GridModel grid, FloodFill floodFill ) {
+   SquareHighlighter( GridModel grid, MatchChainer floodFill ) {
       this.grid = grid;
-      this.floodFill = floodFill;
+      this.matcher = floodFill;
       this.widgets = new HashMap<>();
    }//End Constructor
 
@@ -40,7 +40,7 @@ public class SquareHighlighter {
    
    private void flood( SquareWidget widget ) {
       GridPosition position = widget.association().position();
-      List< Square > connected = floodFill.flood( grid, position.w, position.h );
+      List< Square > connected = matcher.match( grid, position.w, position.h );
       connected.forEach( s -> { 
          if ( widgets.get( s ) != null ) {
             widgets.get( s ).highlight(); 
@@ -50,7 +50,7 @@ public class SquareHighlighter {
    
    private void flush( SquareWidget widget ) {
       GridPosition position = widget.association().position();
-      List< Square > connected = floodFill.flood( grid, position.w, position.h );
+      List< Square > connected = matcher.match( grid, position.w, position.h );
       connected.forEach( s -> { 
          if ( widgets.get( s ) != null ) {
             widgets.get( s ).unhighlight(); 
