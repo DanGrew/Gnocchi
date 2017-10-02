@@ -26,12 +26,14 @@ public class CompletionAction implements Action {
                new Alert( Alert.AlertType.ERROR, "Game Over!" ).showAndWait();
             } );
             launchController.reset();
+            game.properties().reset();
             break;
          case Success:
             PlatformImpl.runAndWait( () -> {
                new Alert( Alert.AlertType.CONFIRMATION, "Success!" ).showAndWait();
             } );
             launchController.reset();
+            game.properties().reset();
             break;
          case Active:
          default:

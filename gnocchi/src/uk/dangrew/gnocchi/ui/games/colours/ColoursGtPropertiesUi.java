@@ -54,7 +54,7 @@ public class ColoursGtPropertiesUi extends GridPane {
       properties.remainingColours().addListener( new FunctionMapAnyKeyChangeListenerImpl<>( 
                colour -> {
                   ToggleButton button = targets.get( colour );
-                  int remaining = properties.remainingColours().get( colour );
+                  int remaining = properties.remainingFor( colour );
                   button.setText( convertToString( remaining ) );
                }
       ) );

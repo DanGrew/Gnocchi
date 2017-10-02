@@ -45,7 +45,6 @@ public class GameEngine {
    
    public void launch( Game game ){
       this.game = game;
-      this.game.properties().reset();
       this.stack.stack( new GameAction( new FillAction( game ), new GravityAnimation( game ) ) );
    }//End Method
 
