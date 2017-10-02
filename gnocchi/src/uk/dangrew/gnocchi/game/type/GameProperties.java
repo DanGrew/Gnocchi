@@ -5,11 +5,12 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class GameProperties {
 
+   public static final int DEFAULT_MOVES = 25;
    private final ObjectProperty< Integer > movesRemaining;
    
    public GameProperties() {
       this.movesRemaining = new SimpleObjectProperty<>( 0 );
-      this.increaseMoves( 25 );
+      this.reset();
    }//End Constructor
    
    public GameProperties withMoves( int moves ) {
@@ -31,6 +32,10 @@ public class GameProperties {
    
    public void moveUsed( int movesUsed ) {
       movesRemaining.set( movesRemaining.get() - movesUsed );
+   }//End Method
+
+   public void reset() {
+      this.movesRemaining.set( DEFAULT_MOVES );
    }//End Method
 
 }//End Class

@@ -13,14 +13,16 @@ import uk.dangrew.kode.observable.PrivatelyModifiableObservableMapImpl;
 
 public class ColoursGtProperties extends GameProperties {
 
+   static final int DEFAULT_RED = 100;
+   static final int DEFAULT_LIGHTSKYBLUE = 100;
+   
    private final ObservableMap< Color, Integer > modifiableColoursRemaining;
    private final ObservableMap< Color, Integer > publicColoursRemaining;
    
    public ColoursGtProperties() {
       this.modifiableColoursRemaining = FXCollections.observableHashMap();
       this.publicColoursRemaining = new PrivatelyModifiableObservableMapImpl<>( modifiableColoursRemaining );
-      this.increaseRemaining( Color.RED, 100 );
-      this.increaseRemaining( Color.LIGHTSKYBLUE, 100 );
+      this.reset();
    }//End Constructor
    
    @Override public ColoursGtProperties withMoves( int moves ) {
@@ -64,6 +66,15 @@ public class ColoursGtProperties extends GameProperties {
 
    public ObservableMap< Color, Integer > remainingColours() {
       return publicColoursRemaining;
+   }//End Method
+   
+   @Override public void reset() {
+      super.reset();
+      if ( this.modifiableColoursRemaining != null ) {
+         this.modifiableColoursRemaining.clear();
+         this.increaseRemaining( Color.RED, DEFAULT_RED );
+         this.increaseRemaining( Color.LIGHTSKYBLUE, DEFAULT_LIGHTSKYBLUE );
+      }
    }//End Method
 
 }//End Class

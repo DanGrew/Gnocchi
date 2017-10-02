@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.kode.observable.FunctionMapChangeListenerImpl;
 import uk.dangrew.kode.observable.PrivatelyModifiableObservableMapImpl;
 
@@ -119,6 +120,21 @@ public class ColoursGtPropertiesTest {
       assertThat( systemUnderTest.remainingFor( Color.RED ), is( 0 ) );
       assertThat( systemUnderTest.withTarget( Color.RED, 23 ), is( systemUnderTest ) );
       assertThat( systemUnderTest.remainingFor( Color.RED ), is( 23 ) );
+   }//End Method
+   
+   @Test public void shouldResetProperties(){
+      assertThat( systemUnderTest.movesRemaining().get(), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( Color.BLUE ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( Color.AQUA ), is( 0 ) );
+      
+      systemUnderTest.reset();
+      assertThat( systemUnderTest.movesRemaining().get(), is( GameProperties.DEFAULT_MOVES ) );
+      assertThat( systemUnderTest.remainingFor( Color.RED ), is( ColoursGtProperties.DEFAULT_RED ) );
+      assertThat( systemUnderTest.remainingFor( Color.LIGHTSKYBLUE ), is( ColoursGtProperties.DEFAULT_LIGHTSKYBLUE ) );
+      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( Color.AQUA ), is( 0 ) );
    }//End Method
 
 }//End Class

@@ -32,5 +32,11 @@ public class GamePropertiesTest {
       assertThat( systemUnderTest.withMoves( 34 ), is( systemUnderTest ) );
       assertThat( systemUnderTest.movesRemaining().get(), is( 34 ) );
    }//End Method
+   
+   @Test public void shouldReset(){
+      assertThat( systemUnderTest.movesRemaining(), is( 0 ) );
+      systemUnderTest.reset();
+      assertThat( systemUnderTest.movesRemaining(), is( GameProperties.DEFAULT_MOVES ) );
+   }//End Method
 
 }//End Class

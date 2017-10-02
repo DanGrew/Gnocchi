@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.gnocchi.game.type.GameType;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtProperties;
 
@@ -43,7 +44,7 @@ public class GameBuilderTest {
    
    @Test public void shouldConfigureGameProperties() {
       assertThat( systemUnderTest.properties(), is( GameBuilder.DEFAULT_PROPERTIES ) );
-      Object properties = new ColoursGtProperties();
+      GameProperties properties = new ColoursGtProperties();
       assertThat( systemUnderTest.withProperties( properties ), is( systemUnderTest ) );
       assertThat( systemUnderTest.properties(), is( properties ) );
    }//End Method 

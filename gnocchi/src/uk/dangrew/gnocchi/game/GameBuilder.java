@@ -1,5 +1,6 @@
 package uk.dangrew.gnocchi.game;
 
+import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.gnocchi.game.type.GameType;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtProperties;
 
@@ -9,13 +10,13 @@ public class GameBuilder {
    static final int DEFAULT_WIDTH = 10;
    static final int DEFAULT_HEIGHT = 10;
    static final GameType DEFAULT_GAME_TYPE = GameType.Colours;
-   static final Object DEFAULT_PROPERTIES = new ColoursGtProperties();
+   static final GameProperties DEFAULT_PROPERTIES = new ColoursGtProperties();
    
    private int colourVariation;
    private int width;
    private int height;
    private GameType gameType;
-   private Object properties;
+   private GameProperties properties;
    
    public GameBuilder() {
       this.colourVariation = DEFAULT_COLOUR_VARIATION;
@@ -61,11 +62,11 @@ public class GameBuilder {
       return this;
    }//End Method
 
-   public Object properties() {
+   public GameProperties properties() {
       return properties;
    }//End Method
 
-   public GameBuilder withProperties( Object properties ) {
+   public GameBuilder withProperties( GameProperties properties ) {
       this.properties = properties;
       return this;
    }//End Method
