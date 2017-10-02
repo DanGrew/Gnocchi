@@ -1,5 +1,8 @@
 package uk.dangrew.gnocchi.ui.square;
 
+import javafx.scene.SnapshotParameters;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
@@ -47,6 +50,14 @@ public class SquareWidget extends Rectangle {
             break;
          case BombBlast:
             fill = new ImagePattern( images.bombBlastImage() );
+            break;
+         case MassMatcher:
+            ImageView view = new ImageView( images.massMatchImage() );
+            ColorAdjust adjust = new ColorAdjust();
+            adjust.setHue( object.colour().getHue() );
+            adjust.setSaturation( 1 );
+            view.setEffect( adjust );
+            fill = new ImagePattern( view.snapshot( new SnapshotParameters(), null ) );
             break;
          default:
             break;

@@ -73,38 +73,6 @@ public class BonusDetectorTest {
       assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.VerticalBlast ) );
    }//End Method
    
-   @Test public void shouldDetermineHorizontalBlastRelativeToSource() {
-      matches.add( new Square( new GridPosition( 0, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 1, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 2, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 5, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 6, 3 ), Color.RED ) );
-      
-      source.moveTo( new GridPosition( 3, 3 ) );
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.HorizontalBlast ) );
-      
-      source.moveTo( new GridPosition( 3, 9 ) );
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.VerticalBlast ) );
-   }//End Method
-   
-   @Test public void shouldDetermineVerticalBlastRelativeToSource() {
-      matches.add( new Square( new GridPosition( 3, 0 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 1 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 2 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 5 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 6 ), Color.RED ) );
-      
-      source.moveTo( new GridPosition( 3, 3 ) );
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.VerticalBlast ) );
-      
-      source.moveTo( new GridPosition( 9, 3 ) );
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.HorizontalBlast ) );
-   }//End Method
-   
    @Test public void shouldDetermineCrossBlastFromEqualWidthHeightPop() {
       matches.add( new Square( new GridPosition( 4, 4 ), Color.RED ) );
       matches.add( new Square( new GridPosition( 3, 4 ), Color.RED ) );
@@ -120,10 +88,17 @@ public class BonusDetectorTest {
    }//End Method
    
    @Test public void shouldDetermineBombBlastIfMoreThanThreshold(){
-      for ( int i = 0; i < 10; i++ ) {
+      for ( int i = 0; i < BonusDetector.BOMB_THRESHOLD; i++ ) {
          matches.add( Square.randomSquare() );
       }
       assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.BombBlast ) );
+   }//End Method
+   
+   @Test public void shouldDetermineMassMatchIfMoreThanThreshold(){
+      for ( int i = 0; i < BonusDetector.MASS_THRESHOLD; i++ ) {
+         matches.add( Square.randomSquare() );
+      }
+      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.MassMatcher ) );
    }//End Method
 
 }//End Class

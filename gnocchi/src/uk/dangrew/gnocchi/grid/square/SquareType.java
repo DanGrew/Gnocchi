@@ -4,6 +4,7 @@ import uk.dangrew.gnocchi.algorithm.BombMatcher;
 import uk.dangrew.gnocchi.algorithm.ColumnMatcher;
 import uk.dangrew.gnocchi.algorithm.CrossMatcher;
 import uk.dangrew.gnocchi.algorithm.FloodFill;
+import uk.dangrew.gnocchi.algorithm.MassColourMatcher;
 import uk.dangrew.gnocchi.algorithm.RowMatcher;
 import uk.dangrew.gnocchi.algorithm.SquareMatcher;
 
@@ -13,7 +14,8 @@ public enum SquareType {
    HorizontalBlast( new RowMatcher() ),
    VerticalBlast( new ColumnMatcher() ),
    CrossBlast( new CrossMatcher() ),
-   BombBlast( new BombMatcher() );
+   BombBlast( new BombMatcher() ),
+   MassMatcher( new MassColourMatcher() );
    
    private final SquareMatcher matcher;
    

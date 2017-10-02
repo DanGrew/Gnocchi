@@ -8,7 +8,8 @@ import uk.dangrew.gnocchi.grid.square.SquareType;
 public class BonusDetector {
    
    static final int LINE_THRESHOLD = 7;
-   static final int BOMB_THRESHOLD = 10;
+   static final int BOMB_THRESHOLD = 15;
+   static final int MASS_THRESHOLD = 25;
 
    public SquareType detectBonus( Square source, List< Square > matches ) {
       if ( source.type() != SquareType.Regular ) {
@@ -17,26 +18,32 @@ public class BonusDetector {
       if ( matches.size() < LINE_THRESHOLD ) {
          return null;
       }
+      if ( matches.size() >= MASS_THRESHOLD ) {
+         return SquareType.MassMatcher;
+      }
       if ( matches.size() >= BOMB_THRESHOLD ) {
          return SquareType.BombBlast;
       }
       
-      int moreWidth = 0;
-      int moreHeight = 0;
+      int minWidth = source.position().w;
+      int maxWidth = source.position().w;
+      int minHeight = source.position().h;
+      int maxHeight = source.position().h;
+      
       for ( Square square : matches ) {
-         int w = Math.abs( square.position().w - source.position().w );
-         int h = Math.abs( square.position().h - source.position().h );
+         minWidth = Math.min( minWidth, square.position().w );
+         maxWidth = Math.max( maxWidth, square.position().w );
          
-         if ( w > h ) {
-            moreWidth++;
-         } else if ( h > w ) {
-            moreHeight++;
-         }
+         minHeight = Math.min( minHeight, square.position().h );
+         maxHeight = Math.max( maxHeight, square.position().h );
       }
       
-      if ( moreWidth > moreHeight ) {
+      int widthRange = maxWidth - minWidth;
+      int heightRange = maxHeight - minHeight;
+      
+      if ( widthRange > heightRange ) {
          return SquareType.HorizontalBlast;
-      } else if ( moreHeight > moreWidth ) {
+      } else if ( heightRange > widthRange ) {
          return SquareType.VerticalBlast;
       } else {
          return SquareType.CrossBlast;

@@ -57,7 +57,9 @@ public class GameEngine {
       SquareType bonus = bonusDetector.detectBonus( object, matches );
       if ( bonus != null ) {
          object.setType( bonus );
-         object.setColour( Color.BLACK );
+         if ( bonus != SquareType.MassMatcher ) {
+            object.setColour( Color.BLACK );
+         }
          matches.remove( object );
       }
       
