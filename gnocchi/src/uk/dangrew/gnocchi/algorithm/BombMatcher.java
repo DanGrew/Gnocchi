@@ -8,14 +8,22 @@ import uk.dangrew.gnocchi.grid.square.Square;
 
 public class BombMatcher implements SquareMatcher {
    
-   private static final int RANGE = 2;
+   private final int range;
+   
+   public BombMatcher() {
+      this( 2 );
+   }//End Constructor
+   
+   public BombMatcher( int range ) {
+      this.range = range;
+   }//End Constructor
 
    @Override public List< Square > match( GridModel model, int w, int h ) {
-      int widthFrom = Math.max( w - RANGE, 0 );
-      int widthTo = Math.min( w + RANGE, model.lastWidthIndex() );
+      int widthFrom = Math.max( w - range, 0 );
+      int widthTo = Math.min( w + range, model.lastWidthIndex() );
       
-      int heightFrom = Math.max( h - RANGE, 0 );
-      int heightTo = Math.min( h + RANGE, model.lastHeightIndex() );
+      int heightFrom = Math.max( h - range, 0 );
+      int heightTo = Math.min( h + range, model.lastHeightIndex() );
       
       List< Square > matches = new ArrayList<>();
       for ( int i = widthFrom; i <= widthTo; i++ ) {

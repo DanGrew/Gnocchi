@@ -9,7 +9,7 @@ public class BonusDetector {
    
    static final int LINE_THRESHOLD = 7;
    static final int BOMB_THRESHOLD = 15;
-   static final int MASS_THRESHOLD = 25;
+   static final int MASS_THRESHOLD = 20;
 
    public SquareType detectBonus( Square source, List< Square > matches ) {
       if ( source.type() != SquareType.Regular ) {

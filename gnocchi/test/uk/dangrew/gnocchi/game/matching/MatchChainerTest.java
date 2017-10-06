@@ -64,5 +64,5 @@ public class MatchChainerTest {
       model.set( null, 0, 0 );
       assertThat( systemUnderTest.match( model, 0, 0 ), is( empty() ) );
    }//End Method
-
+   
 }//End Class

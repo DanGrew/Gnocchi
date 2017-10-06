@@ -28,6 +28,9 @@ public class MatchChainer implements SquareMatcher {
    }//End Method
    
    private void search( GridModel model, Square source, Set< Square > searched ){
+      if ( source == null ) {
+         return;
+      }
       searched.add( source );
       if ( source.type().equals( SquareType.Regular ) ) {
          return;

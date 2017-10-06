@@ -71,7 +71,36 @@ public enum ColoursGames implements GameLevel {
                   .withTarget( ColorGenerator.COLOUR_2, 150 )
                   .withTarget( ColorGenerator.COLOUR_3, 150 )
          )
-   );
+   ),
+   Level6( 
+      "6",
+      new GameBuilder()
+         .ofType( GameType.Colours )
+         .withWidth( 30 )
+         .withHeight( 30 )
+         .withNumberOfColours( 6 )
+         .withProperties( new ColoursGtProperties()
+                  .withMoves( 50 )
+                  .withTarget( ColorGenerator.COLOUR_1, 150 )
+                  .withTarget( ColorGenerator.COLOUR_2, 150 )
+                  .withTarget( ColorGenerator.COLOUR_3, 150 )
+         )
+   ),
+   Level7( 
+      "7",
+      new GameBuilder()
+         .ofType( GameType.Colours )
+         .withWidth( 10 )
+         .withHeight( 10 )
+         .withNumberOfColours( 5 )
+         .withProperties( new ColoursGtProperties()
+                  .withMoves( 50 )
+                  .withTarget( ColorGenerator.COLOUR_1, 150 )
+                  .withTarget( ColorGenerator.COLOUR_2, 150 )
+                  .withTarget( ColorGenerator.COLOUR_3, 150 )
+         )
+   )
+   ;
    
    private final String levelName;
    private final GameBuilder builder;

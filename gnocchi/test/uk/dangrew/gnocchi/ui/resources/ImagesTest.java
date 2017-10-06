@@ -18,6 +18,20 @@ public class ImagesTest {
 
    @Test public void shouldProvideImages() {
       assertThat( systemUnderTest.logoImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.bombBlastImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.bombBombImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.bombCrossImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.bombHorizontalImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.bombVerticalImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.crossBlastImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.horizontalBlastImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.massBombImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.massCrossImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.massHorizontalImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.massMassImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.massMatchImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.massVerticalImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.verticalBlastImage(), is( notNullValue() ) );
    }//End Method
 
 }//End Class

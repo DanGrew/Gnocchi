@@ -11,8 +11,8 @@ public class InputDriver {
       this.engine = engine;
    }//End Constructor
    
-   public void popAction( SquareWidget widget ) {
-      widget.setOnMouseClicked( e -> engine.pop( widget.association() ) );
+   public void pop( SquareWidget widget ) {
+      engine.pop( widget.association() );
    }//End Method
 
 }//End Class

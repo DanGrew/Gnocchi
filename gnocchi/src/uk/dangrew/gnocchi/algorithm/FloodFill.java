@@ -1,7 +1,7 @@
 package uk.dangrew.gnocchi.algorithm;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +20,7 @@ public class FloodFill implements SquareMatcher {
    }//End Method
    
    public List< Square > flood( GridModel model, int w, int h ) {
-      Set< GridPosition > searched = new HashSet<>();
+      Set< GridPosition > searched = new LinkedHashSet<>();
       List< Square > found = new ArrayList<>();
       
       Square source = model.at( w, h );

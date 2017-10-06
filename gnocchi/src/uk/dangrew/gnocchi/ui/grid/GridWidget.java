@@ -14,23 +14,23 @@ import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.input.InputDriver;
+import uk.dangrew.gnocchi.ui.square.HighlightModel;
 import uk.dangrew.gnocchi.ui.square.SquareHighlighter;
 import uk.dangrew.gnocchi.ui.square.SquareWidget;
 
 public class GridWidget extends Pane {
 
    private final GridMeasurements measurements;
-   private final InputDriver inputDriver;
    
    private final GridModel model;
    private final Map< Object, SquareWidget > widgets;
-   private final SquareHighlighter highlighter;
+   private final HighlightModel highlighter;
    
    public GridWidget( GridModel model, InputDriver inputDriver ) {
       this.model = model;
       this.widgets = new HashMap<>();
-      this.highlighter = new SquareHighlighter( model );
-      this.inputDriver = inputDriver;
+      this.highlighter = new HighlightModel( model, inputDriver );
+      new SquareHighlighter( highlighter );
       this.measurements = new GridMeasurements();
       
       this.setMaxSize( measurements.gridPixelWidth(), measurements.gridPixelHeight() );
@@ -44,7 +44,6 @@ public class GridWidget extends Pane {
       SquareWidget widget = widgets.get( object );
       if ( widget == null ) {
          widget = measurements.constructSquareWidget( object, model.width(), model.height() );
-         inputDriver.popAction( widget );
          highlighter.monitor( widget );
          widgets.put( object, widget );
          getChildren().add( widget );
