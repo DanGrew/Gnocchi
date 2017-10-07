@@ -15,6 +15,9 @@ public class SquareHighlighting {
          case MatchingSelection:
             styleMatchingSelection( widget );
             break;
+         case BonusForSelection:
+            styleBonusForSelection( widget );
+            break;
          case Highlighted:
             styleHighlighted( widget );
             break;
@@ -37,6 +40,11 @@ public class SquareHighlighting {
    private void styleMatchingSelection( SquareWidget widget ) {
       widget.setStroke( Color.ORANGE );
       widget.setStrokeWidth( 3 );
+   }//End Method
+   
+   private void styleBonusForSelection( SquareWidget widget ) {
+      widget.setStroke( Color.MEDIUMPURPLE );
+      widget.setStrokeWidth( 6 );
    }//End Method
    
    private void styleHighlighted( SquareWidget widget ) {

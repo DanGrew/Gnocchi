@@ -14,5 +14,9 @@ public class InputDriver {
    public void pop( SquareWidget widget ) {
       engine.pop( widget.association() );
    }//End Method
+   
+   public void combine( SquareWidget selected, SquareWidget bonus ) {
+      engine.combine( selected.association(), bonus.association() );
+   }//End Method
 
 }//End Class

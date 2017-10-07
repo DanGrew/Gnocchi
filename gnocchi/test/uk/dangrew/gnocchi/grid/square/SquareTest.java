@@ -33,6 +33,17 @@ public class SquareTest {
       assertThat( systemUnderTest.matches( Square.colouredSquare( Color.RED ) ), is( false ) );
    }//End Method
    
+   @Test public void shouldNotMatchFromBonusSquare(){
+      systemUnderTest.setType( SquareType.BombBlast );
+      assertThat( systemUnderTest.matches( Square.colouredSquare( Color.ORANGE ) ), is( false ) );
+   }//End Method
+   
+   @Test public void shouldNotMatchToBonusSquare(){
+      Square square = Square.colouredSquare( Color.ORANGE );
+      square.setType( SquareType.BombBomb );
+      assertThat( systemUnderTest.matches( square ), is( false ) );
+   }//End Method
+   
    @Test public void shouldChangePosition(){
       assertThat( systemUnderTest.position(), is( new GridPosition( 0, 1 ) ) );
       systemUnderTest.moveTo( new GridPosition( 4, 9 ) );

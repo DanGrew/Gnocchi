@@ -4,6 +4,7 @@ public enum SquareHighlightType {
 
    Selected,
    MatchingSelection,
+   BonusForSelection,
    Highlighted,
    MatchingHighlighted,
    None

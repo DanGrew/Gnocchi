@@ -20,6 +20,9 @@ public class SquareHighlighter {
       this.highlightModel.matchingSelection().addListener( new FunctionSetChangeListenerImpl<>( 
                this::updateWidget, this::updateWidget 
       ) );
+      this.highlightModel.bonusForSelection().addListener( new FunctionSetChangeListenerImpl<>( 
+               this::updateWidget, this::updateWidget 
+      ) );
       this.highlightModel.highlighted().addListener( this::selectionChanged );
       this.highlightModel.matchingHighlighted().addListener( new FunctionSetChangeListenerImpl<>( 
                this::updateWidget, this::updateWidget 
@@ -34,6 +37,8 @@ public class SquareHighlighter {
    private void updateWidget( SquareWidget widget ){
       if ( highlightModel.isSelected( widget ) ) {
          highlighting.widgetStateChange( widget, SquareHighlightType.Selected );
+      } else if ( highlightModel.isBonusForSelection( widget ) ) {
+         highlighting.widgetStateChange( widget, SquareHighlightType.BonusForSelection );
       } else if ( highlightModel.isMatchingSelection( widget ) ) {
          highlighting.widgetStateChange( widget, SquareHighlightType.MatchingSelection );
       } else if ( highlightModel.isHighlighted( widget ) ){

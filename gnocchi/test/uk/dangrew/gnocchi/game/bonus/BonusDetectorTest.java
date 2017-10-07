@@ -98,7 +98,7 @@ public class BonusDetectorTest {
       for ( int i = 0; i < BonusDetector.MASS_THRESHOLD; i++ ) {
          matches.add( Square.randomSquare() );
       }
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.MassMatcher ) );
+      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.MassBlast ) );
    }//End Method
 
 }//End Class

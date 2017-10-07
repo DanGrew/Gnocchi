@@ -1,7 +1,7 @@
 package uk.dangrew.gnocchi.ui.square;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +9,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import uk.dangrew.gnocchi.algorithm.BonusMatcher;
 import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
@@ -19,28 +20,38 @@ public class HighlightModel {
    private final GridModel model;
    private final InputDriver inputDriver;
    private final MatchChainer matchChainer;
+   private final BonusMatcher bonusMatcher;
    
    private final Map< Square, SquareWidget > widgets;
    
    private final ObjectProperty< SquareWidget > selected;
    private final ObservableSet< SquareWidget > matchingSelection;
+   private final ObservableSet< SquareWidget > bonusesForSelection;
    
    private final ObjectProperty< SquareWidget > highlighted;
    private final ObservableSet< SquareWidget > matchingHighlighted;
    
    public HighlightModel( GridModel model, InputDriver inputDriver ){
-      this( model, inputDriver, new MatchChainer() );
+      this( model, inputDriver, new MatchChainer(), new BonusMatcher() );
    }//End Constructor
    
-   HighlightModel( GridModel model, InputDriver inputDriver, MatchChainer matcher ) {
+   HighlightModel( 
+            GridModel model, 
+            InputDriver inputDriver, 
+            MatchChainer squareMatcher,
+            BonusMatcher bonusMatcher
+   ) {
       this.model = model;
       this.inputDriver = inputDriver;
-      this.matchChainer = matcher;
+      this.matchChainer = squareMatcher;
+      this.bonusMatcher = bonusMatcher;
+      
       this.widgets = new HashMap<>();
       this.selected = new SimpleObjectProperty<>();
       this.highlighted = new SimpleObjectProperty<>();
-      this.matchingSelection = FXCollections.observableSet( new HashSet<>() );
-      this.matchingHighlighted = FXCollections.observableSet( new HashSet<>() );
+      this.matchingSelection = FXCollections.observableSet( new LinkedHashSet<>() );
+      this.matchingHighlighted = FXCollections.observableSet( new LinkedHashSet<>() );
+      this.bonusesForSelection = FXCollections.observableSet( new LinkedHashSet<>() );
    }//End Constructor
 
    public void monitor( SquareWidget widget ) {
@@ -59,15 +70,30 @@ public class HighlightModel {
    
    private void onClicked( SquareWidget widget ) {
       if ( widget == selected.get() ) {
-         selected.set( null );
-         matchingSelection.clear();
          inputDriver.pop( widget );
+         select( null );
+      } else if ( bonusesForSelection.contains( widget ) ) {
+         SquareWidget selected = selected().get();
+         inputDriver.combine( selected, widget );
+         select( selected );
+      } else {
+         select( widget );
+      }
+   }//End Method
+   
+   private void select( SquareWidget widget ) {
+      matchingSelection.clear();
+      bonusesForSelection.clear();
+      selected.set( widget );
+      
+      if ( widget == null ) {
          return;
       }
-      selected.set( widget );
       List< Square > matches = matchChainer.match( model, widget.association().position().w, widget.association().position().h );
-      matchingSelection.clear();
       matches.forEach( s -> matchingSelection.add( widgets.get( s ) ) );
+      
+      List< Square > bonuses = bonusMatcher.match( model, widget.association().position().w, widget.association().position().h );
+      bonuses.forEach( s -> bonusesForSelection.add( widgets.get( s ) ) );
    }//End Method
    
    private void onEntered( SquareWidget widget ) {
@@ -94,6 +120,10 @@ public class HighlightModel {
       return matchingSelection;
    }//End Method
    
+   ObservableSet< SquareWidget > bonusForSelection(){
+      return bonusesForSelection;
+   }//End Method
+   
    ObservableSet< SquareWidget > matchingHighlighted(){
       return matchingHighlighted;
    }//End Method
@@ -104,6 +134,10 @@ public class HighlightModel {
    
    boolean isMatchingSelection( SquareWidget widget ) {
       return matchingSelection.contains( widget );
+   }//End Method
+   
+   boolean isBonusForSelection( SquareWidget widget ) {
+      return bonusesForSelection.contains( widget );
    }//End Method
    
    boolean isHighlighted( SquareWidget widget ) {

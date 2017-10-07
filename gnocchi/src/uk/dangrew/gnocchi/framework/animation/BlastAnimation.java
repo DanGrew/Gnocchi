@@ -1,5 +1,7 @@
 package uk.dangrew.gnocchi.framework.animation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.animation.FadeTransition;
@@ -26,7 +28,8 @@ public class BlastAnimation extends AnimationImpl {
    public BlastAnimation( FadeTransitionFactory fadeFactory, AnimationSynchronizer synchronizer, Game game, List< Square > connectedSquares ) {
       this.game = game;
       this.fadeFactory = fadeFactory;
-      this.connectedSquares = connectedSquares;
+      this.connectedSquares = new ArrayList<>( connectedSquares );
+      Collections.shuffle( this.connectedSquares );
       this.synchronizer = synchronizer;
       this.synchronizer.setOnCompletion( this::complete );
    }//End Constructor

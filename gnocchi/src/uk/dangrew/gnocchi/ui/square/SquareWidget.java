@@ -29,6 +29,7 @@ public class SquareWidget extends Rectangle {
       
       this.registrations = new RegistrationManager();
       this.registrations.apply( new ReadOnlyChangeListenerRegistrationImpl<>( object.typeProperty(), ( s, o, n ) -> updateImage() ) );
+      this.registrations.apply( new ReadOnlyChangeListenerRegistrationImpl<>( object.colourProperty(), ( s, o, n ) -> updateImage() ) );
       this.updateImage();
    }//End Constructor
    

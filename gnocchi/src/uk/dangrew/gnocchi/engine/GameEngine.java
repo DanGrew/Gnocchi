@@ -2,8 +2,6 @@ package uk.dangrew.gnocchi.engine;
 
 import java.util.List;
 
-import javafx.scene.paint.Color;
-import uk.dangrew.gnocchi.algorithm.FloodFill;
 import uk.dangrew.gnocchi.framework.GameAction;
 import uk.dangrew.gnocchi.framework.GameStack;
 import uk.dangrew.gnocchi.framework.action.CompletionAction;
@@ -13,6 +11,7 @@ import uk.dangrew.gnocchi.framework.animation.BlastAnimation;
 import uk.dangrew.gnocchi.framework.animation.GravityAnimation;
 import uk.dangrew.gnocchi.framework.animation.NoAnimation;
 import uk.dangrew.gnocchi.game.Game;
+import uk.dangrew.gnocchi.game.bonus.BonusCombiner;
 import uk.dangrew.gnocchi.game.bonus.BonusDetector;
 import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.square.Square;
@@ -25,6 +24,7 @@ public class GameEngine {
    private final GameLauncherController launchController;
    private final InputDriver inputDriver;
    
+   private final BonusCombiner bonusCombiner;
    private final MatchChainer matchChainer;
    private final BonusDetector bonusDetector;
    private final GameStack stack;
@@ -37,6 +37,7 @@ public class GameEngine {
       this.stack = new GameStack();
       this.bonusDetector = new BonusDetector();
       this.matchChainer = new MatchChainer();
+      this.bonusCombiner = new BonusCombiner();
    }//End Constructor
    
    public InputDriver inputDriver(){
@@ -56,21 +57,20 @@ public class GameEngine {
       SquareType bonus = bonusDetector.detectBonus( object, matches );
       if ( bonus != null ) {
          object.setType( bonus );
-         if ( bonus != SquareType.MassMatcher && 
-                  bonus != SquareType.MassBomb &&
-                  bonus != SquareType.MassCross &&
-                  bonus != SquareType.MassHorizontal &&
-                  bonus != SquareType.MassMass &&
-                  bonus != SquareType.MassVertical
-         ) {
-            object.setColour( Color.BLACK );
-         }
          matches.remove( object );
       }
       
       stack.stack( new GameAction( new SquareRemovalAction( game, matches ), new BlastAnimation( game, matches ) ) );
       stack.stack( new GameAction( new FillAction( game ), new GravityAnimation( game ) ) );
       stack.stack( new GameAction( new CompletionAction( game, launchController ), new NoAnimation() ) );
+   }//End Method
+
+   public void combine( Square selected, Square bonus ) {
+      SquareType combination = bonusCombiner.determineCombination( selected.type(), bonus.type() );
+      if ( combination != null ) {
+         selected.setType( combination );
+         bonus.setType( SquareType.Regular );
+      }
    }//End Method
    
 }//End Class

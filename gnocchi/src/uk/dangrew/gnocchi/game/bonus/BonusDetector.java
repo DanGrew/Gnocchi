@@ -19,7 +19,7 @@ public class BonusDetector {
          return null;
       }
       if ( matches.size() >= MASS_THRESHOLD ) {
-         return SquareType.MassMatcher;
+         return SquareType.MassBlast;
       }
       if ( matches.size() >= BOMB_THRESHOLD ) {
          return SquareType.BombBlast;

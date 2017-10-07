@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.dangrew.gnocchi.algorithm.BonusMatcher;
 import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
@@ -31,7 +32,8 @@ public class HighlightModelTest {
    private SquareWidget widget2;
    private SquareWidget widget3;
    
-   @Mock private MatchChainer matcher;
+   @Mock private BonusMatcher bonusMatcher;
+   @Mock private MatchChainer squareMatcher;
    private HighlightModel systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
@@ -39,7 +41,7 @@ public class HighlightModelTest {
       widget1 = new SquareWidget( Square.randomSquare(), 0, 0, 20, 20 );
       widget2 = new SquareWidget( Square.randomSquare(), 0, 0, 20, 20 );
       widget3 = new SquareWidget( Square.randomSquare(), 0, 0, 20, 20 );
-      systemUnderTest = new HighlightModel( model, inputDriver, matcher );
+      systemUnderTest = new HighlightModel( model, inputDriver, squareMatcher, bonusMatcher );
       systemUnderTest.monitor( widget1 );
       systemUnderTest.monitor( widget2 );
       systemUnderTest.monitor( widget3 );
@@ -54,7 +56,7 @@ public class HighlightModelTest {
    }//End Method
    
    @Test public void shouldHighlightOnMouseMovementSquare() {
-      when( matcher.match( model, widget1.association().position().w, widget1.association().position().h ) )
+      when( squareMatcher.match( model, widget1.association().position().w, widget1.association().position().h ) )
          .thenReturn( Arrays.asList( widget1.association(), widget2.association(), widget3.association() ) );
       
       widget1.getOnMouseEntered().handle( new TestMouseEvent() );
@@ -75,7 +77,7 @@ public class HighlightModelTest {
    }//End Method
    
    @Test public void shouldHighlightSquareMatches() {
-      when( matcher.match( model, widget1.association().position().w, widget1.association().position().h ) )
+      when( squareMatcher.match( model, widget1.association().position().w, widget1.association().position().h ) )
          .thenReturn( Arrays.asList( widget1.association(), widget2.association(), widget3.association() ) );
       
       widget1.getOnMouseClicked().handle( new TestMouseEvent() );
@@ -96,7 +98,16 @@ public class HighlightModelTest {
    }//End Method
    
    @Test public void shouldHighlightCombinations() {
-      fail( "Not yet implemented" );
+      when( bonusMatcher.match( model, widget1.association().position().w, widget1.association().position().h ) )
+         .thenReturn( Arrays.asList( widget2.association(), widget3.association() ) );
+   
+      widget1.getOnMouseClicked().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isSelected( widget1 ), is( true ) );
+      assertThat( systemUnderTest.isBonusForSelection( widget1 ), is( false ) );
+      assertThat( systemUnderTest.isBonusForSelection( widget2 ), is( true ) );
+      assertThat( systemUnderTest.isBonusForSelection( widget3 ), is( true ) );
+      
+      assertThat( systemUnderTest.bonusForSelection(), containsInAnyOrder( widget2, widget3 ) );
    }//End Method
    
    @Test public void shouldRemoveListenersOnRemove(){
@@ -122,4 +133,15 @@ public class HighlightModelTest {
       assertThat( systemUnderTest.isSelected( widget1 ), is( false ) );
    }//End Method
 
+   @Test public void shouldCombineIfBonusClicked(){
+      widget1.getOnMouseClicked().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isSelected( widget1 ), is( true ) );
+      
+      systemUnderTest.bonusForSelection().add( widget2 );
+      widget2.getOnMouseClicked().handle( new TestMouseEvent() );
+      verify( inputDriver ).combine( widget1, widget2 );
+      
+      assertThat( systemUnderTest.isSelected( widget1 ), is( true ) );
+   }//End Method
+   
 }//End Class

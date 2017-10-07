@@ -55,6 +55,17 @@ public class SquareHighlighterTest {
       verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.None );
    }//End Method
    
+   @Test public void shouldSelectBonuses(){
+      highlightModel.bonusForSelection().add( sw1 );
+      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.BonusForSelection );
+      
+      highlightModel.bonusForSelection().add( sw2 );
+      verify( highlighting ).widgetStateChange( sw2, SquareHighlightType.BonusForSelection );
+      
+      highlightModel.bonusForSelection().remove( sw1 );
+      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.None );
+   }//End Method
+   
    @Test public void shouldHighlight(){
       highlightModel.highlighted().set( sw1 );
       verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.Highlighted );
@@ -84,6 +95,9 @@ public class SquareHighlighterTest {
       
       highlightModel.matchingSelection().add( sw1 );
       verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.MatchingSelection );
+      
+      highlightModel.bonusForSelection().add( sw1 );
+      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.BonusForSelection );
       
       highlightModel.selected().set( sw1 );
       verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.Selected );

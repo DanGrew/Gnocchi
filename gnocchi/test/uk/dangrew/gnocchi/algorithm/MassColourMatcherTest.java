@@ -12,6 +12,7 @@ import org.junit.Test;
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareType;
 
 public class MassColourMatcherTest {
 
@@ -50,6 +51,29 @@ public class MassColourMatcherTest {
       
       assertThat( systemUnderTest.match( model, 0, 0 ), containsInAnyOrder(  
                s1, s2, s3, s4, s5, s6, s7
+       ) );
+   }//End Method
+   
+   @Test public void shouldNotMatchBonuses() {
+      Square s1 = Square.colouredSquare( Color.BLACK );
+      model.set( s1, 0, 0 );
+      Square s2 = Square.colouredSquare( Color.BLACK );
+      model.set( s2, 3, 2 );
+      Square s3 = Square.colouredSquare( Color.BLACK );
+      model.set( s3, 7, 8 );
+      Square s4 = Square.colouredSquare( Color.BLACK );
+      model.set( s4, 6, 6 );
+      Square s5 = Square.colouredSquare( Color.BLACK );
+      model.set( s5, 1, 5 );
+      Square s6 = Square.colouredSquare( Color.BLACK );
+      model.set( s6, 1, 6 );
+      Square s7 = Square.colouredSquare( Color.BLACK );
+      model.set( s7, 2, 9 );
+      
+      s2.setType( SquareType.BombBomb );
+      
+      assertThat( systemUnderTest.match( model, 0, 0 ), containsInAnyOrder(  
+               s1, s3, s4, s5, s6, s7
        ) );
    }//End Method
    

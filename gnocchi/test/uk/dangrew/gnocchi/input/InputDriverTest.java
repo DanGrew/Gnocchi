@@ -1,6 +1,5 @@
 package uk.dangrew.gnocchi.input;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -28,6 +27,13 @@ public class InputDriverTest {
       SquareWidget widget = new SquareWidget( Square.randomSquare(), 0, 0, 20, 20 );
       systemUnderTest.pop( widget );
       verify( engine ).pop( widget.association() );
+   }//End Method
+   
+   @Test public void shouldCombineSquares() {
+      SquareWidget widget1 = new SquareWidget( Square.randomSquare(), 0, 0, 20, 20 );
+      SquareWidget widget2 = new SquareWidget( Square.randomSquare(), 0, 0, 20, 20 );
+      systemUnderTest.combine( widget1, widget2 );
+      verify( engine ).combine( widget1.association(), widget2.association() );
    }//End Method
 
 }//End Class

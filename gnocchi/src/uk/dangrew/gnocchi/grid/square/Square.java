@@ -60,6 +60,12 @@ public class Square {
    }//End Method
    
    public boolean matches( Square square ) {
+      if ( 
+               type.get() != SquareType.Regular ||
+               square.type() != SquareType.Regular 
+      ) {
+         return false;
+      }
       return square.colour().equals( colour() );
    }//End Method
    
