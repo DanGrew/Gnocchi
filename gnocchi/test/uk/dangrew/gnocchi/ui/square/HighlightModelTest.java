@@ -6,17 +6,19 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javafx.beans.value.ChangeListener;
 import uk.dangrew.gnocchi.algorithm.BonusMatcher;
 import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.model.GridModel;
@@ -142,6 +144,30 @@ public class HighlightModelTest {
       verify( inputDriver ).combine( widget1, widget2 );
       
       assertThat( systemUnderTest.isSelected( widget1 ), is( true ) );
+   }//End Method
+   
+   @Test public void shouldProvideMatchingWhenSelected(){
+      when( squareMatcher.match( model, widget1.association().position().w, widget1.association().position().h ) )
+         .thenReturn( Arrays.asList( widget1.association() ) );
+
+      List< SquareWidget > matches = new ArrayList<>();
+      ChangeListener< SquareWidget > selectionListener = ( s, o, n ) -> matches.addAll( systemUnderTest.matchingSelection() );
+      systemUnderTest.selected().addListener( selectionListener );
+      
+      widget1.getOnMouseClicked().handle( new TestMouseEvent() );
+      assertThat( matches.isEmpty(), is( false ) );
+   }//End Method
+   
+   @Test public void shouldProvideMatchingWhenHighlighted(){
+      when( squareMatcher.match( model, widget1.association().position().w, widget1.association().position().h ) )
+         .thenReturn( Arrays.asList( widget1.association() ) );
+   
+      List< SquareWidget > matches = new ArrayList<>();
+      ChangeListener< SquareWidget > highlightListener = ( s, o, n ) -> matches.addAll( systemUnderTest.matchingHighlighted() );
+      systemUnderTest.highlighted().addListener( highlightListener );
+      
+      widget1.getOnMouseEntered().handle( new TestMouseEvent() );
+      assertThat( matches.isEmpty(), is( false ) );
    }//End Method
    
 }//End Class

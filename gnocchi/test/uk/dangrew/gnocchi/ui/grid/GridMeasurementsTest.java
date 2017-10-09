@@ -44,8 +44,8 @@ public class GridMeasurementsTest {
       Square object = Square.randomSquare();
       
       SquareWidget widget = systemUnderTest.constructSquareWidget( object, 10, 10 );
-      assertThat( widget.getX(), is( GridMeasurements.OFFSCREEN ) );
-      assertThat( widget.getY(), is( GridMeasurements.OFFSCREEN ) );
+      assertThat( widget.squareBackground().getX(), is( GridMeasurements.OFFSCREEN ) );
+      assertThat( widget.squareBackground().getY(), is( GridMeasurements.OFFSCREEN ) );
       assertThat( widget.getWidth(), is( systemUnderTest.calculateSquareDimension( 10, 10 ) ) );
       assertThat( widget.getHeight(), is( systemUnderTest.calculateSquareDimension( 10, 10 ) ) );
       assertThat( widget.association(), is( object ) );

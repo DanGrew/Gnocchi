@@ -4,6 +4,9 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -37,69 +40,69 @@ public class SquareHighlighterTest {
 
    @Test public void shouldSelect(){
       highlightModel.selected().set( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.Selected );
+      verify( highlighting ).styleSelected( sw1, new ArrayList<>() );
       
       highlightModel.selected().set( sw2 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.None );
-      verify( highlighting ).widgetStateChange( sw2, SquareHighlightType.Selected );
+      verify( highlighting ).styleSelected( sw1, new ArrayList<>() );
+      verify( highlighting ).styleSelected( sw2, new ArrayList<>() );
    }//End Method
    
    @Test public void shouldSelectMatches(){
       highlightModel.matchingSelection().add( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.MatchingSelection );
+      verify( highlighting ).styleMatchingSelection( sw1 );
       
       highlightModel.matchingSelection().add( sw2 );
-      verify( highlighting ).widgetStateChange( sw2, SquareHighlightType.MatchingSelection );
+      verify( highlighting ).styleMatchingSelection( sw2 );
       
       highlightModel.matchingSelection().remove( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.None );
+      verify( highlighting ).styleMatchingSelection( sw1 );
    }//End Method
    
    @Test public void shouldSelectBonuses(){
       highlightModel.bonusForSelection().add( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.BonusForSelection );
+      verify( highlighting ).styleBonusForSelection( sw1 );
       
       highlightModel.bonusForSelection().add( sw2 );
-      verify( highlighting ).widgetStateChange( sw2, SquareHighlightType.BonusForSelection );
+      verify( highlighting ).styleBonusForSelection( sw2 );
       
       highlightModel.bonusForSelection().remove( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.None );
+      verify( highlighting ).styleBonusForSelection( sw1 );
    }//End Method
    
    @Test public void shouldHighlight(){
       highlightModel.highlighted().set( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.Highlighted );
+      verify( highlighting ).styleHighlighted( sw1 );
       
       highlightModel.highlighted().set( sw2 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.None );
-      verify( highlighting ).widgetStateChange( sw2, SquareHighlightType.Highlighted );
+      verify( highlighting ).styleHighlighted( sw1 );
+      verify( highlighting ).styleHighlighted( sw2 );
    }//End Method
    
    @Test public void shouldHighlightMatches(){
       highlightModel.matchingHighlighted().add( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.MatchingHighlighted );
+      verify( highlighting ).styleMatchingHighlighted( sw1 );
       
       highlightModel.matchingHighlighted().add( sw2 );
-      verify( highlighting ).widgetStateChange( sw2, SquareHighlightType.MatchingHighlighted );
+      verify( highlighting ).styleMatchingHighlighted( sw2 );
       
       highlightModel.matchingHighlighted().remove( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.None );
+      verify( highlighting ).styleMatchingHighlighted( sw1 );
    }//End Method
    
    @Test public void shouldPrioritizeHighlighting(){
       highlightModel.matchingHighlighted().add( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.MatchingHighlighted );
+      verify( highlighting ).styleMatchingHighlighted( sw1 );
       
       highlightModel.highlighted().set( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.Highlighted );
+      verify( highlighting ).styleHighlighted( sw1 );
       
       highlightModel.matchingSelection().add( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.MatchingSelection );
+      verify( highlighting ).styleMatchingSelection( sw1 );
       
       highlightModel.bonusForSelection().add( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.BonusForSelection );
+      verify( highlighting ).styleBonusForSelection( sw1 );
       
       highlightModel.selected().set( sw1 );
-      verify( highlighting ).widgetStateChange( sw1, SquareHighlightType.Selected );
+      verify( highlighting ).styleSelected( sw1, Arrays.asList( sw1 ) );
    }//End Method
 }//End Class

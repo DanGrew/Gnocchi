@@ -1,64 +1,63 @@
 package uk.dangrew.gnocchi.ui.square;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.game.bonus.BonusDetector;
+import uk.dangrew.gnocchi.grid.square.SquareType;
 
 public class SquareHighlighting {
+   
+   private final BonusDetector bonusDetector;
+   
+   public SquareHighlighting() {
+      this.bonusDetector = new BonusDetector();
+   }//End Constructor
 
-   public void widgetStateChange( SquareWidget widget, SquareHighlightType type ){
-      if ( widget == null ) {
-         return;
+   void styleSelected( SquareWidget widget, List< SquareWidget > matches ) {
+      SquareType type = bonusDetector.detectBonus( 
+               widget.association(), 
+               matches.stream()
+                  .map( SquareWidget::association )
+                  .collect( Collectors.toList() ) 
+      );
+      if ( type != null ) {
+         widget.imageView().setImage( type.image() );
+         widget.imageView().setOpacity( 0.5 );
       }
-      switch ( type ) {
-         case Selected:
-            styleSelected( widget );
-            break;
-         case MatchingSelection:
-            styleMatchingSelection( widget );
-            break;
-         case BonusForSelection:
-            styleBonusForSelection( widget );
-            break;
-         case Highlighted:
-            styleHighlighted( widget );
-            break;
-         case MatchingHighlighted:
-            styleMatchingHighlighted( widget );
-            break;
-         case None:
-            removeStyling( widget );
-            break;
-         default:
-            break;
-      }
-   }//End Method
-   
-   private void styleSelected( SquareWidget widget ) {
-      widget.setStroke( Color.ORANGE );
-      widget.setStrokeWidth( 8 );
+      
+      widget.squareBackground().setStroke( Color.ORANGE );
+      widget.squareBackground().setStrokeWidth( 8 );
    }//End Method
 
-   private void styleMatchingSelection( SquareWidget widget ) {
-      widget.setStroke( Color.ORANGE );
-      widget.setStrokeWidth( 3 );
+   void styleMatchingSelection( SquareWidget widget ) {
+      widget.resetWidget();
+      widget.squareBackground().setStroke( Color.ORANGE );
+      widget.squareBackground().setStrokeWidth( 3 );
    }//End Method
    
-   private void styleBonusForSelection( SquareWidget widget ) {
-      widget.setStroke( Color.MEDIUMPURPLE );
-      widget.setStrokeWidth( 6 );
+   void styleBonusForSelection( SquareWidget widget ) {
+      widget.resetWidget();
+      widget.squareBackground().setStroke( Color.MEDIUMPURPLE );
+      widget.squareBackground().setStrokeWidth( 6 );
    }//End Method
    
-   private void styleHighlighted( SquareWidget widget ) {
-      widget.setStroke( Color.YELLOW );
-      widget.setStrokeWidth( 8 );
+   void styleHighlighted( SquareWidget widget ) {
+      widget.resetWidget();
+      widget.squareBackground().setStroke( Color.YELLOW );
+      widget.squareBackground().setStrokeWidth( 8 );
    }//End Method
 
-   private void styleMatchingHighlighted( SquareWidget widget ) {
-      widget.setStroke( Color.YELLOW );
-      widget.setStrokeWidth( 3 );
+   void styleMatchingHighlighted( SquareWidget widget ) {
+      widget.resetWidget();
+      widget.squareBackground().setStroke( Color.YELLOW );
+      widget.squareBackground().setStrokeWidth( 3 );
    }//End Method
    
-   private void removeStyling( SquareWidget widget ) {
-      widget.setStroke( null );
+   void removeStyling( SquareWidget widget ) {
+      widget.resetWidget();
+      widget.squareBackground().setStroke( null );
    }//End Method
 
 }//End Class

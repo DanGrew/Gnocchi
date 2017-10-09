@@ -1,5 +1,7 @@
 package uk.dangrew.gnocchi.ui.square;
 
+import java.util.ArrayList;
+
 import javafx.beans.value.ObservableValue;
 import uk.dangrew.kode.observable.FunctionSetChangeListenerImpl;
 
@@ -35,18 +37,21 @@ public class SquareHighlighter {
    }//End Method
    
    private void updateWidget( SquareWidget widget ){
+      if ( widget == null ) {
+         return;
+      }
       if ( highlightModel.isSelected( widget ) ) {
-         highlighting.widgetStateChange( widget, SquareHighlightType.Selected );
+         highlighting.styleSelected( widget, new ArrayList<>( highlightModel.matchingSelection() ) );
       } else if ( highlightModel.isBonusForSelection( widget ) ) {
-         highlighting.widgetStateChange( widget, SquareHighlightType.BonusForSelection );
+         highlighting.styleBonusForSelection( widget );
       } else if ( highlightModel.isMatchingSelection( widget ) ) {
-         highlighting.widgetStateChange( widget, SquareHighlightType.MatchingSelection );
+         highlighting.styleMatchingSelection( widget );
       } else if ( highlightModel.isHighlighted( widget ) ){
-         highlighting.widgetStateChange( widget, SquareHighlightType.Highlighted );
+         highlighting.styleHighlighted( widget );
       } else if ( highlightModel.isMatchingHighlighted( widget ) ){
-         highlighting.widgetStateChange( widget, SquareHighlightType.MatchingHighlighted );
+         highlighting.styleMatchingHighlighted( widget );
       } else {
-         highlighting.widgetStateChange( widget, SquareHighlightType.None );
+         highlighting.removeStyling( widget );
       }
    }//End Method
    

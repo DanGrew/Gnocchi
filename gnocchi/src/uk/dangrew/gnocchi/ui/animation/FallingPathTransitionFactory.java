@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.ui.grid.GridMeasurements;
+import uk.dangrew.gnocchi.ui.square.SquareWidget;
 
 public class FallingPathTransitionFactory {
    
@@ -18,7 +19,7 @@ public class FallingPathTransitionFactory {
    }//End Constructor
    
    public PathTransition create( 
-            Rectangle widget, 
+            SquareWidget widget, 
             GridPosition from, 
             GridPosition to,
             int gridWidth,

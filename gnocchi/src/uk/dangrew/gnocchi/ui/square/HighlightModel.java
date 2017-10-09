@@ -84,23 +84,23 @@ public class HighlightModel {
    private void select( SquareWidget widget ) {
       matchingSelection.clear();
       bonusesForSelection.clear();
-      selected.set( widget );
       
-      if ( widget == null ) {
-         return;
+      if ( widget != null ) {
+         List< Square > matches = matchChainer.match( model, widget.association().position().w, widget.association().position().h );
+         matches.forEach( s -> matchingSelection.add( widgets.get( s ) ) );
+         
+         List< Square > bonuses = bonusMatcher.match( model, widget.association().position().w, widget.association().position().h );
+         bonuses.forEach( s -> bonusesForSelection.add( widgets.get( s ) ) );
       }
-      List< Square > matches = matchChainer.match( model, widget.association().position().w, widget.association().position().h );
-      matches.forEach( s -> matchingSelection.add( widgets.get( s ) ) );
-      
-      List< Square > bonuses = bonusMatcher.match( model, widget.association().position().w, widget.association().position().h );
-      bonuses.forEach( s -> bonusesForSelection.add( widgets.get( s ) ) );
+      selected.set( widget );
    }//End Method
    
    private void onEntered( SquareWidget widget ) {
-      highlighted.set( widget );
       List< Square > matches = matchChainer.match( model, widget.association().position().w, widget.association().position().h );
       matchingHighlighted.clear();
       matches.forEach( s -> matchingHighlighted.add( widgets.get( s ) ) );
+      
+      highlighted.set( widget );
    }//End Method
    
    private void onExited( SquareWidget widget ) {
