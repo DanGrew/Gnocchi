@@ -8,7 +8,7 @@ import java.util.Set;
 import uk.dangrew.gnocchi.algorithm.SquareMatcher;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquareType;
+import uk.dangrew.gnocchi.grid.square.SquarePopType;
 
 public class MatchChainer implements SquareMatcher {
 
@@ -19,7 +19,7 @@ public class MatchChainer implements SquareMatcher {
       if ( source == null ) {
          return new ArrayList<>();
       }
-      List< Square > matches = source.type().matcher().match( model, source.position().w, source.position().h );
+      List< Square > matches = source.type().properties().matcher().match( model, source.position().w, source.position().h );
       for ( Square match : matches ) {
          search( model, match, searched );
       }
@@ -32,10 +32,10 @@ public class MatchChainer implements SquareMatcher {
          return;
       }
       searched.add( source );
-      if ( source.type().equals( SquareType.Regular ) ) {
+      if ( source.type().equals( SquarePopType.Regular ) ) {
          return;
       }
-      List< Square > matches = source.type().matcher().match( model, source.position().w, source.position().h );
+      List< Square > matches = source.type().properties().matcher().match( model, source.position().w, source.position().h );
       for ( Square match : matches ) {
          if ( searched.contains( match ) ) {
             continue;

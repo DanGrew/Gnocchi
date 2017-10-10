@@ -14,7 +14,7 @@ import org.junit.Test;
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquareType;
+import uk.dangrew.gnocchi.grid.square.SquarePopType;
 
 public class BonusDetectorTest {
 
@@ -30,13 +30,13 @@ public class BonusDetectorTest {
    
    @Test public void shouldProvideNoBonusIfAlreadyBonusType(){
       shouldDetermineCrossBlastFromEqualWidthHeightPop();
-      source.setType( SquareType.CrossBlast );
+      source.setType( SquarePopType.CrossBlast );
       assertThat( systemUnderTest.detectBonus( source, matches ), is( nullValue() ) );
-      source.setType( SquareType.HorizontalBlast );
+      source.setType( SquarePopType.HorizontalBlast );
       assertThat( systemUnderTest.detectBonus( source, matches ), is( nullValue() ) );
-      source.setType( SquareType.VerticalBlast );
+      source.setType( SquarePopType.VerticalBlast );
       assertThat( systemUnderTest.detectBonus( source, matches ), is( nullValue() ) );
-      source.setType( SquareType.Regular );
+      source.setType( SquarePopType.Regular );
       assertThat( systemUnderTest.detectBonus( source, matches ), is( notNullValue() ) );
    }//End Method
    
@@ -58,7 +58,7 @@ public class BonusDetectorTest {
       matches.add( new Square( new GridPosition( 3, 1 ), Color.RED ) );
       matches.add( new Square( new GridPosition( 3, 2 ), Color.RED ) );
       
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.HorizontalBlast ) );
+      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquarePopType.HorizontalBlast ) );
    }//End Method
    
    @Test public void shouldDetermineHorizontalBlastFromHighHeightPop() {
@@ -70,7 +70,7 @@ public class BonusDetectorTest {
       matches.add( new Square( new GridPosition( 4, 1 ), Color.RED ) );
       matches.add( new Square( new GridPosition( 5, 2 ), Color.RED ) );
       
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.VerticalBlast ) );
+      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquarePopType.VerticalBlast ) );
    }//End Method
    
    @Test public void shouldDetermineCrossBlastFromEqualWidthHeightPop() {
@@ -84,21 +84,21 @@ public class BonusDetectorTest {
       matches.add( new Square( new GridPosition( 4, 6 ), Color.RED ) );
       matches.add( new Square( new GridPosition( 4, 5 ), Color.RED ) );
       
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.CrossBlast ) );
+      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquarePopType.CrossBlast ) );
    }//End Method
    
    @Test public void shouldDetermineBombBlastIfMoreThanThreshold(){
       for ( int i = 0; i < BonusDetector.BOMB_THRESHOLD; i++ ) {
          matches.add( Square.randomSquare() );
       }
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.BombBlast ) );
+      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquarePopType.BombBlast ) );
    }//End Method
    
    @Test public void shouldDetermineMassMatchIfMoreThanThreshold(){
       for ( int i = 0; i < BonusDetector.MASS_THRESHOLD; i++ ) {
          matches.add( Square.randomSquare() );
       }
-      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareType.MassBlast ) );
+      assertThat( systemUnderTest.detectBonus( source, matches ), is( SquarePopType.MassBlast ) );
    }//End Method
 
 }//End Class

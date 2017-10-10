@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.bonus.BonusDetector;
-import uk.dangrew.gnocchi.grid.square.SquareType;
+import uk.dangrew.gnocchi.grid.square.SquarePopType;
 
 public class SquareHighlighting {
    
@@ -16,14 +16,14 @@ public class SquareHighlighting {
    }//End Constructor
 
    void styleSelected( SquareWidget widget, List< SquareWidget > matches ) {
-      SquareType type = bonusDetector.detectBonus( 
+      SquarePopType type = bonusDetector.detectBonus( 
                widget.association(), 
                matches.stream()
                   .map( SquareWidget::association )
                   .collect( Collectors.toList() ) 
       );
       if ( type != null ) {
-         widget.imageView().setImage( type.image() );
+         widget.imageView().setImage( type.properties().image() );
          widget.imageView().setOpacity( 0.5 );
       }
       

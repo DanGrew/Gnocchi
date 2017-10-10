@@ -9,8 +9,8 @@ import org.junit.Test;
 public class SquareTypeTest {
 
    @Test public void shouldProvideMatcher() {
-      for( SquareType type : SquareType.values() ) {
-         assertThat( type.matcher(), is( notNullValue() ) );
+      for( SquarePopType type : SquarePopType.values() ) {
+         assertThat( type.properties().matcher(), is( notNullValue() ) );
       }
    }//End Method
 

@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.dangrew.gnocchi.grid.square.SquareType;
+import uk.dangrew.gnocchi.grid.square.SquarePopType;
 
 public class BonusCombinerTest {
 
@@ -17,43 +17,43 @@ public class BonusCombinerTest {
    }//End Method
 
    @Test public void shouldNotCombineNonCombinationTypes() {
-      assertCombination( SquareType.Regular, SquareType.CrossBlast, null );
-      assertCombination( SquareType.MassBomb, SquareType.CrossBlast, null ); 
+      assertCombination( SquarePopType.Regular, SquarePopType.CrossBlast, null );
+      assertCombination( SquarePopType.MassBomb, SquarePopType.CrossBlast, null ); 
    }//End Method
    
    @Test public void shouldCombine() {
-      assertCombination( SquareType.HorizontalBlast, SquareType.HorizontalBlast, SquareType.CrossBlast );
-      assertCombination( SquareType.HorizontalBlast, SquareType.VerticalBlast, SquareType.CrossBlast );
-      assertCombination( SquareType.HorizontalBlast, SquareType.CrossBlast, SquareType.BombBlast );
-      assertCombination( SquareType.HorizontalBlast, SquareType.BombBlast, SquareType.BombHorizontal );
-      assertCombination( SquareType.HorizontalBlast, SquareType.MassBlast, SquareType.MassHorizontal );
+      assertCombination( SquarePopType.HorizontalBlast, SquarePopType.HorizontalBlast, SquarePopType.CrossBlast );
+      assertCombination( SquarePopType.HorizontalBlast, SquarePopType.VerticalBlast, SquarePopType.CrossBlast );
+      assertCombination( SquarePopType.HorizontalBlast, SquarePopType.CrossBlast, SquarePopType.BombBlast );
+      assertCombination( SquarePopType.HorizontalBlast, SquarePopType.BombBlast, SquarePopType.BombHorizontal );
+      assertCombination( SquarePopType.HorizontalBlast, SquarePopType.MassBlast, SquarePopType.MassHorizontal );
       
-      assertCombination( SquareType.VerticalBlast, SquareType.HorizontalBlast, SquareType.CrossBlast );
-      assertCombination( SquareType.VerticalBlast, SquareType.VerticalBlast, SquareType.CrossBlast );
-      assertCombination( SquareType.VerticalBlast, SquareType.CrossBlast, SquareType.BombBlast );
-      assertCombination( SquareType.VerticalBlast, SquareType.BombBlast, SquareType.BombVertical );
-      assertCombination( SquareType.VerticalBlast, SquareType.MassBlast, SquareType.MassVertical );
+      assertCombination( SquarePopType.VerticalBlast, SquarePopType.HorizontalBlast, SquarePopType.CrossBlast );
+      assertCombination( SquarePopType.VerticalBlast, SquarePopType.VerticalBlast, SquarePopType.CrossBlast );
+      assertCombination( SquarePopType.VerticalBlast, SquarePopType.CrossBlast, SquarePopType.BombBlast );
+      assertCombination( SquarePopType.VerticalBlast, SquarePopType.BombBlast, SquarePopType.BombVertical );
+      assertCombination( SquarePopType.VerticalBlast, SquarePopType.MassBlast, SquarePopType.MassVertical );
       
-      assertCombination( SquareType.CrossBlast, SquareType.HorizontalBlast, SquareType.BombBlast );
-      assertCombination( SquareType.CrossBlast, SquareType.VerticalBlast, SquareType.BombBlast );
-      assertCombination( SquareType.CrossBlast, SquareType.CrossBlast, SquareType.BombBlast );
-      assertCombination( SquareType.CrossBlast, SquareType.BombBlast, SquareType.BombCross );
-      assertCombination( SquareType.CrossBlast, SquareType.MassBlast, SquareType.MassCross );
+      assertCombination( SquarePopType.CrossBlast, SquarePopType.HorizontalBlast, SquarePopType.BombBlast );
+      assertCombination( SquarePopType.CrossBlast, SquarePopType.VerticalBlast, SquarePopType.BombBlast );
+      assertCombination( SquarePopType.CrossBlast, SquarePopType.CrossBlast, SquarePopType.BombBlast );
+      assertCombination( SquarePopType.CrossBlast, SquarePopType.BombBlast, SquarePopType.BombCross );
+      assertCombination( SquarePopType.CrossBlast, SquarePopType.MassBlast, SquarePopType.MassCross );
       
-      assertCombination( SquareType.BombBlast, SquareType.HorizontalBlast, SquareType.BombHorizontal );
-      assertCombination( SquareType.BombBlast, SquareType.VerticalBlast, SquareType.BombVertical );
-      assertCombination( SquareType.BombBlast, SquareType.CrossBlast, SquareType.BombCross );
-      assertCombination( SquareType.BombBlast, SquareType.BombBlast, SquareType.BombBomb );
-      assertCombination( SquareType.BombBlast, SquareType.MassBlast, SquareType.MassBomb );
+      assertCombination( SquarePopType.BombBlast, SquarePopType.HorizontalBlast, SquarePopType.BombHorizontal );
+      assertCombination( SquarePopType.BombBlast, SquarePopType.VerticalBlast, SquarePopType.BombVertical );
+      assertCombination( SquarePopType.BombBlast, SquarePopType.CrossBlast, SquarePopType.BombCross );
+      assertCombination( SquarePopType.BombBlast, SquarePopType.BombBlast, SquarePopType.BombBomb );
+      assertCombination( SquarePopType.BombBlast, SquarePopType.MassBlast, SquarePopType.MassBomb );
       
-      assertCombination( SquareType.MassBlast, SquareType.HorizontalBlast, SquareType.MassHorizontal );
-      assertCombination( SquareType.MassBlast, SquareType.VerticalBlast, SquareType.MassVertical );
-      assertCombination( SquareType.MassBlast, SquareType.CrossBlast, SquareType.MassCross );
-      assertCombination( SquareType.MassBlast, SquareType.BombBlast, SquareType.MassBomb );
-      assertCombination( SquareType.MassBlast, SquareType.MassBlast, SquareType.MassMass );
+      assertCombination( SquarePopType.MassBlast, SquarePopType.HorizontalBlast, SquarePopType.MassHorizontal );
+      assertCombination( SquarePopType.MassBlast, SquarePopType.VerticalBlast, SquarePopType.MassVertical );
+      assertCombination( SquarePopType.MassBlast, SquarePopType.CrossBlast, SquarePopType.MassCross );
+      assertCombination( SquarePopType.MassBlast, SquarePopType.BombBlast, SquarePopType.MassBomb );
+      assertCombination( SquarePopType.MassBlast, SquarePopType.MassBlast, SquarePopType.MassMass );
    }//End Method
    
-   private void assertCombination( SquareType type1, SquareType type2, SquareType result ) {
+   private void assertCombination( SquarePopType type1, SquarePopType type2, SquarePopType result ) {
       assertThat( systemUnderTest.determineCombination( 
                type1, type2 
       ), is( result ) );

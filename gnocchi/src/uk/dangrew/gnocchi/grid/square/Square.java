@@ -10,7 +10,7 @@ import uk.dangrew.gnocchi.grid.model.GridPosition;
 public class Square {
 
    private final ObjectProperty< Color > colour;
-   private final ObjectProperty< SquareType > type;
+   private final ObjectProperty< SquarePopType > type;
    private GridPosition position;
    
    public Square( Color colour ) {
@@ -20,7 +20,7 @@ public class Square {
    public Square( GridPosition position, Color colour ) {
       this.position = position;
       this.colour = new SimpleObjectProperty<>( colour );
-      this.type = new SimpleObjectProperty<>( SquareType.Regular );
+      this.type = new SimpleObjectProperty<>( SquarePopType.Regular );
    }//End Constructor
 
    public Color colour() {
@@ -43,26 +43,26 @@ public class Square {
       return position;
    }//End Method
    
-   public SquareType type() {
+   public SquarePopType type() {
       return type.get();
    }//End Method
    
-   public ReadOnlyObjectProperty< SquareType > typeProperty() {
+   public ReadOnlyObjectProperty< SquarePopType > typeProperty() {
       return type;
    }//End Method
    
-   public void setType( SquareType type ) {
+   public void setType( SquarePopType type ) {
       this.type.set( type );
    }//End Method
    
    public SquareMatcher typeMatcher() {
-      return type().matcher();
+      return type().properties().matcher();
    }//End Method
    
    public boolean matches( Square square ) {
       if ( 
-               type.get() != SquareType.Regular ||
-               square.type() != SquareType.Regular 
+               type.get() != SquarePopType.Regular ||
+               square.type() != SquarePopType.Regular 
       ) {
          return false;
       }

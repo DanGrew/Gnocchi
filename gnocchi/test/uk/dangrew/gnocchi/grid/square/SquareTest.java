@@ -34,13 +34,13 @@ public class SquareTest {
    }//End Method
    
    @Test public void shouldNotMatchFromBonusSquare(){
-      systemUnderTest.setType( SquareType.BombBlast );
+      systemUnderTest.setType( SquarePopType.BombBlast );
       assertThat( systemUnderTest.matches( Square.colouredSquare( Color.ORANGE ) ), is( false ) );
    }//End Method
    
    @Test public void shouldNotMatchToBonusSquare(){
       Square square = Square.colouredSquare( Color.ORANGE );
-      square.setType( SquareType.BombBomb );
+      square.setType( SquarePopType.BombBomb );
       assertThat( systemUnderTest.matches( square ), is( false ) );
    }//End Method
    
@@ -51,17 +51,17 @@ public class SquareTest {
    }//End Method
    
    @Test public void shouldProvideSquareType(){
-      assertThat( systemUnderTest.type(), is( SquareType.Regular ) );
-      assertThat( systemUnderTest.typeProperty().get(), is( SquareType.Regular ) );
-      systemUnderTest.setType( SquareType.HorizontalBlast );
-      assertThat( systemUnderTest.type(), is( SquareType.HorizontalBlast ) );
-      assertThat( systemUnderTest.typeProperty().get(), is( SquareType.HorizontalBlast ) );
+      assertThat( systemUnderTest.type(), is( SquarePopType.Regular ) );
+      assertThat( systemUnderTest.typeProperty().get(), is( SquarePopType.Regular ) );
+      systemUnderTest.setType( SquarePopType.HorizontalBlast );
+      assertThat( systemUnderTest.type(), is( SquarePopType.HorizontalBlast ) );
+      assertThat( systemUnderTest.typeProperty().get(), is( SquarePopType.HorizontalBlast ) );
    }//End Method
    
    @Test public void shouldProvideMatcher(){
-      assertThat( systemUnderTest.typeMatcher(), is( SquareType.Regular.matcher() ) );
-      systemUnderTest.setType( SquareType.CrossBlast );
-      assertThat( systemUnderTest.typeMatcher(), is( SquareType.CrossBlast.matcher() ) );
+      assertThat( systemUnderTest.typeMatcher(), is( SquarePopType.Regular.properties().matcher() ) );
+      systemUnderTest.setType( SquarePopType.CrossBlast );
+      assertThat( systemUnderTest.typeMatcher(), is( SquarePopType.CrossBlast.properties().matcher() ) );
    }//End Method
 
 }//End Class

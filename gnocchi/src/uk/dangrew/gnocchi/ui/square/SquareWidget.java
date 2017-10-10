@@ -42,7 +42,7 @@ public class SquareWidget extends StackPane {
    
    public void resetWidget(){
       this.squareBackground.setFill( object.colour() );
-      this.imageView.setImage( object.type().image() );
+      this.imageView.setImage( object.type().properties().image() );
       this.imageView.setOpacity( 1 );
    }//End Method
    

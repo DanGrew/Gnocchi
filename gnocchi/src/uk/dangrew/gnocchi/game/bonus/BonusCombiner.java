@@ -1,11 +1,11 @@
 package uk.dangrew.gnocchi.game.bonus;
 
-import uk.dangrew.gnocchi.grid.square.SquareType;
+import uk.dangrew.gnocchi.grid.square.SquarePopType;
 
 public class BonusCombiner {
    
-   public SquareType determineCombination( SquareType first, SquareType second ) {
-      if ( !first.isComboEnabled() || !second.isComboEnabled() ) {
+   public SquarePopType determineCombination( SquarePopType first, SquarePopType second ) {
+      if ( !first.properties().isComboEnabled() || !second.properties().isComboEnabled() ) {
          return null;
       }
       switch ( first ) {
@@ -13,62 +13,62 @@ public class BonusCombiner {
             switch ( second ) {
                case HorizontalBlast:
                case VerticalBlast:
-                  return SquareType.CrossBlast;
+                  return SquarePopType.CrossBlast;
                case CrossBlast:
-                  return SquareType.BombBlast;
+                  return SquarePopType.BombBlast;
                case BombBlast:
-                  return SquareType.BombHorizontal;
+                  return SquarePopType.BombHorizontal;
                case MassBlast:
-                  return SquareType.MassHorizontal;
+                  return SquarePopType.MassHorizontal;
             }
          case VerticalBlast:
             switch ( second ) {
                case HorizontalBlast:
                case VerticalBlast:
-                  return SquareType.CrossBlast;
+                  return SquarePopType.CrossBlast;
                case CrossBlast:
-                  return SquareType.BombBlast;
+                  return SquarePopType.BombBlast;
                case BombBlast:
-                  return SquareType.BombVertical;
+                  return SquarePopType.BombVertical;
                case MassBlast:
-                  return SquareType.MassVertical;
+                  return SquarePopType.MassVertical;
             }
          case CrossBlast:
             switch ( second ) {
                case HorizontalBlast:
                case VerticalBlast:
                case CrossBlast:
-                  return SquareType.BombBlast;
+                  return SquarePopType.BombBlast;
                case BombBlast:
-                  return SquareType.BombCross;
+                  return SquarePopType.BombCross;
                case MassBlast:
-                  return SquareType.MassCross;
+                  return SquarePopType.MassCross;
             }
          case BombBlast:
             switch ( second ) {
                case HorizontalBlast:
-                  return SquareType.BombHorizontal;
+                  return SquarePopType.BombHorizontal;
                case VerticalBlast:
-                  return SquareType.BombVertical;
+                  return SquarePopType.BombVertical;
                case CrossBlast:
-                  return SquareType.BombCross;
+                  return SquarePopType.BombCross;
                case BombBlast:
-                  return SquareType.BombBomb;
+                  return SquarePopType.BombBomb;
                case MassBlast:
-                  return SquareType.MassBomb;
+                  return SquarePopType.MassBomb;
             }
          case MassBlast:
             switch ( second ) {
                case HorizontalBlast:
-                  return SquareType.MassHorizontal;
+                  return SquarePopType.MassHorizontal;
                case VerticalBlast:
-                  return SquareType.MassVertical;
+                  return SquarePopType.MassVertical;
                case CrossBlast:
-                  return SquareType.MassCross;
+                  return SquarePopType.MassCross;
                case BombBlast:
-                  return SquareType.MassBomb;
+                  return SquarePopType.MassBomb;
                case MassBlast:
-                  return SquareType.MassMass;
+                  return SquarePopType.MassMass;
             }
       }
       return null;

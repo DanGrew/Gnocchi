@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations;
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquareType;
+import uk.dangrew.gnocchi.grid.square.SquarePopType;
 
 public class MatchChainerTest {
 
@@ -39,7 +39,7 @@ public class MatchChainerTest {
       model.set( Square.colouredSquare( Color.BLUE ), 2, 0 );
       model.set( Square.colouredSquare( Color.BLUE ), 3, 0 );
       model.set( Square.colouredSquare( Color.BLUE ), 4, 0 );
-      model.at( 4, 0 ).setType( SquareType.VerticalBlast );
+      model.at( 4, 0 ).setType( SquarePopType.VerticalBlast );
       
       List< Square > expectedMatches = Arrays.asList(
                model.at( 0, 0 ),

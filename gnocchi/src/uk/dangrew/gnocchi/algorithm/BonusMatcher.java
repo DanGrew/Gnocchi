@@ -14,7 +14,7 @@ public class BonusMatcher implements SquareMatcher {
       Square source = model.at( w, h );
       if ( 
                source == null || 
-               !source.type().isComboEnabled() 
+               !source.type().properties().isComboEnabled() 
       ) {
          return matches;
       }
@@ -27,7 +27,7 @@ public class BonusMatcher implements SquareMatcher {
             
             if ( !model.isEmpty( i, j ) ) {
                Square square = model.at( i, j );
-               if ( square.type().isComboEnabled() ) {
+               if ( square.type().properties().isComboEnabled() ) {
                   matches.add( square );
                }
             }
