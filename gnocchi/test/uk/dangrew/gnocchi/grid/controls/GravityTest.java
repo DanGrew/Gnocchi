@@ -16,6 +16,7 @@ import uk.dangrew.gnocchi.game.mechanics.Feeder;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
 
 public class GravityTest {
 
@@ -62,6 +63,43 @@ public class GravityTest {
       systemUnderTest.pullDown( 0 );
       
       assertThatObjectsInColumn( 0, 0, 1, 2, 3, 4, 5, 6, 7 );
+   }//End Method
+   
+   @Test public void shouldNotMoveUnmoveable(){
+      Square unmoveable = Square.randomSquare();
+      unmoveable.setType( SquareObstacleType.FixedIndestructible );
+      grid.set( unmoveable, 0, 4 );
+      assertThatObjectsInColumn( 0, 4 );
+      
+      systemUnderTest.pullDown( 0 );
+      assertThatObjectsInColumn( 0, 4 );
+   }//End Method
+   
+   @Test public void shouldNotMoveThroughUnmoveable(){
+      Square unmoveable = Square.randomSquare();
+      unmoveable.setType( SquareObstacleType.FixedIndestructible );
+      grid.set( unmoveable, 0, 4 );
+      
+      coloursGtFeeder.feed( 0 );
+      systemUnderTest.pullDown( 0 );
+      assertThatObjectsInColumn( 0, 4, 5 );
+   }//End Method
+   
+   @Test public void shouldMoveBelowUnmoveableAndAboveUnmoveable(){
+      Square unmoveable = Square.randomSquare();
+      unmoveable.setType( SquareObstacleType.FixedIndestructible );
+      grid.set( unmoveable, 0, 4 );
+      
+      Square unmoveable2 = Square.randomSquare();
+      unmoveable2.setType( SquareObstacleType.FixedIndestructible );
+      grid.set( unmoveable2, 0, 7 );
+      
+      grid.set( Square.randomSquare(), 0, 3 );
+      grid.set( Square.randomSquare(), 0, 6 );
+      grid.set( Square.randomSquare(), 0, 9 );
+      
+      systemUnderTest.pullDown( 0 );
+      assertThatObjectsInColumn( 0, 0, 4, 5, 7, 8 );
    }//End Method
    
    private void assertThatObjectsInColumn( int column, Integer... rows ) {

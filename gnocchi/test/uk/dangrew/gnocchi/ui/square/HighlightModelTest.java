@@ -23,6 +23,7 @@ import uk.dangrew.gnocchi.algorithm.BonusMatcher;
 import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
 import uk.dangrew.gnocchi.input.InputDriver;
 import uk.dangrew.gnocchi.ui.utility.mouse.TestMouseEvent;
 
@@ -168,6 +169,30 @@ public class HighlightModelTest {
       
       widget1.getOnMouseEntered().handle( new TestMouseEvent() );
       assertThat( matches.isEmpty(), is( false ) );
+   }//End Method
+   
+   @Test public void shouldNotHighlightNonPoppable(){
+      widget1.getOnMouseEntered().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isHighlighted( widget1 ), is( true ) );
+      
+      widget1.getOnMouseExited().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isHighlighted( widget1 ), is( false ) );
+      
+      widget1.association().setType( SquareObstacleType.FixedIndestructible );
+      widget1.getOnMouseEntered().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isHighlighted( widget1 ), is( false ) );
+   }//End Method
+   
+   @Test public void shouldNotSelectNonPoppable(){
+      widget1.getOnMouseClicked().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isSelected( widget1 ), is( true ) );
+      
+      widget2.getOnMouseClicked().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isSelected( widget1 ), is( false ) );
+      
+      widget1.association().setType( SquareObstacleType.FixedIndestructible );
+      widget1.getOnMouseClicked().handle( new TestMouseEvent() );
+      assertThat( systemUnderTest.isHighlighted( widget1 ), is( false ) );
    }//End Method
    
 }//End Class

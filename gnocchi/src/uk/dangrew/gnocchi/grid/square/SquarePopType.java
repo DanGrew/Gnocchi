@@ -110,6 +110,7 @@ public enum SquarePopType implements SquareType {
    
    private SquarePopType( SquareProperties properties ) {
       this.properties = properties;
+      this.properties.withPoppable( true );
    }//End Constructor
    
    @Override public SquareProperties properties(){

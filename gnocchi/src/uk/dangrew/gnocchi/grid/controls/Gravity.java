@@ -23,9 +23,17 @@ public class Gravity {
          }
       }
       
+      int lastFilledPosition = -1;
       for ( int h = 0; h < filledSquares.size(); h++ ) {
-         Square next = grid.at( w, filledSquares.get( h ) );
-         grid.set( next, w, h );
+         
+         lastFilledPosition++;
+         int squarePosition = filledSquares.get( h );
+         
+         Square next = grid.at( w, squarePosition );
+         if ( !next.type().properties().isMoveable() ) {
+            lastFilledPosition = squarePosition;
+         }
+         grid.set( next, w, lastFilledPosition );
       }
    }//End Method
 

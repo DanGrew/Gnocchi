@@ -32,6 +32,7 @@ public class ImagesTest {
       assertThat( systemUnderTest.massMatchImage(), is( notNullValue() ) );
       assertThat( systemUnderTest.massVerticalImage(), is( notNullValue() ) );
       assertThat( systemUnderTest.verticalBlastImage(), is( notNullValue() ) );
+      assertThat( systemUnderTest.indestructibleImage(), is( notNullValue() ) );
    }//End Method
 
 }//End Class

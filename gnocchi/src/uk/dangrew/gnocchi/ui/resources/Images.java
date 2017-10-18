@@ -25,6 +25,8 @@ public class Images {
    private static final String MASS_BOMB_IMAGE_PATH = IMAGE_PATH + "mass-bomb.png";
    private static final String MASS_MASS_IMAGE_PATH = IMAGE_PATH + "mass-mass.png";
    
+   private static final String INDESTRUCTIBLE_IMAGE_PATH = IMAGE_PATH + "indestructible.png";
+   
    private static final Image LOGO_IMAGE = new Image( Images.class.getClassLoader().getResourceAsStream( LOGO_IMAGE_PATH ) );
    
    private static final Image HORIZONTAL_BLAST_IMAGE = new Image( Images.class.getClassLoader().getResourceAsStream( HORIZONTAL_BLAST_IMAGE_PATH ) );
@@ -43,6 +45,8 @@ public class Images {
    private static final Image MASS_CROSS_IMAGE = new Image( Images.class.getClassLoader().getResourceAsStream( MASS_CROSS_IMAGE_PATH ) );
    private static final Image MASS_BOMB_IMAGE = new Image( Images.class.getClassLoader().getResourceAsStream( MASS_BOMB_IMAGE_PATH ) );
    private static final Image MASS_MASS_IMAGE = new Image( Images.class.getClassLoader().getResourceAsStream( MASS_MASS_IMAGE_PATH ) );
+   
+   private static final Image INDESTRUCTIBLE_IMAGE = new Image( Images.class.getClassLoader().getResourceAsStream( INDESTRUCTIBLE_IMAGE_PATH ) );
    
    public Image logoImage(){
       return LOGO_IMAGE;
@@ -102,6 +106,10 @@ public class Images {
    
    public Image massMassImage() {
       return MASS_MASS_IMAGE;
+   }//End Method
+   
+   public Image indestructibleImage() {
+      return INDESTRUCTIBLE_IMAGE;
    }//End Method
    
 }//End Constructor

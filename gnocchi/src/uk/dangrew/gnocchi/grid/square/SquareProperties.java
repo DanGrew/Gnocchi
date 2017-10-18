@@ -12,11 +12,13 @@ public class SquareProperties {
    private Image image;
    private boolean comboEnabled;
    private boolean poppable;
+   private boolean moveable;
    
    public SquareProperties() {
       this.matcher = DEFAULT_MATCHER;
       this.image = null;
       this.comboEnabled = false;
+      this.moveable = true;
    }//End Constructor
    
    public SquareMatcher matcher() {
@@ -52,6 +54,15 @@ public class SquareProperties {
 
    public SquareProperties withPoppable( boolean poppable ) {
       this.poppable = poppable;
+      return this;
+   }//End Method
+
+   public boolean isMoveable() {
+      return moveable;
+   }//End Method
+
+   public SquareProperties withMoveable( boolean moveable ) {
+      this.moveable = moveable;
       return this;
    }//End Method
 

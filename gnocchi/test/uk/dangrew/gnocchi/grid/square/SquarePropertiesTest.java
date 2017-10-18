@@ -44,5 +44,11 @@ public class SquarePropertiesTest {
       assertThat( systemUnderTest.withPoppable( true ), is( systemUnderTest ) );
       assertThat( systemUnderTest.isPoppable(), is( true ) );
    }//End Method
+   
+   @Test public void shouldProvideMoveable(){
+      assertThat( systemUnderTest.isMoveable(), is( true ) );
+      assertThat( systemUnderTest.withMoveable( false ), is( systemUnderTest ) );
+      assertThat( systemUnderTest.isMoveable(), is( false ) );
+   }//End Method
 
 }//End Class

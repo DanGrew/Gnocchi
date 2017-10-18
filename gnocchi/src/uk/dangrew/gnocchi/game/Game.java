@@ -19,7 +19,7 @@ public class Game {
    private final Filler filler;
    
    public Game( InputDriver inputDriver, GameBuilder builder ) {
-      this.model = new GridModel( builder.colourVariation(), builder.width(), builder.height() );
+      this.model = new GridModel( builder.gridBuilder() );
       this.gridWidget = new GridWidget( model, inputDriver );
       this.mechanics = builder.type().produceMechanics( model, builder.properties() );
       this.filler = new Filler( model, mechanics.feeder() );

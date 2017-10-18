@@ -1,16 +1,25 @@
 package uk.dangrew.gnocchi.game.bonus;
 
 import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareType;
 
 public class BonusCombiner {
    
-   public SquarePopType determineCombination( SquarePopType first, SquarePopType second ) {
+   public SquarePopType determineCombination( SquareType first, SquareType second ) {
       if ( !first.properties().isComboEnabled() || !second.properties().isComboEnabled() ) {
          return null;
       }
-      switch ( first ) {
+      
+      if ( !first.properties().isPoppable() || !second.properties().isPoppable() ) {
+         return null;
+      }
+      
+      
+      SquarePopType firstPoppable = ( SquarePopType )first;
+      SquarePopType secondPoppable = ( SquarePopType )second;
+      switch ( firstPoppable ) {
          case HorizontalBlast:
-            switch ( second ) {
+            switch ( secondPoppable ) {
                case HorizontalBlast:
                case VerticalBlast:
                   return SquarePopType.CrossBlast;
@@ -22,7 +31,7 @@ public class BonusCombiner {
                   return SquarePopType.MassHorizontal;
             }
          case VerticalBlast:
-            switch ( second ) {
+            switch ( secondPoppable ) {
                case HorizontalBlast:
                case VerticalBlast:
                   return SquarePopType.CrossBlast;
@@ -34,7 +43,7 @@ public class BonusCombiner {
                   return SquarePopType.MassVertical;
             }
          case CrossBlast:
-            switch ( second ) {
+            switch ( secondPoppable ) {
                case HorizontalBlast:
                case VerticalBlast:
                case CrossBlast:
@@ -45,7 +54,7 @@ public class BonusCombiner {
                   return SquarePopType.MassCross;
             }
          case BombBlast:
-            switch ( second ) {
+            switch ( secondPoppable ) {
                case HorizontalBlast:
                   return SquarePopType.BombHorizontal;
                case VerticalBlast:
@@ -58,7 +67,7 @@ public class BonusCombiner {
                   return SquarePopType.MassBomb;
             }
          case MassBlast:
-            switch ( second ) {
+            switch ( secondPoppable ) {
                case HorizontalBlast:
                   return SquarePopType.MassHorizontal;
                case VerticalBlast:

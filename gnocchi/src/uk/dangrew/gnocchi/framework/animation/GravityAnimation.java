@@ -36,6 +36,9 @@ public class GravityAnimation extends AnimationImpl {
       for ( int w = 0; w < game.model().width(); w++ ) {
          for ( int h = 0; h < game.model().height(); h++ ) {
             Square square = game.model().at( w, h );
+            if ( square == null ) {
+               continue;
+            }
             animate( square );
          }
       }

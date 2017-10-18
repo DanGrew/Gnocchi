@@ -69,6 +69,9 @@ public class HighlightModel {
    }//End Method
    
    private void onClicked( SquareWidget widget ) {
+      if ( !widget.association().type().properties().isPoppable() ) {
+         return;
+      }
       if ( widget == selected.get() ) {
          inputDriver.pop( widget );
          select( null );
@@ -96,6 +99,10 @@ public class HighlightModel {
    }//End Method
    
    private void onEntered( SquareWidget widget ) {
+      if ( !widget.association().type().properties().isPoppable() ) {
+         return;
+      }
+      
       List< Square > matches = matchChainer.match( model, widget.association().position().w, widget.association().position().h );
       matchingHighlighted.clear();
       matches.forEach( s -> matchingHighlighted.add( widgets.get( s ) ) );

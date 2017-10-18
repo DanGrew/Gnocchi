@@ -2,6 +2,7 @@ package uk.dangrew.gnocchi.grid;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -9,9 +10,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.paint.Color;
+import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
+import uk.dangrew.gnocchi.grid.controls.Filler;
+import uk.dangrew.gnocchi.grid.model.GridBuilder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
 
 public class GridModelTest {
    
@@ -19,10 +24,15 @@ public class GridModelTest {
    private static final int WIDTH = 10;
    private static final int HEIGHT = 20;
 
+   private GridBuilder builder;
    private GridModel systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      systemUnderTest = new GridModel( COLOURS, WIDTH, HEIGHT );
+      builder = new GridBuilder()
+               .withNumberOfColours( COLOURS )
+               .withWidth( WIDTH )
+               .withHeight( HEIGHT );
+      systemUnderTest = new GridModel( builder );
    }//End Method
 
    @Test public void shouldProvideDimensions(){
@@ -120,5 +130,29 @@ public class GridModelTest {
 
    @Test public void shouldProvideSnapshot(){
       fail();
+   }//End Method
+   
+   @Test public void shouldNotPlaceSpecifics(){
+      builder.withSpecific( new GridPosition( 4, 9 ), SquareObstacleType.FixedIndestructible );
+      systemUnderTest = new GridModel( builder );
+      assertThat( systemUnderTest.at( 4, 9 ), is( nullValue() ) );
+   }//End Method
+   
+   @Test public void shouldResetSpecifics(){
+      builder.withSpecific( new GridPosition( 4, 9 ), SquareObstacleType.FixedIndestructible );
+      systemUnderTest = new GridModel( builder );
+      new Filler( systemUnderTest, new ColoursGtFeeder( systemUnderTest ) ).fill();
+      assertThat( systemUnderTest.at( 4, 9 ).type(), is( not( SquareObstacleType.FixedIndestructible ) ) );
+      
+      systemUnderTest.reset();
+      for ( int w = 0; w < systemUnderTest.width(); w++ ) {
+         for ( int h = 0; h < systemUnderTest.height(); h++ ) {
+            if ( w == 4 && h == 9 ) {
+               continue;
+            }
+            assertThat( systemUnderTest.isEmpty( w, h ), is( true ) );
+         }
+      }
+      assertThat( systemUnderTest.at( 4, 9 ).type(), is( SquareObstacleType.FixedIndestructible ) );
    }//End Method
 }//End Method

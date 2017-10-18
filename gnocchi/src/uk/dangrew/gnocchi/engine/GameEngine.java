@@ -6,6 +6,7 @@ import uk.dangrew.gnocchi.framework.GameAction;
 import uk.dangrew.gnocchi.framework.GameStack;
 import uk.dangrew.gnocchi.framework.action.CompletionAction;
 import uk.dangrew.gnocchi.framework.action.FillAction;
+import uk.dangrew.gnocchi.framework.action.GridSetupAction;
 import uk.dangrew.gnocchi.framework.action.SquareRemovalAction;
 import uk.dangrew.gnocchi.framework.animation.BlastAnimation;
 import uk.dangrew.gnocchi.framework.animation.GravityAnimation;
@@ -16,6 +17,7 @@ import uk.dangrew.gnocchi.game.bonus.BonusDetector;
 import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareType;
 import uk.dangrew.gnocchi.input.InputDriver;
 import uk.dangrew.gnocchi.ui.frame.content.GameLauncherController;
 
@@ -46,6 +48,7 @@ public class GameEngine {
    
    public void launch( Game game ){
       this.game = game;
+      this.stack.stack( new GameAction( new GridSetupAction( game ), new GravityAnimation( game ) ) );
       this.stack.stack( new GameAction( new FillAction( game ), new GravityAnimation( game ) ) );
    }//End Method
 
@@ -66,7 +69,7 @@ public class GameEngine {
    }//End Method
 
    public void combine( Square selected, Square bonus ) {
-      SquarePopType combination = bonusCombiner.determineCombination( selected.type(), bonus.type() );
+      SquareType combination = bonusCombiner.determineCombination( selected.type(), bonus.type() );
       if ( combination != null ) {
          selected.setType( combination );
          bonus.setType( SquarePopType.Regular );

@@ -1,33 +1,40 @@
 package uk.dangrew.gnocchi.grid.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.square.Square;
 
 public class GridModel {
 
-   private final int colourVariation;
-   private final int width;
-   private final int height;
+   private final GridBuilder builder;
    private final Map< Square, GridPosition > objects;
    private final Map< GridPosition, Square > positions;
    
-   public GridModel( int colourVariation, int width, int height ) {
-      this.colourVariation = colourVariation;
-      this.width = width;
-      this.height = height;
-      
+   public GridModel( GridBuilder builder ) {
+      this.builder = builder;
       this.objects = new HashMap<>();
       this.positions = new HashMap<>();
    }//End Constructor
    
+   public GridModel( int colourVariation, int width, int height ) {
+      this( 
+               new GridBuilder()
+                  .withNumberOfColours( colourVariation )
+                  .withWidth( width )
+                  .withHeight( height )
+      );
+   }//End Constructor
+   
    public Square at( int w, int h ) {
-      if ( w < 0 || w >= width ) {
+      if ( w < 0 || w >= width() ) {
          return null;
       }
-      if ( h < 0 || h >= height ) {
+      if ( h < 0 || h >= height() ) {
          return null;
       }
       return positions.get( new GridPosition( w, h ) );
@@ -68,20 +75,35 @@ public class GridModel {
       objects.remove( object );
    }//End Method
    
+   public void reset() {
+      Collection< Square > contents = new ArrayList<>( objects.keySet() );
+      contents.forEach( this::remove );
+      
+      builder.specifics().forEach( p -> {
+         Square s = new Square( p.getKey(), Color.BISQUE );
+         s.setType( p.getValue() );
+         set( s, p.getKey().w, p.getKey().h );
+      } );
+   }//End Method
+   
+   public int colourVariation() {
+      return builder.colourVariation();
+   }//End Method
+   
    public int width() {
-      return width;
+      return builder.width();
    }//End Method
 
    public int height() {
-      return height;
+      return builder.height();
    }//End Method
    
    public int lastWidthIndex(){
-      return width - 1;
+      return width() - 1;
    }//End Method
    
    public int lastHeightIndex(){
-      return height - 1;
+      return height() - 1;
    }//End Method
    
    public Iterator< GridEntry > bottomUpIterator(){
@@ -98,10 +120,6 @@ public class GridModel {
 
    public GridSnapshot snapshot() {
       return new GridSnapshot( this );
-   }//End Method
-
-   public int colourVariation() {
-      return colourVariation;
    }//End Method
 
 }//End Class

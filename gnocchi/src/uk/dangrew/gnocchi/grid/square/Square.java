@@ -10,7 +10,7 @@ import uk.dangrew.gnocchi.grid.model.GridPosition;
 public class Square {
 
    private final ObjectProperty< Color > colour;
-   private final ObjectProperty< SquarePopType > type;
+   private final ObjectProperty< SquareType > type;
    private GridPosition position;
    
    public Square( Color colour ) {
@@ -43,15 +43,15 @@ public class Square {
       return position;
    }//End Method
    
-   public SquarePopType type() {
+   public SquareType type() {
       return type.get();
    }//End Method
    
-   public ReadOnlyObjectProperty< SquarePopType > typeProperty() {
+   public ReadOnlyObjectProperty< SquareType > typeProperty() {
       return type;
    }//End Method
    
-   public void setType( SquarePopType type ) {
+   public void setType( SquareType type ) {
       this.type.set( type );
    }//End Method
    
