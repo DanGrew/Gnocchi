@@ -1,11 +1,11 @@
 package uk.dangrew.gnocchi.game.bonus;
 
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareBonusType;
 import uk.dangrew.gnocchi.grid.square.SquareType;
 
 public class BonusCombiner {
    
-   public SquarePopType determineCombination( SquareType first, SquareType second ) {
+   public SquareBonusType determineCombination( SquareType first, SquareType second ) {
       if ( !first.properties().isComboEnabled() || !second.properties().isComboEnabled() ) {
          return null;
       }
@@ -15,69 +15,69 @@ public class BonusCombiner {
       }
       
       
-      SquarePopType firstPoppable = ( SquarePopType )first;
-      SquarePopType secondPoppable = ( SquarePopType )second;
+      SquareBonusType firstPoppable = ( SquareBonusType )first;
+      SquareBonusType secondPoppable = ( SquareBonusType )second;
       switch ( firstPoppable ) {
          case HorizontalBlast:
             switch ( secondPoppable ) {
                case HorizontalBlast:
                case VerticalBlast:
-                  return SquarePopType.CrossBlast;
+                  return SquareBonusType.CrossBlast;
                case CrossBlast:
-                  return SquarePopType.BombBlast;
+                  return SquareBonusType.BombBlast;
                case BombBlast:
-                  return SquarePopType.BombHorizontal;
+                  return SquareBonusType.BombHorizontal;
                case MassBlast:
-                  return SquarePopType.MassHorizontal;
+                  return SquareBonusType.MassHorizontal;
             }
          case VerticalBlast:
             switch ( secondPoppable ) {
                case HorizontalBlast:
                case VerticalBlast:
-                  return SquarePopType.CrossBlast;
+                  return SquareBonusType.CrossBlast;
                case CrossBlast:
-                  return SquarePopType.BombBlast;
+                  return SquareBonusType.BombBlast;
                case BombBlast:
-                  return SquarePopType.BombVertical;
+                  return SquareBonusType.BombVertical;
                case MassBlast:
-                  return SquarePopType.MassVertical;
+                  return SquareBonusType.MassVertical;
             }
          case CrossBlast:
             switch ( secondPoppable ) {
                case HorizontalBlast:
                case VerticalBlast:
                case CrossBlast:
-                  return SquarePopType.BombBlast;
+                  return SquareBonusType.BombBlast;
                case BombBlast:
-                  return SquarePopType.BombCross;
+                  return SquareBonusType.BombCross;
                case MassBlast:
-                  return SquarePopType.MassCross;
+                  return SquareBonusType.MassCross;
             }
          case BombBlast:
             switch ( secondPoppable ) {
                case HorizontalBlast:
-                  return SquarePopType.BombHorizontal;
+                  return SquareBonusType.BombHorizontal;
                case VerticalBlast:
-                  return SquarePopType.BombVertical;
+                  return SquareBonusType.BombVertical;
                case CrossBlast:
-                  return SquarePopType.BombCross;
+                  return SquareBonusType.BombCross;
                case BombBlast:
-                  return SquarePopType.BombBomb;
+                  return SquareBonusType.BombBomb;
                case MassBlast:
-                  return SquarePopType.MassBomb;
+                  return SquareBonusType.MassBomb;
             }
          case MassBlast:
             switch ( secondPoppable ) {
                case HorizontalBlast:
-                  return SquarePopType.MassHorizontal;
+                  return SquareBonusType.MassHorizontal;
                case VerticalBlast:
-                  return SquarePopType.MassVertical;
+                  return SquareBonusType.MassVertical;
                case CrossBlast:
-                  return SquarePopType.MassCross;
+                  return SquareBonusType.MassCross;
                case BombBlast:
-                  return SquarePopType.MassBomb;
+                  return SquareBonusType.MassBomb;
                case MassBlast:
-                  return SquarePopType.MassMass;
+                  return SquareBonusType.MassMass;
             }
       }
       return null;

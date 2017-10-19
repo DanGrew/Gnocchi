@@ -16,7 +16,8 @@ import uk.dangrew.gnocchi.game.bonus.BonusCombiner;
 import uk.dangrew.gnocchi.game.bonus.BonusDetector;
 import uk.dangrew.gnocchi.game.matching.MatchChainer;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareBonusType;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 import uk.dangrew.gnocchi.grid.square.SquareType;
 import uk.dangrew.gnocchi.input.InputDriver;
 import uk.dangrew.gnocchi.ui.frame.content.GameLauncherController;
@@ -57,7 +58,7 @@ public class GameEngine {
       if ( matches.isEmpty() ) {
          return;
       }
-      SquarePopType bonus = bonusDetector.detectBonus( object, matches );
+      SquareBonusType bonus = bonusDetector.detectBonus( object, matches );
       if ( bonus != null ) {
          object.setType( bonus );
          matches.remove( object );
@@ -72,7 +73,7 @@ public class GameEngine {
       SquareType combination = bonusCombiner.determineCombination( selected.type(), bonus.type() );
       if ( combination != null ) {
          selected.setType( combination );
-         bonus.setType( SquarePopType.Regular );
+         bonus.setType( SquareRegularType.Regular );
       }
    }//End Method
    

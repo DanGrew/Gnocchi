@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.bonus.BonusDetector;
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareBonusType;
 
 public class SquareHighlighting {
    
@@ -16,7 +16,7 @@ public class SquareHighlighting {
    }//End Constructor
 
    void styleSelected( SquareWidget widget, List< SquareWidget > matches ) {
-      SquarePopType type = bonusDetector.detectBonus( 
+      SquareBonusType type = bonusDetector.detectBonus( 
                widget.association(), 
                matches.stream()
                   .map( SquareWidget::association )

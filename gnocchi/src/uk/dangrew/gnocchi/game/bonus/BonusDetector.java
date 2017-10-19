@@ -3,7 +3,8 @@ package uk.dangrew.gnocchi.game.bonus;
 import java.util.List;
 
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareBonusType;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class BonusDetector {
    
@@ -11,18 +12,18 @@ public class BonusDetector {
    static final int BOMB_THRESHOLD = 15;
    static final int MASS_THRESHOLD = 20;
 
-   public SquarePopType detectBonus( Square source, List< Square > matches ) {
-      if ( source.type() != SquarePopType.Regular ) {
+   public SquareBonusType detectBonus( Square source, List< Square > matches ) {
+      if ( !( source.type() instanceof SquareRegularType ) ) {
          return null;
       }
       if ( matches.size() < LINE_THRESHOLD ) {
          return null;
       }
       if ( matches.size() >= MASS_THRESHOLD ) {
-         return SquarePopType.MassBlast;
+         return SquareBonusType.MassBlast;
       }
       if ( matches.size() >= BOMB_THRESHOLD ) {
-         return SquarePopType.BombBlast;
+         return SquareBonusType.BombBlast;
       }
       
       int minWidth = source.position().w;
@@ -42,11 +43,11 @@ public class BonusDetector {
       int heightRange = maxHeight - minHeight;
       
       if ( widthRange > heightRange ) {
-         return SquarePopType.HorizontalBlast;
+         return SquareBonusType.HorizontalBlast;
       } else if ( heightRange > widthRange ) {
-         return SquarePopType.VerticalBlast;
+         return SquareBonusType.VerticalBlast;
       } else {
-         return SquarePopType.CrossBlast;
+         return SquareBonusType.CrossBlast;
       }
    }//End Method
 

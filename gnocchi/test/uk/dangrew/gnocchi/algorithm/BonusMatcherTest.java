@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareBonusType;
 
 public class BonusMatcherTest {
 
@@ -35,34 +35,34 @@ public class BonusMatcherTest {
    }//End Method
    
    @Test public void shouldIgnoreNoneBonus() {
-      model.at( 4, 4 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 4, 5 ).setType( SquarePopType.VerticalBlast );
-      model.at( 4, 6 ).setType( SquarePopType.MassHorizontal );
-      model.at( 5, 4 ).setType( SquarePopType.BombBlast );
-      model.at( 5, 6 ).setType( SquarePopType.BombBlast );
-      model.at( 6, 4 ).setType( SquarePopType.BombBlast );
-      model.at( 6, 5 ).setType( SquarePopType.BombBlast );
-      model.at( 6, 6 ).setType( SquarePopType.BombBlast );
+      model.at( 4, 4 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 4, 5 ).setType( SquareBonusType.VerticalBlast );
+      model.at( 4, 6 ).setType( SquareBonusType.MassHorizontal );
+      model.at( 5, 4 ).setType( SquareBonusType.BombBlast );
+      model.at( 5, 6 ).setType( SquareBonusType.BombBlast );
+      model.at( 6, 4 ).setType( SquareBonusType.BombBlast );
+      model.at( 6, 5 ).setType( SquareBonusType.BombBlast );
+      model.at( 6, 6 ).setType( SquareBonusType.BombBlast );
       
       assertThat( systemUnderTest.match( model, 5, 5 ), is( new ArrayList<>() ) );
    }//End Method
    
    @Test public void shouldNotMatchAnyNonBonuses() {
-      model.at( 5, 5 ).setType( SquarePopType.BombBlast );
+      model.at( 5, 5 ).setType( SquareBonusType.BombBlast );
       assertThat( systemUnderTest.match( model, 5, 5 ), is( new ArrayList<>() ) );
    }//End Method
    
    @Test public void shouldMatchSurroundingBonuses() {
-      model.at( 5, 5 ).setType( SquarePopType.HorizontalBlast );
+      model.at( 5, 5 ).setType( SquareBonusType.HorizontalBlast );
       
-      model.at( 4, 4 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 4, 5 ).setType( SquarePopType.VerticalBlast );
-      model.at( 4, 6 ).setType( SquarePopType.VerticalBlast );
-      model.at( 5, 4 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 5, 6 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 6, 4 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 6, 5 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 6, 6 ).setType( SquarePopType.HorizontalBlast );
+      model.at( 4, 4 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 4, 5 ).setType( SquareBonusType.VerticalBlast );
+      model.at( 4, 6 ).setType( SquareBonusType.VerticalBlast );
+      model.at( 5, 4 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 5, 6 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 6, 4 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 6, 5 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 6, 6 ).setType( SquareBonusType.HorizontalBlast );
       
       assertThat( systemUnderTest.match( model, 5, 5 ), containsInAnyOrder( 
                model.at( 4, 4 ),
@@ -77,10 +77,10 @@ public class BonusMatcherTest {
    }//End Method
    
    @Test public void shouldMatchComboEnabledBonuses() {
-      model.at( 5, 5 ).setType( SquarePopType.HorizontalBlast );
+      model.at( 5, 5 ).setType( SquareBonusType.HorizontalBlast );
       
-      model.at( 4, 4 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 4, 5 ).setType( SquarePopType.BombBomb );
+      model.at( 4, 4 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 4, 5 ).setType( SquareBonusType.BombBomb );
       
       assertThat( systemUnderTest.match( model, 5, 5 ), containsInAnyOrder( 
                model.at( 4, 4 )
@@ -88,10 +88,10 @@ public class BonusMatcherTest {
    }//End Method
    
    @Test public void shouldNotMatchNonComboEnabled() {
-      model.at( 5, 5 ).setType( SquarePopType.BombBomb );
+      model.at( 5, 5 ).setType( SquareBonusType.BombBomb );
       
-      model.at( 4, 4 ).setType( SquarePopType.HorizontalBlast );
-      model.at( 4, 5 ).setType( SquarePopType.VerticalBlast );
+      model.at( 4, 4 ).setType( SquareBonusType.HorizontalBlast );
+      model.at( 4, 5 ).setType( SquareBonusType.VerticalBlast );
       
       assertThat( systemUnderTest.match( model, 5, 5 ), is( empty() ) );
    }//End Method

@@ -20,7 +20,7 @@ public class Square {
    public Square( GridPosition position, Color colour ) {
       this.position = position;
       this.colour = new SimpleObjectProperty<>( colour );
-      this.type = new SimpleObjectProperty<>( SquarePopType.Regular );
+      this.type = new SimpleObjectProperty<>( SquareRegularType.Regular );
    }//End Constructor
 
    public Color colour() {
@@ -61,8 +61,8 @@ public class Square {
    
    public boolean matches( Square square ) {
       if ( 
-               type.get() != SquarePopType.Regular ||
-               square.type() != SquarePopType.Regular 
+               type.get() != SquareRegularType.Regular ||
+               square.type() != SquareRegularType.Regular 
       ) {
          return false;
       }

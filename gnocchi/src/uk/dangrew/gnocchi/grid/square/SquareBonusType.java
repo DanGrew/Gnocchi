@@ -13,12 +13,8 @@ import uk.dangrew.gnocchi.algorithm.MassCompositeMatcher;
 import uk.dangrew.gnocchi.algorithm.RowMatcher;
 import uk.dangrew.gnocchi.ui.resources.Images;
 
-public enum SquarePopType implements SquareType {
+public enum SquareBonusType implements SquareType {
 
-   Regular( 
-            new SquareProperties().withMatcher( new FloodFill() )
-   ),
-   
    HorizontalBlast( 
             new SquareProperties()
                .withMatcher( new RowMatcher() )
@@ -108,7 +104,7 @@ public enum SquarePopType implements SquareType {
             
    private final SquareProperties properties;
    
-   private SquarePopType( SquareProperties properties ) {
+   private SquareBonusType( SquareProperties properties ) {
       this.properties = properties;
       this.properties.withPoppable( true );
    }//End Constructor

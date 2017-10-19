@@ -11,7 +11,8 @@ public class SquareTypesTest {
 
    @Test public void shoudProvideTypes() {
       assertThat( SquareTypes.values(), is( SquareTypes.values() ) );
-      assertThat( Arrays.asList( SquareTypes.values() ).containsAll( Arrays.asList( SquarePopType.values() ) ), is( true ) );
+      assertThat( Arrays.asList( SquareTypes.values() ).containsAll( Arrays.asList( SquareRegularType.values() ) ), is( true ) );
+      assertThat( Arrays.asList( SquareTypes.values() ).containsAll( Arrays.asList( SquareBonusType.values() ) ), is( true ) );
       assertThat( Arrays.asList( SquareTypes.values() ).containsAll( Arrays.asList( SquareObstacleType.values() ) ), is( true ) );
    }//End Method
 

@@ -12,7 +12,7 @@ import org.junit.Test;
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareBonusType;
 
 public class MassColourMatcherTest {
 
@@ -70,7 +70,7 @@ public class MassColourMatcherTest {
       Square s7 = Square.colouredSquare( Color.BLACK );
       model.set( s7, 2, 9 );
       
-      s2.setType( SquarePopType.BombBomb );
+      s2.setType( SquareBonusType.BombBomb );
       
       assertThat( systemUnderTest.match( model, 0, 0 ), containsInAnyOrder(  
                s1, s3, s4, s5, s6, s7

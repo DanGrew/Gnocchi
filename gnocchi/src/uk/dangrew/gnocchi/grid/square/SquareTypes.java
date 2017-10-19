@@ -10,7 +10,8 @@ public class SquareTypes {
    
    static {
       List< SquareType > values = new ArrayList<>();
-      values.addAll( Arrays.asList( SquarePopType.values() ) );
+      values.addAll( Arrays.asList( SquareRegularType.values() ) );
+      values.addAll( Arrays.asList( SquareBonusType.values() ) );
       values.addAll( Arrays.asList( SquareObstacleType.values() ) );
       TYPES = new SquareType[ values.size() ];
       values.toArray( TYPES );

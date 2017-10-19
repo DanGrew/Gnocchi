@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import javafx.util.Pair;
 import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareBonusType;
 import uk.dangrew.gnocchi.grid.square.SquareType;
 
 public class GridBuilderTest {
@@ -50,7 +50,7 @@ public class GridBuilderTest {
       assertThat( systemUnderTest.specifics(), is( Arrays.asList( new Pair<>( position, type ) ) ) );
       
       GridPosition position2 = new GridPosition( 3, 2 );
-      SquareType type2 = SquarePopType.BombBomb;
+      SquareType type2 = SquareBonusType.BombBomb;
       systemUnderTest.withSpecific( position2, type2 );
       
       assertThat( systemUnderTest.specifics(), is( Arrays.asList( 

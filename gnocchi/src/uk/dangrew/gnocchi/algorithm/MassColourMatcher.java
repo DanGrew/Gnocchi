@@ -5,7 +5,7 @@ import java.util.List;
 
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.grid.square.SquarePopType;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class MassColourMatcher implements SquareMatcher {
 
@@ -22,7 +22,7 @@ public class MassColourMatcher implements SquareMatcher {
             if ( square == null ) {
                continue;
             }
-            if ( square.type() != SquarePopType.Regular ) {
+            if ( !( square.type() instanceof SquareRegularType ) ) {
                continue;
             }
             if ( square.colour().equals( source.colour() ) ) {
