@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.algorithm.SquareMatcher;
 
 public class SquarePropertiesTest {
@@ -49,6 +50,18 @@ public class SquarePropertiesTest {
       assertThat( systemUnderTest.isMoveable(), is( true ) );
       assertThat( systemUnderTest.withMoveable( false ), is( systemUnderTest ) );
       assertThat( systemUnderTest.isMoveable(), is( false ) );
+   }//End Method
+   
+   @Test public void shouldProvideColour(){
+      assertThat( systemUnderTest.colour(), is( SquareProperties.DEFAULT_COLOUR ) );
+      assertThat( systemUnderTest.withColour( Color.AQUA ), is( systemUnderTest ) );
+      assertThat( systemUnderTest.colour(), is( Color.AQUA ) );
+   }//End Method
+   
+   @Test public void shouldProvideBasic(){
+      assertThat( systemUnderTest.isBasic(), is( false ) );
+      assertThat( systemUnderTest.withBasic( true ), is( systemUnderTest ) );
+      assertThat( systemUnderTest.isBasic(), is( true ) );
    }//End Method
 
 }//End Class

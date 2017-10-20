@@ -36,7 +36,6 @@ public class SquareWidget extends StackPane {
       
       this.registrations = new RegistrationManager();
       this.registrations.apply( new ReadOnlyChangeListenerRegistrationImpl<>( object.typeProperty(), ( s, o, n ) -> resetWidget() ) );
-      this.registrations.apply( new ReadOnlyChangeListenerRegistrationImpl<>( object.colourProperty(), ( s, o, n ) -> resetWidget() ) );
       this.resetWidget();
    }//End Constructor
    

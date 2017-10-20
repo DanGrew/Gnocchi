@@ -11,10 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.grid.square.SquareBonusType;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class MatchChainerTest {
 
@@ -26,7 +26,7 @@ public class MatchChainerTest {
       model = new GridModel( 3, 10, 10 );
       for ( int w = 0; w < 10; w++ ) {
          for ( int h = 0; h < 10; h++ ) {
-            model.set( Square.colouredSquare( Color.RED ), w, h );
+            model.set( Square.typedSquare( SquareRegularType.Primary ), w, h );
          }
       }
       
@@ -34,18 +34,10 @@ public class MatchChainerTest {
    }//End Method
 
    @Test public void shouldRecursivelyMatchSquaresThatMatch() {
-      model.set( Square.colouredSquare( Color.BLUE ), 0, 0 );
-      model.set( Square.colouredSquare( Color.BLUE ), 1, 0 );
-      model.set( Square.colouredSquare( Color.BLUE ), 2, 0 );
-      model.set( Square.colouredSquare( Color.BLUE ), 3, 0 );
-      model.set( Square.colouredSquare( Color.BLUE ), 4, 0 );
       model.at( 4, 0 ).setType( SquareBonusType.VerticalBlast );
+      model.at( 4, 9 ).setType( SquareBonusType.HorizontalBlast );
       
       List< Square > expectedMatches = Arrays.asList(
-               model.at( 0, 0 ),
-               model.at( 1, 0 ),
-               model.at( 2, 0 ),
-               model.at( 3, 0 ),
                model.at( 4, 0 ),
                model.at( 4, 1 ),
                model.at( 4, 2 ),
@@ -55,9 +47,18 @@ public class MatchChainerTest {
                model.at( 4, 6 ),
                model.at( 4, 7 ),
                model.at( 4, 8 ),
-               model.at( 4, 9 )
+               model.at( 4, 9 ),
+               model.at( 0, 9 ),
+               model.at( 1, 9 ),
+               model.at( 2, 9 ),
+               model.at( 3, 9 ),
+               model.at( 5, 9 ),
+               model.at( 6, 9 ),
+               model.at( 7, 9 ),
+               model.at( 8, 9 ),
+               model.at( 9, 9 )
       );
-      assertThat( systemUnderTest.match( model, 0, 0 ), is( expectedMatches ) );
+      assertThat( systemUnderTest.match( model, 4, 0 ), is( expectedMatches ) );
    }//End Method
    
    @Test public void shouldIgnoreNullMatch(){

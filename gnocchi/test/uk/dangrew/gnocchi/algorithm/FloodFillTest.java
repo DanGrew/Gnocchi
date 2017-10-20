@@ -9,9 +9,9 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class FloodFillTest {
 
@@ -29,15 +29,15 @@ public class FloodFillTest {
    private FloodFill systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      s1 = new Square( Color.BLUE );
-      s2 = new Square( Color.BLUE );
-      s3 = new Square( Color.BLUE );
-      s4 = new Square( Color.BLUE );
-      s5 = new Square( Color.BLUE );
-      s6 = new Square( Color.BLUE );
-      s7 = new Square( Color.BLUE );
-      s8 = new Square( Color.BLUE );
-      s9 = new Square( Color.BLUE );
+      s1 = new Square( SquareRegularType.Secondary );
+      s2 = new Square( SquareRegularType.Secondary );
+      s3 = new Square( SquareRegularType.Secondary );
+      s4 = new Square( SquareRegularType.Secondary );
+      s5 = new Square( SquareRegularType.Secondary );
+      s6 = new Square( SquareRegularType.Secondary );
+      s7 = new Square( SquareRegularType.Secondary );
+      s8 = new Square( SquareRegularType.Secondary );
+      s9 = new Square( SquareRegularType.Secondary );
       
       grid = new GridModel( 4, 10, 10 );
       systemUnderTest = new FloodFill();
@@ -46,7 +46,7 @@ public class FloodFillTest {
    @Test public void shouldMatchImmediatelyConnected() {
       for ( int w = 0; w < grid.width(); w++ ) {
          for ( int h = 0; h < grid.width(); h++ ) {
-            grid.set( new Square( Color.RED ), w, h );
+            grid.set( new Square( SquareRegularType.Primary ), w, h );
          }   
       }
       
@@ -65,7 +65,7 @@ public class FloodFillTest {
    @Test public void shouldNotMatchNotConnected() {
       for ( int w = 0; w < grid.width(); w++ ) {
          for ( int h = 0; h < grid.width(); h++ ) {
-            grid.set( new Square( Color.RED ), w, h );
+            grid.set( new Square( SquareRegularType.Primary ), w, h );
          }   
       }
       
@@ -84,7 +84,7 @@ public class FloodFillTest {
    @Test public void shouldMatchCrossShape() {
       for ( int w = 0; w < grid.width(); w++ ) {
          for ( int h = 0; h < grid.width(); h++ ) {
-            grid.set( new Square( Color.RED ), w, h );
+            grid.set( new Square( SquareRegularType.Primary ), w, h );
          }   
       }
       
@@ -107,7 +107,7 @@ public class FloodFillTest {
    @Test public void shouldMatchPattern() {
       for ( int w = 0; w < grid.width(); w++ ) {
          for ( int h = 0; h < grid.width(); h++ ) {
-            grid.set( new Square( Color.RED ), w, h );
+            grid.set( new Square( SquareRegularType.Primary ), w, h );
          }   
       }
       
@@ -137,7 +137,7 @@ public class FloodFillTest {
    @Test public void shouldClearMatchesIfLessThanLimit(){
       for ( int w = 0; w < grid.width(); w++ ) {
          for ( int h = 0; h < grid.width(); h++ ) {
-            grid.set( new Square( Color.RED ), w, h );
+            grid.set( new Square( SquareRegularType.Primary ), w, h );
          }   
       }
       

@@ -1,6 +1,5 @@
 package uk.dangrew.gnocchi.ui.square;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -12,10 +11,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 import uk.dangrew.gnocchi.input.InputDriver;
 
 public class SquareHighlighterTest {
@@ -32,9 +31,9 @@ public class SquareHighlighterTest {
       MockitoAnnotations.initMocks( this );
       
       highlightModel = new HighlightModel( mock( GridModel.class ), mock( InputDriver.class ) );
-      sw1 = new SquareWidget( new Square( new GridPosition( 3, 4 ), Color.RED ), 0, 0, 0, 0 );
-      sw2 = new SquareWidget( new Square( new GridPosition( 2, 1 ), Color.RED ), 0, 0, 0, 0 );
-      sw3 = new SquareWidget( new Square( new GridPosition( 0, 0 ), Color.RED ), 0, 0, 0, 0 );
+      sw1 = new SquareWidget( new Square( new GridPosition( 3, 4 ), SquareRegularType.Primary ), 0, 0, 0, 0 );
+      sw2 = new SquareWidget( new Square( new GridPosition( 2, 1 ), SquareRegularType.Primary ), 0, 0, 0, 0 );
+      sw3 = new SquareWidget( new Square( new GridPosition( 0, 0 ), SquareRegularType.Primary ), 0, 0, 0, 0 );
       systemUnderTest = new SquareHighlighter( highlighting, highlightModel );
    }//End Method
 

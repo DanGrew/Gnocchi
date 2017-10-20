@@ -37,7 +37,7 @@ public class BonusDetectorTest {
       assertThat( systemUnderTest.detectBonus( source, matches ), is( nullValue() ) );
       source.setType( SquareBonusType.VerticalBlast );
       assertThat( systemUnderTest.detectBonus( source, matches ), is( nullValue() ) );
-      source.setType( SquareRegularType.Regular );
+      source.setType( SquareRegularType.Primary );
       assertThat( systemUnderTest.detectBonus( source, matches ), is( notNullValue() ) );
    }//End Method
    
@@ -51,39 +51,39 @@ public class BonusDetectorTest {
    }//End Method
 
    @Test public void shouldDetermineHorizontalBlastFromHighWidthPop() {
-      matches.add( new Square( new GridPosition( 3, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 5, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 6, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 2 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 1 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 2 ), Color.RED ) );
+      matches.add( new Square( new GridPosition( 3, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 5, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 6, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 2 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 3, 1 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 3, 2 ), SquareRegularType.Primary ) );
       
       assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareBonusType.HorizontalBlast ) );
    }//End Method
    
    @Test public void shouldDetermineHorizontalBlastFromHighHeightPop() {
-      matches.add( new Square( new GridPosition( 3, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 6 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 7 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 8 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 2 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 1 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 5, 2 ), Color.RED ) );
+      matches.add( new Square( new GridPosition( 3, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 3, 6 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 3, 7 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 3, 8 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 2 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 1 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 5, 2 ), SquareRegularType.Primary ) );
       
       assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareBonusType.VerticalBlast ) );
    }//End Method
    
    @Test public void shouldDetermineCrossBlastFromEqualWidthHeightPop() {
-      matches.add( new Square( new GridPosition( 4, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 3, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 2, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 5, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 6, 4 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 3 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 2 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 6 ), Color.RED ) );
-      matches.add( new Square( new GridPosition( 4, 5 ), Color.RED ) );
+      matches.add( new Square( new GridPosition( 4, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 3, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 2, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 5, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 6, 4 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 3 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 2 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 6 ), SquareRegularType.Primary ) );
+      matches.add( new Square( new GridPosition( 4, 5 ), SquareRegularType.Primary ) );
       
       assertThat( systemUnderTest.detectBonus( source, matches ), is( SquareBonusType.CrossBlast ) );
    }//End Method

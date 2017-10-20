@@ -3,15 +3,14 @@ package uk.dangrew.gnocchi.grid;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.BottomUpGridIterator;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class BottomUpGridIteratorTest {
 
@@ -27,12 +26,12 @@ public class BottomUpGridIteratorTest {
 
    @Before public void initialiseSystemUnderTest() {
       grid = new GridModel( 3, 2, 3 );
-      grid.set( o00 = new Square( Color.RED ), 0, 0 );
-      grid.set( o01 = new Square( Color.RED ), 0, 1 );
-      grid.set( o02 = new Square( Color.RED ), 0, 2 );
-      grid.set( o10 = new Square( Color.RED ), 1, 0 );
-      grid.set( o11 = new Square( Color.RED ), 1, 1 );
-      grid.set( o12 = new Square( Color.RED ), 1, 2 );
+      grid.set( o00 = new Square( SquareRegularType.Primary ), 0, 0 );
+      grid.set( o01 = new Square( SquareRegularType.Primary ), 0, 1 );
+      grid.set( o02 = new Square( SquareRegularType.Primary ), 0, 2 );
+      grid.set( o10 = new Square( SquareRegularType.Primary ), 1, 0 );
+      grid.set( o11 = new Square( SquareRegularType.Primary ), 1, 1 );
+      grid.set( o12 = new Square( SquareRegularType.Primary ), 1, 2 );
       
       systemUnderTest = new BottomUpGridIterator( grid );
    }//End Method

@@ -67,4 +67,8 @@ public class AnimationSynchronizerTest {
       assertThat( systemUnderTest.isEmpty(), is( true ) );
    }//End Method
 
+   @Test public void shouldCompleteIfNoAnimations(){
+      systemUnderTest.playAll();
+      verify( onCompletion ).run();
+   }//End Method
 }//End Class

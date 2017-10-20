@@ -80,8 +80,7 @@ public class GridModel {
       contents.forEach( this::remove );
       
       builder.specifics().forEach( p -> {
-         Square s = new Square( p.getKey(), Color.BISQUE );
-         s.setType( p.getValue() );
+         Square s = new Square( p.getKey(), p.getValue() );
          set( s, p.getKey().w, p.getKey().h );
       } );
    }//End Method

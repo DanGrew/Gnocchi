@@ -9,6 +9,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtProperties;
+import uk.dangrew.gnocchi.grid.square.SquareType;
 import uk.dangrew.gnocchi.ui.styling.ButtonStyling;
 import uk.dangrew.kode.javafx.style.JavaFxStyle;
 import uk.dangrew.kode.observable.FunctionMapAnyKeyChangeListenerImpl;
@@ -16,7 +17,7 @@ import uk.dangrew.kode.observable.FunctionMapAnyKeyChangeListenerImpl;
 public class ColoursGtPropertiesUi extends GridPane {
 
    private final ToggleButton movesRemaining;
-   private final Map< Color, ToggleButton > targets;
+   private final Map< SquareType, ToggleButton > targets;
    
    public ColoursGtPropertiesUi( ColoursGtProperties properties ) {
       JavaFxStyle styling = new JavaFxStyle();
@@ -40,13 +41,13 @@ public class ColoursGtPropertiesUi extends GridPane {
       
       GridPane targetsPane = new GridPane();
       styling.configureConstraintsForEvenRows( targetsPane, 1 );
-      styling.configureConstraintsForEvenColumns( targetsPane, properties.targetColours().size() );
+      styling.configureConstraintsForEvenColumns( targetsPane, properties.targetTypes().size() );
       
       this.targets = new HashMap<>();
       
-      for ( int i = 0; i < properties.targetColours().size(); i++ ) {
-         Color target = properties.targetColours().get( i );
-         ToggleButton button = buttonStyling.configureButton( convertToString( properties.remainingColours().get( target ) ), target );
+      for ( int i = 0; i < properties.targetTypes().size(); i++ ) {
+         SquareType target = properties.targetTypes().get( i );
+         ToggleButton button = buttonStyling.configureButton( convertToString( properties.remainingColours().get( target ) ), target.properties().colour() );
          targets.put( target, button );
          targetsPane.add( button, i, 0 );
       }
@@ -66,8 +67,8 @@ public class ColoursGtPropertiesUi extends GridPane {
       return value.toString();
    }//End Method
    
-   ToggleButton buttonForTarget( Color colour ) {
-      return targets.get( colour );
+   ToggleButton buttonForTarget( SquareType type ) {
+      return targets.get( type );
    }//End Method
    
    ToggleButton movesRemaining(){

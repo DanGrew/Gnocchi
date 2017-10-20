@@ -14,32 +14,30 @@ public class SquareTest {
    private Square systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      systemUnderTest = new Square( new GridPosition( 0, 1 ), Color.ORANGE );
+      systemUnderTest = new Square( new GridPosition( 0, 1 ), SquareRegularType.Quinary );
    }//End Method
 
    @Test public void shouldProvideColour() {
-      assertThat( systemUnderTest.colour(), is( Color.ORANGE ) );
-      assertThat( systemUnderTest.colourProperty().get(), is( systemUnderTest.colour() ) );
-      systemUnderTest.setColour( Color.RED );
-      assertThat( systemUnderTest.colour(), is( Color.RED ) );
-      assertThat( systemUnderTest.colourProperty().get(), is( systemUnderTest.colour() ) );
+      assertThat( systemUnderTest.colour(), is( SquareRegularType.Quinary.properties().colour() ) );
+      systemUnderTest.setType( SquareRegularType.Senary );
+      assertThat( systemUnderTest.colour(), is( SquareRegularType.Senary.properties().colour() ) );
    }//End Method
    
    @Test public void shouldMatchAnotherSquare(){
-      assertThat( systemUnderTest.matches( Square.colouredSquare( Color.ORANGE ) ), is( true ) );
+      assertThat( systemUnderTest.matches( Square.typedSquare( SquareRegularType.Quinary ) ), is( true ) );
    }//End Method
    
    @Test public void shouldNotMatchAnotherSquare(){
-      assertThat( systemUnderTest.matches( Square.colouredSquare( Color.RED ) ), is( false ) );
+      assertThat( systemUnderTest.matches( Square.typedSquare( SquareRegularType.Primary ) ), is( false ) );
    }//End Method
    
    @Test public void shouldNotMatchFromBonusSquare(){
       systemUnderTest.setType( SquareBonusType.BombBlast );
-      assertThat( systemUnderTest.matches( Square.colouredSquare( Color.ORANGE ) ), is( false ) );
+      assertThat( systemUnderTest.matches( Square.typedSquare( SquareRegularType.Quinary ) ), is( false ) );
    }//End Method
    
    @Test public void shouldNotMatchToBonusSquare(){
-      Square square = Square.colouredSquare( Color.ORANGE );
+      Square square = Square.typedSquare( SquareRegularType.Quinary );
       square.setType( SquareBonusType.BombBomb );
       assertThat( systemUnderTest.matches( square ), is( false ) );
    }//End Method
@@ -51,15 +49,15 @@ public class SquareTest {
    }//End Method
    
    @Test public void shouldProvideSquareType(){
-      assertThat( systemUnderTest.type(), is( SquareRegularType.Regular ) );
-      assertThat( systemUnderTest.typeProperty().get(), is( SquareRegularType.Regular ) );
+      assertThat( systemUnderTest.type(), is( SquareRegularType.Quinary ) );
+      assertThat( systemUnderTest.typeProperty().get(), is( SquareRegularType.Quinary ) );
       systemUnderTest.setType( SquareBonusType.HorizontalBlast );
       assertThat( systemUnderTest.type(), is( SquareBonusType.HorizontalBlast ) );
       assertThat( systemUnderTest.typeProperty().get(), is( SquareBonusType.HorizontalBlast ) );
    }//End Method
    
    @Test public void shouldProvideMatcher(){
-      assertThat( systemUnderTest.typeMatcher(), is( SquareRegularType.Regular.properties().matcher() ) );
+      assertThat( systemUnderTest.typeMatcher(), is( SquareRegularType.Quinary.properties().matcher() ) );
       systemUnderTest.setType( SquareBonusType.CrossBlast );
       assertThat( systemUnderTest.typeMatcher(), is( SquareBonusType.CrossBlast.properties().matcher() ) );
    }//End Method

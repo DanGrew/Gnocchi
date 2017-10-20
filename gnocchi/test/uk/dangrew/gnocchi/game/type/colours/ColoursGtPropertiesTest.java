@@ -12,8 +12,9 @@ import java.util.function.BiConsumer;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.type.GameProperties;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
+import uk.dangrew.gnocchi.grid.square.SquareType;
 import uk.dangrew.kode.observable.FunctionMapChangeListenerImpl;
 import uk.dangrew.kode.observable.PrivatelyModifiableObservableMapImpl;
 
@@ -23,66 +24,66 @@ public class ColoursGtPropertiesTest {
 
    @Before public void initialiseSystemUnderTest() {
       systemUnderTest = new ColoursGtProperties();
-      systemUnderTest.decreaseRemaining( Color.RED, 100 );
-      systemUnderTest.decreaseRemaining( Color.LIGHTSKYBLUE, 100 );
+      systemUnderTest.decreaseRemaining( SquareRegularType.Primary, 100 );
+      systemUnderTest.decreaseRemaining( SquareRegularType.Secondary, 100 );
       systemUnderTest.moveUsed( 25 );
    }//End Method
 
    @Test public void shouldProvideColourTargets() {
-      assertThat( systemUnderTest.targetColours(), is( Arrays.asList( Color.LIGHTSKYBLUE, Color.RED ) ) );
+      assertThat( systemUnderTest.targetTypes(), is( Arrays.asList( SquareRegularType.Primary, SquareRegularType.Secondary ) ) );
       
-      systemUnderTest.increaseRemaining( Color.RED, 10 );
-      systemUnderTest.increaseRemaining( Color.BLUE, 12 );
-      systemUnderTest.increaseRemaining( Color.GREEN, 8 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Primary, 10 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Secondary, 12 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Tertiary, 8 );
       
-      assertThat( systemUnderTest.targetColours(), is( Arrays.asList( Color.LIGHTSKYBLUE, Color.RED, Color.BLUE, Color.GREEN ) ) );
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 10 ) );
-      assertThat( systemUnderTest.remainingFor( Color.BLUE ), is( 12 ) );
-      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 8 ) );
+      assertThat( systemUnderTest.targetTypes(), is( Arrays.asList( SquareRegularType.Primary, SquareRegularType.Secondary, SquareRegularType.Tertiary ) ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( 10 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Secondary ), is( 12 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Tertiary ), is( 8 ) );
    }//End Method
    
    @Test public void shouldProvideColourProgress(){
-      systemUnderTest.increaseRemaining( Color.RED, 10 );
-      systemUnderTest.increaseRemaining( Color.BLUE, 12 );
-      systemUnderTest.increaseRemaining( Color.GREEN, 8 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Primary, 10 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Secondary, 12 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Tertiary, 8 );
       
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 10 ) );
-      assertThat( systemUnderTest.remainingFor( Color.BLUE ), is( 12 ) );
-      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 8 ) );
-      assertThat( systemUnderTest.remainingFor( Color.AQUA ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( 10 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Secondary ), is( 12 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Tertiary ), is( 8 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Quaternary ), is( 0 ) );
       
-      systemUnderTest.increaseRemaining( Color.RED, 5 );
-      systemUnderTest.increaseRemaining( Color.BLUE, 10 );
-      systemUnderTest.increaseRemaining( Color.GREEN, 3 );
-      systemUnderTest.increaseRemaining( Color.AQUA, 89 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Primary, 5 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Secondary, 10 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Tertiary, 3 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Quaternary, 89 );
       
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 15 ) );
-      assertThat( systemUnderTest.remainingFor( Color.BLUE ), is( 22 ) );
-      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 11 ) );
-      assertThat( systemUnderTest.remainingFor( Color.AQUA ), is( 89 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( 15 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Secondary ), is( 22 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Tertiary ), is( 11 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Quaternary ), is( 89 ) );
    }//End Method
    
    @Test public void shouldProvideObservableProgress(){
       assertThat( systemUnderTest.remainingColours(), is( instanceOf( PrivatelyModifiableObservableMapImpl.class ) ) );
       
-      systemUnderTest.increaseRemaining( Color.RED, 10 );
-      systemUnderTest.increaseRemaining( Color.BLUE, 12 );
-      systemUnderTest.increaseRemaining( Color.GREEN, 8 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Primary, 10 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Secondary, 12 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Tertiary, 8 );
       
-      BiConsumer< Color, Integer > added = mock( BiConsumer.class );
-      BiConsumer< Color, Integer > removed = mock( BiConsumer.class );
-      FunctionMapChangeListenerImpl< Color, Integer > listener = new FunctionMapChangeListenerImpl<>( 
+      BiConsumer< SquareType, Integer > added = mock( BiConsumer.class );
+      BiConsumer< SquareType, Integer > removed = mock( BiConsumer.class );
+      FunctionMapChangeListenerImpl< SquareType, Integer > listener = new FunctionMapChangeListenerImpl<>( 
                systemUnderTest.remainingColours(), added, removed 
       );
       systemUnderTest.remainingColours().addListener( listener );
       
-      systemUnderTest.increaseRemaining( Color.RED, 5 );
-      verify( added ).accept( Color.RED, 15 );
-      systemUnderTest.increaseRemaining( Color.RED, 4 );
-      verify( added ).accept( Color.RED, 19 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Primary, 5 );
+      verify( added ).accept( SquareRegularType.Primary, 15 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Primary, 4 );
+      verify( added ).accept( SquareRegularType.Primary, 19 );
       
-      systemUnderTest.increaseRemaining( Color.GREEN, 20 );
-      verify( added ).accept( Color.GREEN, 28 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Tertiary, 20 );
+      verify( added ).accept( SquareRegularType.Tertiary, 28 );
    }//End Method
    
    @Test public void shouldProvideNumberOfMoves(){
@@ -98,18 +99,18 @@ public class ColoursGtPropertiesTest {
    }//End Method
    
    @Test public void shouldDecreaseRemainingColours(){
-      systemUnderTest.increaseRemaining( Color.RED, 10 );
-      systemUnderTest.increaseRemaining( Color.BLUE, 12 );
-      systemUnderTest.increaseRemaining( Color.GREEN, 8 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Primary, 10 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Secondary, 12 );
+      systemUnderTest.increaseRemaining( SquareRegularType.Tertiary, 8 );
       
-      systemUnderTest.decreaseRemaining( Color.RED, 5 );
-      systemUnderTest.decreaseRemaining( Color.BLUE, 100 );
-      systemUnderTest.decreaseRemaining( Color.AQUA, 7 );
+      systemUnderTest.decreaseRemaining( SquareRegularType.Primary, 5 );
+      systemUnderTest.decreaseRemaining( SquareRegularType.Secondary, 100 );
+      systemUnderTest.decreaseRemaining( SquareRegularType.Quaternary, 7 );
       
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 5 ) );
-      assertThat( systemUnderTest.remainingFor( Color.BLUE ), is( 0 ) );
-      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 8 ) );
-      assertThat( systemUnderTest.remainingFor( Color.AQUA ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( 5 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Secondary ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Tertiary ), is( 8 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Quaternary ), is( 0 ) );
    }//End Method
    
    @Test public void shouldProvideBuilderForProperties(){
@@ -117,24 +118,24 @@ public class ColoursGtPropertiesTest {
       assertThat( systemUnderTest.withMoves( 34 ), is( systemUnderTest ) );
       assertThat( systemUnderTest.movesRemaining().get(), is( 34 ) );
       
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 0 ) );
-      assertThat( systemUnderTest.withTarget( Color.RED, 23 ), is( systemUnderTest ) );
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 23 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( 0 ) );
+      assertThat( systemUnderTest.withTarget( SquareRegularType.Primary, 23 ), is( systemUnderTest ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( 23 ) );
    }//End Method
    
    @Test public void shouldResetProperties(){
       assertThat( systemUnderTest.movesRemaining().get(), is( 0 ) );
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( 0 ) );
-      assertThat( systemUnderTest.remainingFor( Color.BLUE ), is( 0 ) );
-      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 0 ) );
-      assertThat( systemUnderTest.remainingFor( Color.AQUA ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Secondary ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Tertiary ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Quaternary ), is( 0 ) );
       
       systemUnderTest.reset();
       assertThat( systemUnderTest.movesRemaining().get(), is( GameProperties.DEFAULT_MOVES ) );
-      assertThat( systemUnderTest.remainingFor( Color.RED ), is( ColoursGtProperties.DEFAULT_RED ) );
-      assertThat( systemUnderTest.remainingFor( Color.LIGHTSKYBLUE ), is( ColoursGtProperties.DEFAULT_LIGHTSKYBLUE ) );
-      assertThat( systemUnderTest.remainingFor( Color.GREEN ), is( 0 ) );
-      assertThat( systemUnderTest.remainingFor( Color.AQUA ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Primary ), is( ColoursGtProperties.DEFAULT_PRIMARY ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Secondary ), is( ColoursGtProperties.DEFAULT_SECONDARY ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Tertiary ), is( 0 ) );
+      assertThat( systemUnderTest.remainingFor( SquareRegularType.Quaternary ), is( 0 ) );
    }//End Method
 
 }//End Class

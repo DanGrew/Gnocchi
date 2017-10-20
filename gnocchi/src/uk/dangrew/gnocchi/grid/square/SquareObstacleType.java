@@ -1,6 +1,6 @@
 package uk.dangrew.gnocchi.grid.square;
 
-import uk.dangrew.gnocchi.ui.resources.Images;
+import javafx.scene.paint.Color;
 
 public enum SquareObstacleType implements SquareType {
    
@@ -10,7 +10,8 @@ public enum SquareObstacleType implements SquareType {
 //   ),
    FixedIndestructible(
             new SquareProperties()
-               .withImage( new Images().indestructibleImage() )
+//               .withImage( new Images().indestructibleImage() )
+               .withColour( Color.WHITE )
                .withMoveable( false )
    )
    ;

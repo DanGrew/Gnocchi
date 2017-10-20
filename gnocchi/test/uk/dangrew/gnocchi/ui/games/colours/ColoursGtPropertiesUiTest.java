@@ -2,13 +2,12 @@ package uk.dangrew.gnocchi.ui.games.colours;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtProperties;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 import uk.dangrew.kode.launch.TestApplication;
 
 public class ColoursGtPropertiesUiTest {
@@ -29,14 +28,14 @@ public class ColoursGtPropertiesUiTest {
    }//End Method
    
    @Test public void shouldDisplayTargetColoursAndRemaining() {
-      assertThat( systemUnderTest.buttonForTarget( Color.RED ).getText(), is( "100" ) );
-      assertThat( systemUnderTest.buttonForTarget( Color.LIGHTSKYBLUE ).getText(), is( "100" ) );
-      properties.decreaseRemaining( Color.RED, 40 );
-      assertThat( systemUnderTest.buttonForTarget( Color.RED ).getText(), is( "60" ) );
-      assertThat( systemUnderTest.buttonForTarget( Color.LIGHTSKYBLUE ).getText(), is( "100" ) );
-      properties.decreaseRemaining( Color.LIGHTSKYBLUE, 87 );
-      assertThat( systemUnderTest.buttonForTarget( Color.RED ).getText(), is( "60" ) );
-      assertThat( systemUnderTest.buttonForTarget( Color.LIGHTSKYBLUE ).getText(), is( "13" ) );
+      assertThat( systemUnderTest.buttonForTarget( SquareRegularType.Primary ).getText(), is( "100" ) );
+      assertThat( systemUnderTest.buttonForTarget( SquareRegularType.Secondary ).getText(), is( "100" ) );
+      properties.decreaseRemaining( SquareRegularType.Primary, 40 );
+      assertThat( systemUnderTest.buttonForTarget( SquareRegularType.Primary ).getText(), is( "60" ) );
+      assertThat( systemUnderTest.buttonForTarget( SquareRegularType.Secondary ).getText(), is( "100" ) );
+      properties.decreaseRemaining( SquareRegularType.Secondary, 87 );
+      assertThat( systemUnderTest.buttonForTarget( SquareRegularType.Primary ).getText(), is( "60" ) );
+      assertThat( systemUnderTest.buttonForTarget( SquareRegularType.Secondary ).getText(), is( "13" ) );
    }//End Method
 
 }//End Class

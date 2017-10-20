@@ -20,6 +20,7 @@ import uk.dangrew.gnocchi.game.mechanics.GameState;
 import uk.dangrew.gnocchi.game.mechanics.Logic;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class ColoursGtLogicTest {
 
@@ -36,20 +37,20 @@ public class ColoursGtLogicTest {
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
       
-      r1 = Square.colouredSquare( Color.AQUA );
-      r2 = Square.colouredSquare( Color.AQUA );
-      r3 = Square.colouredSquare( Color.AQUA );
-      b1 = Square.colouredSquare( Color.BLUE );
-      b2 = Square.colouredSquare( Color.BLUE );
-      g1 = Square.colouredSquare( Color.GREEN );
+      r1 = Square.typedSquare( SquareRegularType.Primary );
+      r2 = Square.typedSquare( SquareRegularType.Primary );
+      r3 = Square.typedSquare( SquareRegularType.Primary );
+      b1 = Square.typedSquare( SquareRegularType.Secondary );
+      b2 = Square.typedSquare( SquareRegularType.Secondary );
+      g1 = Square.typedSquare( SquareRegularType.Tertiary );
       
       properties = new ColoursGtProperties();
-      properties.decreaseRemaining( Color.RED, 100 );
-      properties.decreaseRemaining( Color.LIGHTSKYBLUE, 100 );
+      properties.decreaseRemaining( SquareRegularType.Primary, 100 );
+      properties.decreaseRemaining( SquareRegularType.Secondary, 100 );
       properties.moveUsed( 25 );
       
-      properties.increaseRemaining( Color.AQUA, 5 );
-      properties.increaseRemaining( Color.BLUE, 5 );
+      properties.increaseRemaining( SquareRegularType.Primary, 5 );
+      properties.increaseRemaining( SquareRegularType.Secondary, 5 );
       properties.increaseMoves( 5 );
       
       systemUnderTest = new ColoursGtLogic( properties );
@@ -57,27 +58,27 @@ public class ColoursGtLogicTest {
 
    @Test public void shouldProgressEachPop(){
       systemUnderTest.popAll( Arrays.asList( r1, r2, r3 ) );
-      assertThat( properties.remainingFor( Color.AQUA ), is( 2 ) );
-      assertThat( properties.remainingFor( Color.BLUE ), is( 5 ) );
-      assertThat( properties.remainingFor( Color.GREEN ), is( 0 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Primary ), is( 2 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Secondary ), is( 5 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Tertiary ), is( 0 ) );
    }//End Method
    
    @Test public void shouldPopMultiColouredMatch(){
       systemUnderTest.popAll( Arrays.asList( r1, r2, r3, b1, b2 ) );
-      assertThat( properties.remainingFor( Color.AQUA ), is( 2 ) );
-      assertThat( properties.remainingFor( Color.BLUE ), is( 3 ) );
-      assertThat( properties.remainingFor( Color.GREEN ), is( 0 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Primary ), is( 2 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Secondary ), is( 3 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Tertiary ), is( 0 ) );
    }//End Method
    
    @Test public void shouldIgnoreProgressOnNonTarget(){
       systemUnderTest.popAll( Arrays.asList( r1, r2, g1 ) );
-      assertThat( properties.remainingFor( Color.AQUA ), is( 3 ) );
-      assertThat( properties.remainingFor( Color.BLUE ), is( 5 ) );
-      assertThat( properties.remainingFor( Color.GREEN ), is( 0 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Primary ), is( 3 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Secondary ), is( 5 ) );
+      assertThat( properties.remainingFor( SquareRegularType.Tertiary ), is( 0 ) );
    }//End Method
    
    @Test public void shouldFailWhenOutOfMovesAndAnyColourTargetNotMet(){
-      properties.increaseRemaining( Color.AQUA, 10 );
+      properties.increaseRemaining( SquareRegularType.Primary, 10 );
       properties.moveUsed();
       properties.moveUsed();
       properties.moveUsed();
@@ -88,8 +89,8 @@ public class ColoursGtLogicTest {
    
    @Test public void shouldSucceedWhenMovesLeftAndAllColourTargetsMet(){
       properties.increaseMoves( 5 );
-      properties.decreaseRemaining( Color.AQUA, 5 );
-      properties.decreaseRemaining( Color.BLUE, 5 );
+      properties.decreaseRemaining( SquareRegularType.Primary, 5 );
+      properties.decreaseRemaining( SquareRegularType.Secondary, 5 );
       
       assertThat( systemUnderTest.determineGameState(), is( GameState.Success ) );
    }//End Method
@@ -99,8 +100,8 @@ public class ColoursGtLogicTest {
       properties.moveUsed();
       properties.moveUsed();
       
-      properties.decreaseRemaining( Color.AQUA, 5 );
-      properties.decreaseRemaining( Color.BLUE, 5 );
+      properties.decreaseRemaining( SquareRegularType.Primary, 5 );
+      properties.decreaseRemaining( SquareRegularType.Secondary, 5 );
       
       
       assertThat( systemUnderTest.determineGameState(), is( GameState.Success ) );

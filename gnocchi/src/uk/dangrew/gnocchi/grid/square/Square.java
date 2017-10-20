@@ -9,30 +9,20 @@ import uk.dangrew.gnocchi.grid.model.GridPosition;
 
 public class Square {
 
-   private final ObjectProperty< Color > colour;
    private final ObjectProperty< SquareType > type;
    private GridPosition position;
    
-   public Square( Color colour ) {
-      this( new GridPosition( -1, -1 ), colour );
+   public Square( SquareType type ) {
+      this( new GridPosition( -1, -1 ), type );
    }//End Constructor
    
-   public Square( GridPosition position, Color colour ) {
+   public Square( GridPosition position, SquareType type ) {
       this.position = position;
-      this.colour = new SimpleObjectProperty<>( colour );
-      this.type = new SimpleObjectProperty<>( SquareRegularType.Regular );
+      this.type = new SimpleObjectProperty<>( type );
    }//End Constructor
 
    public Color colour() {
-      return colour.get();
-   }//End Method
-   
-   public ReadOnlyObjectProperty< Color > colourProperty() {
-      return colour;
-   }//End Method
-   
-   public void setColour( Color colour ) {
-      this.colour.set( colour );
+      return type.get().properties().colour();
    }//End Method
    
    public void moveTo( GridPosition position ) {
@@ -60,13 +50,9 @@ public class Square {
    }//End Method
    
    public boolean matches( Square square ) {
-      if ( 
-               type.get() != SquareRegularType.Regular ||
-               square.type() != SquareRegularType.Regular 
-      ) {
-         return false;
-      }
-      return square.colour().equals( colour() );
+      return type().properties().isBasic() &&
+             square.type().properties().isBasic() &&
+             type() == square.type();
    }//End Method
    
    @Override public String toString() {
@@ -74,11 +60,11 @@ public class Square {
    }//End Method
    
    public static Square randomSquare(){
-      return new Square( new GridPosition( 0, 0 ), Color.RED );
+      return new Square( new GridPosition( 0, 0 ), SquareRegularType.Primary );
    }//End Method
    
-   public static Square colouredSquare( Color colour ){
-      return new Square( new GridPosition( 0, 0 ), colour );
+   public static Square typedSquare( SquareRegularType type ){
+      return new Square( new GridPosition( 0, 0 ), type );
    }//End Method
    
 }//End Class

@@ -8,10 +8,10 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class FillerTest {
 
@@ -40,8 +40,8 @@ public class FillerTest {
    }//End Method
    
    @Test public void shouldOnlyFillUpToExistingElements(){
-      Square o1 = new Square( Color.RED );
-      Square o2 = new Square( Color.RED );
+      Square o1 = new Square( SquareRegularType.Primary );
+      Square o2 = new Square( SquareRegularType.Primary );
       grid.set( o1, 4, 0 );
       grid.set( o2, 7, 4 );
       

@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.grid.square.SquareBonusType;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class MassColourMatcherTest {
 
@@ -23,7 +23,7 @@ public class MassColourMatcherTest {
       model = new GridModel( 3, 10, 10 );
       for( int w = 0; w < 10; w++ ) {
          for( int h = 0; h< 10; h++ ) {
-            model.set( Square.colouredSquare( Color.RED ), w, h );
+            model.set( Square.typedSquare( SquareRegularType.Primary ), w, h );
          }
       }
       
@@ -31,19 +31,19 @@ public class MassColourMatcherTest {
    }//End Method
 
    @Test public void shouldMatchAllOfSameColour() {
-      Square s1 = Square.colouredSquare( Color.BLACK );
+      Square s1 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s1, 0, 0 );
-      Square s2 = Square.colouredSquare( Color.BLACK );
+      Square s2 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s2, 3, 2 );
-      Square s3 = Square.colouredSquare( Color.BLACK );
+      Square s3 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s3, 7, 8 );
-      Square s4 = Square.colouredSquare( Color.BLACK );
+      Square s4 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s4, 6, 6 );
-      Square s5 = Square.colouredSquare( Color.BLACK );
+      Square s5 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s5, 1, 5 );
-      Square s6 = Square.colouredSquare( Color.BLACK );
+      Square s6 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s6, 1, 6 );
-      Square s7 = Square.colouredSquare( Color.BLACK );
+      Square s7 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s7, 2, 9 );
       
       model.set( null, 3, 6 );
@@ -55,19 +55,19 @@ public class MassColourMatcherTest {
    }//End Method
    
    @Test public void shouldNotMatchBonuses() {
-      Square s1 = Square.colouredSquare( Color.BLACK );
+      Square s1 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s1, 0, 0 );
-      Square s2 = Square.colouredSquare( Color.BLACK );
+      Square s2 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s2, 3, 2 );
-      Square s3 = Square.colouredSquare( Color.BLACK );
+      Square s3 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s3, 7, 8 );
-      Square s4 = Square.colouredSquare( Color.BLACK );
+      Square s4 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s4, 6, 6 );
-      Square s5 = Square.colouredSquare( Color.BLACK );
+      Square s5 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s5, 1, 5 );
-      Square s6 = Square.colouredSquare( Color.BLACK );
+      Square s6 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s6, 1, 6 );
-      Square s7 = Square.colouredSquare( Color.BLACK );
+      Square s7 = Square.typedSquare( SquareRegularType.Secondary );
       model.set( s7, 2, 9 );
       
       s2.setType( SquareBonusType.BombBomb );

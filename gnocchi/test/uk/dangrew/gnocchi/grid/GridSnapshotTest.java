@@ -7,13 +7,13 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.controls.Filler;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.model.GridSnapshot;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class GridSnapshotTest {
 
@@ -42,7 +42,7 @@ public class GridSnapshotTest {
    @Test public void shouldRepresentIndividualChanges() {
       filler.fill();
       systemUnderTest = grid.snapshot();
-      grid.set( new Square( Color.RED ), 3, 4 );
+      grid.set( new Square( SquareRegularType.Primary ), 3, 4 );
       
       for ( int w = 0; w < grid.width(); w++ ) {
          for ( int h = 0; h < grid.height(); h++ ) {

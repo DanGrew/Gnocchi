@@ -11,12 +11,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.mechanics.Feeder;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class GravityTest {
 
@@ -45,7 +45,7 @@ public class GravityTest {
    
    @Test public void shouldPullMultipleDown(){
       coloursGtFeeder.feed( 0 );
-      grid.set( new Square( Color.RED ), 0, 8 );
+      grid.set( new Square( SquareRegularType.Primary ), 0, 8 );
       assertThatObjectsInColumn( 0, 9, 8 );
       
       systemUnderTest.pullDown( 0 );
@@ -54,7 +54,7 @@ public class GravityTest {
    
    @Test public void shouldPullMultipleDownToFillMultipleGaps(){
       for ( int h = 0; h < grid.height(); h++ ) {
-         grid.set( new Square( Color.RED ), 0, h );
+         grid.set( new Square( SquareRegularType.Primary ), 0, h );
       }
       
       grid.set( null, 0, 3 );

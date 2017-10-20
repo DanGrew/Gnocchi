@@ -9,7 +9,6 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.controls.Filler;
 import uk.dangrew.gnocchi.grid.model.GridBuilder;
@@ -17,6 +16,7 @@ import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.Square;
 import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class GridModelTest {
    
@@ -58,14 +58,14 @@ public class GridModelTest {
    
    @Test public void shouldPutObjectsInGrid(){
       assertThat( systemUnderTest.at( 5, 6 ), is( nullValue() ) );
-      Square object = new Square( Color.AQUA );
+      Square object = new Square( SquareRegularType.Secondary );
       systemUnderTest.set( object, 5, 6 );
       assertThat( systemUnderTest.at( 5, 6 ), is( object ) );
       assertThat( systemUnderTest.of( object ), is( new GridPosition( 5, 6 ) ) );
    }//End Method
    
    @Test public void shouldMoveObjectWhenPositionSet(){
-      Square object = new Square( Color.AQUA );
+      Square object = new Square( SquareRegularType.Secondary );
       systemUnderTest.set( object, 4, 5 );
       assertThat( systemUnderTest.at( 4, 5 ), is( object ) );
       assertThat( systemUnderTest.of( object ), is( new GridPosition( 4, 5 ) ) );
@@ -79,7 +79,7 @@ public class GridModelTest {
    }//End Method
    
    @Test public void shouldNotMoveObjectWhenSetToNull(){
-      Square object = new Square( Color.AQUA );
+      Square object = new Square( SquareRegularType.Secondary );
       systemUnderTest.set( object, 4, 5 );
       assertThat( systemUnderTest.at( 4, 5 ), is( object ) );
       assertThat( systemUnderTest.of( object ), is( new GridPosition( 4, 5 ) ) );
@@ -92,7 +92,7 @@ public class GridModelTest {
    }//End Method
    
    @Test public void shouldRemoveObject(){
-      Square object = new Square( Color.AQUA );
+      Square object = new Square( SquareRegularType.Secondary );
       systemUnderTest.set( object, 4, 5 );
       assertThat( systemUnderTest.at( 4, 5 ), is( object ) );
       assertThat( systemUnderTest.of( object ), is( new GridPosition( 4, 5 ) ) );
@@ -103,12 +103,12 @@ public class GridModelTest {
    }//End Method
    
    @Test public void shouldIgnoreRemoveOnObjectOutside(){
-      Square object = new Square( Color.AQUA );
+      Square object = new Square( SquareRegularType.Secondary );
       systemUnderTest.remove( object );
    }//End Method
    
    @Test public void shouldDetermineEmptyLocation(){
-      Square object = new Square( Color.AQUA );
+      Square object = new Square( SquareRegularType.Secondary );
       
       assertThat( systemUnderTest.isEmpty( 5, 6 ), is( true ) );
       systemUnderTest.set( object, 5, 6 );

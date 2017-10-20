@@ -3,18 +3,18 @@ package uk.dangrew.gnocchi.game.type.colours;
 import uk.dangrew.gnocchi.game.mechanics.Feeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
-import uk.dangrew.gnocchi.mechanics.ColorGenerator;
+import uk.dangrew.gnocchi.mechanics.SquareTypeGenerator;
 
 public class ColoursGtFeeder implements Feeder {
    
-   private final ColorGenerator colours;
+   private final SquareTypeGenerator colours;
    private final GridModel grid;
 
    public ColoursGtFeeder( GridModel grid ) {
-      this( new ColorGenerator(), grid );
+      this( new SquareTypeGenerator(), grid );
    }//End Constructor
    
-   ColoursGtFeeder( ColorGenerator colours, GridModel grid ) {
+   ColoursGtFeeder( SquareTypeGenerator colours, GridModel grid ) {
       this.colours = colours;
       this.grid = grid;
    }//End Constructor

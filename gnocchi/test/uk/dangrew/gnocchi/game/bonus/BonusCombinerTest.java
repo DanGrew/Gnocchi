@@ -19,7 +19,7 @@ public class BonusCombinerTest {
    }//End Method
 
    @Test public void shouldNotCombineNonCombinationTypes() {
-      assertCombination( SquareRegularType.Regular, SquareBonusType.CrossBlast, null );
+      assertCombination( SquareRegularType.Primary, SquareBonusType.CrossBlast, null );
       assertCombination( SquareBonusType.MassBomb, SquareBonusType.CrossBlast, null ); 
    }//End Method
    

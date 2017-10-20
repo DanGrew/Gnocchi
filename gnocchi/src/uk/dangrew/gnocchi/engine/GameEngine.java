@@ -20,6 +20,7 @@ import uk.dangrew.gnocchi.grid.square.SquareBonusType;
 import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 import uk.dangrew.gnocchi.grid.square.SquareType;
 import uk.dangrew.gnocchi.input.InputDriver;
+import uk.dangrew.gnocchi.mechanics.SquareTypeGenerator;
 import uk.dangrew.gnocchi.ui.frame.content.GameLauncherController;
 
 public class GameEngine {
@@ -27,6 +28,7 @@ public class GameEngine {
    private final GameLauncherController launchController;
    private final InputDriver inputDriver;
    
+   private final SquareTypeGenerator squareGenerator;
    private final BonusCombiner bonusCombiner;
    private final MatchChainer matchChainer;
    private final BonusDetector bonusDetector;
@@ -41,6 +43,7 @@ public class GameEngine {
       this.bonusDetector = new BonusDetector();
       this.matchChainer = new MatchChainer();
       this.bonusCombiner = new BonusCombiner();
+      this.squareGenerator = new SquareTypeGenerator();
    }//End Constructor
    
    public InputDriver inputDriver(){
@@ -73,7 +76,7 @@ public class GameEngine {
       SquareType combination = bonusCombiner.determineCombination( selected.type(), bonus.type() );
       if ( combination != null ) {
          selected.setType( combination );
-         bonus.setType( SquareRegularType.Regular );
+         bonus.setType( squareGenerator.next( game.model().colourVariation() ) );
       }
    }//End Method
    

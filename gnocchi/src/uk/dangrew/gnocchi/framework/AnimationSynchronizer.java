@@ -39,6 +39,10 @@ public class AnimationSynchronizer {
    }//End Method
 
    public void playAll() {
+      if ( waitingFor.isEmpty() ) {
+         onCompletion.run();
+         return;
+      }
       Set< Animation > a = new LinkedHashSet<>( waitingFor );
       a.forEach( Animation::play );
    }//End Method

@@ -11,21 +11,20 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javafx.scene.paint.Color;
 import uk.dangrew.gnocchi.game.mechanics.Feeder;
-import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
-import uk.dangrew.gnocchi.mechanics.ColorGenerator;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
+import uk.dangrew.gnocchi.mechanics.SquareTypeGenerator;
 
 public class ColoursGtFeederTest {
 
-   @Mock private ColorGenerator colours;
+   @Mock private SquareTypeGenerator colours;
    private GridModel grid;
    private Feeder systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      when( colours.next( 4 ) ).thenReturn( Color.RED );
+      when( colours.next( 4 ) ).thenReturn( SquareRegularType.Primary );
       
       grid = new GridModel( 4, 10, 10 );
       systemUnderTest = new ColoursGtFeeder( colours, grid );
@@ -35,7 +34,7 @@ public class ColoursGtFeederTest {
       assertThat( grid.at( 4, 9 ), is( nullValue() ) );
       assertThat( systemUnderTest.feed( 4 ), is ( notNullValue() ) );
       assertThat( grid.at( 4, 9 ), is( notNullValue() ) );
-      assertThat( grid.at( 4, 9 ).colour(), is( Color.RED ) );
+      assertThat( grid.at( 4, 9 ).colour(), is( SquareRegularType.Primary.properties().colour() ) );
    }//End Method
    
    @Test public void shouldNotFeedColumnWhenFull() {

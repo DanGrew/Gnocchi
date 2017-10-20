@@ -8,6 +8,7 @@ import uk.dangrew.gnocchi.game.mechanics.GameState;
 import uk.dangrew.gnocchi.game.mechanics.Logic;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareType;
 
 public class ColoursGtLogic implements Logic {
    
@@ -18,7 +19,7 @@ public class ColoursGtLogic implements Logic {
    }//End Constructor
    
    @Override public void pop( Square object ) {
-      properties.decreaseRemaining( object.colour(), 1 );
+      properties.decreaseRemaining( object.type(), 1 );
    }//End Method
    
    @Override public void popAll( Collection< Square > objects ) {
@@ -28,7 +29,7 @@ public class ColoursGtLogic implements Logic {
    @Override public GameState determineGameState() {
       boolean targetsComplete = true;
       
-      for ( Color target : properties.targetColours() ) {
+      for ( SquareType target : properties.targetTypes() ) {
          if ( properties.remainingFor( target ) > 0 ) {
             targetsComplete = false;
             break;

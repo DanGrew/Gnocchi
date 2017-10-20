@@ -6,7 +6,7 @@ import uk.dangrew.gnocchi.game.type.GameType;
 import uk.dangrew.gnocchi.grid.model.GridBuilder;
 import uk.dangrew.gnocchi.grid.model.GridPosition;
 import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
-import uk.dangrew.gnocchi.mechanics.ColorGenerator;
+import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public enum ColoursGames implements GameLevel {
 
@@ -21,8 +21,8 @@ public enum ColoursGames implements GameLevel {
          )
          .withProperties( new ColoursGtProperties()
                   .withMoves( 25 )
-                  .withTarget( ColorGenerator.COLOUR_1, 45 )
-                  .withTarget( ColorGenerator.COLOUR_2, 45 )
+                  .withTarget( SquareRegularType.Primary, 45 )
+                  .withTarget( SquareRegularType.Secondary, 45 )
          )
    ),
    Level2( 
@@ -36,8 +36,8 @@ public enum ColoursGames implements GameLevel {
          )
          .withProperties( new ColoursGtProperties()
                   .withMoves( 25 )
-                  .withTarget( ColorGenerator.COLOUR_1, 60 )
-                  .withTarget( ColorGenerator.COLOUR_2, 60 )
+                  .withTarget( SquareRegularType.Primary, 60 )
+                  .withTarget( SquareRegularType.Secondary, 60 )
          )
    ),
    Level3( 
@@ -51,8 +51,8 @@ public enum ColoursGames implements GameLevel {
          )
          .withProperties( new ColoursGtProperties()
                   .withMoves( 35 )
-                  .withTarget( ColorGenerator.COLOUR_1, 200 )
-                  .withTarget( ColorGenerator.COLOUR_2, 200 )
+                  .withTarget( SquareRegularType.Primary, 200 )
+                  .withTarget( SquareRegularType.Secondary, 200 )
          )
    ),
    Level4( 
@@ -66,7 +66,7 @@ public enum ColoursGames implements GameLevel {
          )
          .withProperties( new ColoursGtProperties()
                   .withMoves( 25 )
-                  .withTarget( ColorGenerator.COLOUR_3, 70 )
+                  .withTarget( SquareRegularType.Tertiary, 70 )
          )
    ),
    Level5( 
@@ -80,9 +80,9 @@ public enum ColoursGames implements GameLevel {
          )
          .withProperties( new ColoursGtProperties()
                   .withMoves( 50 )
-                  .withTarget( ColorGenerator.COLOUR_1, 150 )
-                  .withTarget( ColorGenerator.COLOUR_2, 150 )
-                  .withTarget( ColorGenerator.COLOUR_3, 150 )
+                  .withTarget( SquareRegularType.Primary, 150 )
+                  .withTarget( SquareRegularType.Secondary, 150 )
+                  .withTarget( SquareRegularType.Tertiary, 150 )
          )
    ),
    Level6( 
@@ -96,9 +96,9 @@ public enum ColoursGames implements GameLevel {
          )
          .withProperties( new ColoursGtProperties()
                   .withMoves( 50 )
-                  .withTarget( ColorGenerator.COLOUR_1, 150 )
-                  .withTarget( ColorGenerator.COLOUR_2, 150 )
-                  .withTarget( ColorGenerator.COLOUR_3, 150 )
+                  .withTarget( SquareRegularType.Primary, 150 )
+                  .withTarget( SquareRegularType.Secondary, 150 )
+                  .withTarget( SquareRegularType.Tertiary, 150 )
          )
    ),
    Level7( 
@@ -112,9 +112,9 @@ public enum ColoursGames implements GameLevel {
          )
          .withProperties( new ColoursGtProperties()
                   .withMoves( 50 )
-                  .withTarget( ColorGenerator.COLOUR_1, 150 )
-                  .withTarget( ColorGenerator.COLOUR_2, 150 )
-                  .withTarget( ColorGenerator.COLOUR_3, 150 )
+                  .withTarget( SquareRegularType.Primary, 150 )
+                  .withTarget( SquareRegularType.Secondary, 150 )
+                  .withTarget( SquareRegularType.Tertiary, 150 )
          )
    ),
    Level8( 
@@ -132,9 +132,9 @@ public enum ColoursGames implements GameLevel {
                )
                .withProperties( new ColoursGtProperties()
                         .withMoves( 50 )
-                        .withTarget( ColorGenerator.COLOUR_1, 150 )
-                        .withTarget( ColorGenerator.COLOUR_2, 150 )
-                        .withTarget( ColorGenerator.COLOUR_3, 150 )
+                        .withTarget( SquareRegularType.Primary, 150 )
+                        .withTarget( SquareRegularType.Secondary, 150 )
+                        .withTarget( SquareRegularType.Tertiary, 150 )
                )
          )
    ;
