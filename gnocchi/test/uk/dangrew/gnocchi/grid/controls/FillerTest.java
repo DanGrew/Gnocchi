@@ -11,6 +11,7 @@ import org.junit.Test;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtFeeder;
 import uk.dangrew.gnocchi.grid.model.GridModel;
 import uk.dangrew.gnocchi.grid.square.Square;
+import uk.dangrew.gnocchi.grid.square.SquareObstacleType;
 import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 
 public class FillerTest {
@@ -64,6 +65,25 @@ public class FillerTest {
       assertThat( grid.at( 0, 2 ), is( o3 ) );
       assertThat( grid.at( 0, 1 ), is( o2 ) );
       assertThat( grid.at( 0, 0 ), is( o1 ) );
+   }//End Method
+   
+   @Test public void shouldFillWithSliding(){
+      for ( int i = 0; i < 10; i++ ) {
+         for ( int j = 0; j < 10; j++ ) {
+            assertThat( grid.at( i, j ), is( nullValue() ) );
+         }   
+      }
+      
+      grid.set( Square.typedSquare( SquareObstacleType.FixedIndestructible ), 4, 2 );
+      grid.set( Square.typedSquare( SquareObstacleType.FixedIndestructible ), 8, 5 );
+      
+      systemUnderTest.fill();
+      
+      for ( int i = 0; i < 10; i++ ) {
+         for ( int j = 0; j < 10; j++ ) {
+            assertThat( grid.at( i, j ), is( notNullValue() ) );
+         }   
+      }
    }//End Method
 
 }//End Class

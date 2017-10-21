@@ -63,7 +63,7 @@ public class Square {
       return new Square( new GridPosition( 0, 0 ), SquareRegularType.Primary );
    }//End Method
    
-   public static Square typedSquare( SquareRegularType type ){
+   public static Square typedSquare( SquareType type ){
       return new Square( new GridPosition( 0, 0 ), type );
    }//End Method
    

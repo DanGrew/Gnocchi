@@ -18,11 +18,22 @@ public class Filler {
    }//End Constructor
 
    public void fill() {
-      for ( int w = 0; w < grid.width(); w++ ) {
-         for ( int h = 0; h < grid.height(); h++ ) {
+      for ( int h = 0; h < grid.height(); h++ ) {
+         for ( int w = 0; w < grid.width(); w++ ) {
             if ( !grid.isEmpty( w, h ) ) {
                continue;
             }
+            feeder.feed( w );
+            gravity.pullDown( w );
+         }
+      }
+      
+      for ( int h = 0; h < grid.height(); h++ ) {
+         for ( int w = 0; w < grid.width(); w++ ) {
+            if ( !grid.isEmpty( w, h ) ) {
+               continue;
+            }
+            gravity.slideForGaps( w );
             feeder.feed( w );
             gravity.pullDown( w );
          }

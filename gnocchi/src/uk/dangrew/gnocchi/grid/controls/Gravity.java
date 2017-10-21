@@ -37,4 +37,54 @@ public class Gravity {
       }
    }//End Method
 
+   public void slideForGaps( int w ) {
+      for ( int h = 0; h < grid.height(); h++ ) {
+         if ( !grid.isEmpty( w, h ) ) {
+            continue;
+         }
+         
+         if ( slideFromLeft( w, h ) ) {
+            pullDown( w - 1 );
+            pullDown( w );
+         } else if ( slideFromRight( w, h ) ) {
+            pullDown( w + 1 );
+            pullDown( w );
+         }
+      }
+   }//End Method
+   
+   private boolean slideFromLeft( int w, int h ) {
+      if ( w == 0 || h > grid.height() - 1 ) {
+         return false;
+      }
+      
+      return slide( w, h, -1 );
+   }//End Method
+   
+   private boolean slideFromRight( int w, int h ) {
+      if ( w == grid.lastWidthIndex()  || h > grid.lastHeightIndex() ) {
+         return false;
+      }
+
+      return slide( w, h, 1 );
+   }//End Method
+   
+   private boolean slide( int w, int h, int direction ) {
+      Square slideCandidate = null;
+      int candidateHeight = h + 1;
+      while (  
+                  ( slideCandidate == null || !slideCandidate.type().properties().isMoveable() ) &&
+                  candidateHeight <= grid.height()
+      ) {
+         slideCandidate = grid.at( w + direction, candidateHeight++ );
+      }
+      
+      if ( slideCandidate == null ) {
+         return false;
+      }
+      
+      grid.set( slideCandidate, w, h );
+      return true;
+   }//End Method
+
 }//End Class

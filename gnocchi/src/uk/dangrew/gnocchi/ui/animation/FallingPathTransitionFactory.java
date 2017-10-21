@@ -44,7 +44,7 @@ public class FallingPathTransitionFactory {
       pathTransition.setDuration( Duration.millis( gravity * 4 ) );//verticalDuration ) );
       pathTransition.setPath( path );
       pathTransition.setNode( widget );
-      pathTransition.setOrientation( PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT );
+      pathTransition.setOrientation( PathTransition.OrientationType.NONE );
       pathTransition.setCycleCount( 1 );
       
       return pathTransition;
