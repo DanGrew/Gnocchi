@@ -4,15 +4,29 @@ import javafx.scene.paint.Color;
 
 public enum SquareObstacleType implements SquareType {
    
-//   Indestructible(
-//            new SquareProperties()
-//               .withImage( new Images().indestructibleImage() )
-//   ),
-   FixedIndestructible(
+   MoveableIndestructible(
             new SquareProperties()
-//               .withImage( new Images().indestructibleImage() )
                .withColour( Color.WHITE )
                .withMoveable( false )
+               .withDestructible( false )
+   ),
+   FixedIndestructible(
+            new SquareProperties()
+               .withColour( Color.WHITE )
+               .withMoveable( false )
+               .withDestructible( false )
+   ),
+   MoveableDestructible(
+            new SquareProperties()
+               .withColour( Color.WHITE )
+               .withMoveable( false )
+               .withDestructible( true )
+   ),
+   FixedDstructible(
+            new SquareProperties()
+               .withColour( Color.WHITE )
+               .withMoveable( false )
+               .withDestructible( true )
    )
    ;
 

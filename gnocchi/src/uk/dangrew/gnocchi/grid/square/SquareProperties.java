@@ -17,6 +17,7 @@ public class SquareProperties {
    private boolean poppable;
    private boolean moveable;
    private boolean basic;
+   private boolean destructible;
    
    public SquareProperties() {
       this.matcher = DEFAULT_MATCHER;
@@ -25,6 +26,7 @@ public class SquareProperties {
       this.comboEnabled = false;
       this.moveable = true;
       this.basic = false;
+      this.destructible = true;
    }//End Constructor
    
    public SquareMatcher matcher() {
@@ -87,6 +89,15 @@ public class SquareProperties {
 
    public SquareProperties withBasic( boolean basic ) {
       this.basic = basic;
+      return this;
+   }//End Method
+
+   public boolean isDestructible() {
+      return destructible;
+   }//End Method
+
+   public SquareProperties withDestructible( boolean destructible ) {
+      this.destructible = destructible;
       return this;
    }//End Method
 

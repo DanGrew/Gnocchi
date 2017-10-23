@@ -1,6 +1,7 @@
 package uk.dangrew.gnocchi.engine;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import uk.dangrew.gnocchi.framework.GameAction;
 import uk.dangrew.gnocchi.framework.GameStack;
@@ -66,6 +67,10 @@ public class GameEngine {
          object.setType( bonus );
          matches.remove( object );
       }
+      
+      matches = matches.stream()
+               .filter( s -> s.type().properties().isDestructible() )
+               .collect( Collectors.toList() );
       
       stack.stack( new GameAction( new SquareRemovalAction( game, matches ), new BlastAnimation( game, matches ) ) );
       stack.stack( new GameAction( new FillAction( game ), new GravityAnimation( game ) ) );

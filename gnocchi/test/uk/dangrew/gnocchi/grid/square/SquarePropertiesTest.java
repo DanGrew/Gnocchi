@@ -63,5 +63,11 @@ public class SquarePropertiesTest {
       assertThat( systemUnderTest.withBasic( true ), is( systemUnderTest ) );
       assertThat( systemUnderTest.isBasic(), is( true ) );
    }//End Method
+   
+   @Test public void shouldProvideDestructible(){
+      assertThat( systemUnderTest.isDestructible(), is( true ) );
+      assertThat( systemUnderTest.withDestructible( false ), is( systemUnderTest ) );
+      assertThat( systemUnderTest.isDestructible(), is( false ) );
+   }//End Method
 
 }//End Class
