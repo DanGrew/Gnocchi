@@ -5,13 +5,14 @@ import uk.dangrew.kode.javafx.style.JavaFxStyle;
 
 public class MainMenu extends GridPane {
 
-   public MainMenu( GameSelection gameSelection, GridSelection gridSelection ) {
+   public MainMenu( GameSelection gameSelection, GridSelection gridSelection, GameLevelInformation gameLevelInformation ) {
       JavaFxStyle styling = new JavaFxStyle();
       styling.configureConstraintsForRowPercentages( this, 40, 60 );
-      styling.configureConstraintsForColumnPercentages( this, 100 );
+      styling.configureConstraintsForColumnPercentages( this, 70, 30 );
       
       add( gameSelection, 0, 0 );
       add( gridSelection, 0, 1 );
+      add( gameLevelInformation, 1, 1 );
    }//End Constructor
    
 }//End Class

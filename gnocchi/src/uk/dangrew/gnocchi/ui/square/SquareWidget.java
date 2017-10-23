@@ -31,7 +31,7 @@ public class SquareWidget extends StackPane {
       this.imageView = new ImageView();
       this.imageView.setFitWidth( w );
       this.imageView.setFitHeight( h );
-      this.imageView.getTransforms().add( new Rotate( -90, w / 2, h / 2 ) );
+//      this.imageView.getTransforms().add( new Rotate( -90, w / 2, h / 2 ) );
       this.getChildren().addAll( squareBackground, imageView );
       
       this.registrations = new RegistrationManager();

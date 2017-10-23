@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import uk.dangrew.gnocchi.game.type.GameInformation;
 import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 import uk.dangrew.gnocchi.grid.square.SquareType;
@@ -16,10 +17,16 @@ public class ColoursGtProperties extends GameProperties {
    static final int DEFAULT_PRIMARY = 100;
    static final int DEFAULT_SECONDARY = 100;
    
+   private final ColoursGtPropertyInformationProvider infomationProvider;
    private final ObservableMap< SquareType, Integer > modifiableTypesRemaining;
    private final ObservableMap< SquareType, Integer > publicColoursRemaining;
    
    public ColoursGtProperties() {
+      this( new ColoursGtPropertyInformationProvider() );
+   }//End Constructor
+   
+   ColoursGtProperties( ColoursGtPropertyInformationProvider informationProvider ) {
+      this.infomationProvider = informationProvider;
       this.modifiableTypesRemaining = FXCollections.observableMap( new LinkedHashMap<>() );
       this.publicColoursRemaining = new PrivatelyModifiableObservableMapImpl<>( modifiableTypesRemaining );
       this.reset();
@@ -75,6 +82,10 @@ public class ColoursGtProperties extends GameProperties {
          this.increaseRemaining( SquareRegularType.Primary, DEFAULT_PRIMARY );
          this.increaseRemaining( SquareRegularType.Secondary, DEFAULT_SECONDARY );
       }
+   }//End Method
+
+   @Override public void configureInformation( GameInformation information ) {
+      infomationProvider.configure( this, information );
    }//End Method
 
 }//End Class

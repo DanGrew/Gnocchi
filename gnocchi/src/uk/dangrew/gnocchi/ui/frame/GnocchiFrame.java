@@ -13,12 +13,13 @@ import uk.dangrew.kode.javafx.style.JavaFxStyle;
 
 public class GnocchiFrame extends GridPane {
 
+   private final BorderPane gridWrapper;
    private final BorderPane logo;
    
    public GnocchiFrame() {
       JavaFxStyle styling = new JavaFxStyle();
       styling.configureConstraintsForRowPercentages( this, 70, 30 );
-      styling.configureConstraintsForColumnPercentages( this, 10, 60, 30 );
+      styling.configureConstraintsForColumnPercentages( this, 80, 20 );
       
       ImageView view = new ImageView( new Images().logoImage() );
       view.setFitWidth( 200 );
@@ -26,6 +27,7 @@ public class GnocchiFrame extends GridPane {
       this.logo = new BorderPane();
       this.logo.setRight( view );
       
+      this.gridWrapper = new BorderPane();
       this.setBackground( new Background( new BackgroundFill( Color.BLACK, null, null ) ) );
       
       new GameLauncherController( this );
@@ -33,16 +35,22 @@ public class GnocchiFrame extends GridPane {
    
    public void setContent( Node grid, Node properties ) {
       getChildren().clear();
-      add( grid, 1, 0 );
-      GridPane.setRowSpan( grid, 2 );
+      add( gridWrapper, 0, 0 );
+      
+      this.gridWrapper.setCenter( grid );
+      GridPane.setRowSpan( gridWrapper, 2 );
       if ( properties != null ) {
-         add( properties, 2, 0 );
+         add( properties, 1, 0 );
       }
-      add( logo, 2, 1 );
+      add( logo, 1, 1 );
    }//End Method
    
    BorderPane logo(){
       return logo;
+   }//End Method
+   
+   BorderPane gridWrapper(){
+      return gridWrapper;
    }//End Method
 
 }//End Method

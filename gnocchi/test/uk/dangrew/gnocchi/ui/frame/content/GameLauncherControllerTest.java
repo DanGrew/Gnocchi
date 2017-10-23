@@ -41,4 +41,7 @@ public class GameLauncherControllerTest {
       verify( frame, times( 2 ) ).setContent( systemUnderTest.mainMenu(), null );
    }//End Method
 
+   @Test public void shouldShowInformation(){
+      fail();
+   }//End Method
 }//End Class

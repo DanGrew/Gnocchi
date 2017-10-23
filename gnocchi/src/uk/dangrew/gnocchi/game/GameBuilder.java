@@ -1,5 +1,6 @@
 package uk.dangrew.gnocchi.game;
 
+import uk.dangrew.gnocchi.game.type.GameInformation;
 import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.gnocchi.game.type.GameType;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtProperties;
@@ -46,5 +47,11 @@ public class GameBuilder {
       this.properties = properties;
       return this;
    }//End Method
-
+   
+   public GameInformation produceInformation(){
+      GameInformation information = new GameInformation();
+      information.configure( this );
+      return information;
+   }//End Method
+   
 }//End Class

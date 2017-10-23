@@ -11,7 +11,10 @@ import java.util.function.BiConsumer;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
+import uk.dangrew.gnocchi.game.type.GameInformation;
 import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.gnocchi.grid.square.SquareRegularType;
 import uk.dangrew.gnocchi.grid.square.SquareType;
@@ -20,10 +23,12 @@ import uk.dangrew.kode.observable.PrivatelyModifiableObservableMapImpl;
 
 public class ColoursGtPropertiesTest {
 
+   @Spy private ColoursGtPropertyInformationProvider informationProvider;
    private ColoursGtProperties systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      systemUnderTest = new ColoursGtProperties();
+      MockitoAnnotations.initMocks( this );
+      systemUnderTest = new ColoursGtProperties( informationProvider );
       systemUnderTest.decreaseRemaining( SquareRegularType.Primary, 100 );
       systemUnderTest.decreaseRemaining( SquareRegularType.Secondary, 100 );
       systemUnderTest.moveUsed( 25 );
@@ -136,6 +141,12 @@ public class ColoursGtPropertiesTest {
       assertThat( systemUnderTest.remainingFor( SquareRegularType.Secondary ), is( ColoursGtProperties.DEFAULT_SECONDARY ) );
       assertThat( systemUnderTest.remainingFor( SquareRegularType.Tertiary ), is( 0 ) );
       assertThat( systemUnderTest.remainingFor( SquareRegularType.Quaternary ), is( 0 ) );
+   }//End Method
+   
+   @Test public void shouldProvideInformation(){
+      GameInformation gameInformation = new GameInformation();
+      systemUnderTest.configureInformation( gameInformation );
+      verify( informationProvider ).configure( systemUnderTest, gameInformation );
    }//End Method
 
 }//End Class

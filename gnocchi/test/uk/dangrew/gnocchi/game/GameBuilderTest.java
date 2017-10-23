@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.dangrew.gnocchi.game.type.GameInformation;
 import uk.dangrew.gnocchi.game.type.GameProperties;
 import uk.dangrew.gnocchi.game.type.GameType;
 import uk.dangrew.gnocchi.game.type.colours.ColoursGtProperties;
@@ -41,4 +42,10 @@ public class GameBuilderTest {
       assertThat( systemUnderTest.withProperties( properties ), is( systemUnderTest ) );
       assertThat( systemUnderTest.properties(), is( properties ) );
    }//End Method 
+   
+   @Test public void shouldProvideInformation(){
+      systemUnderTest.withProperties( new GameProperties() );
+      GameInformation information = systemUnderTest.produceInformation();
+      assertThat( information.valueFor( "Moves Allowed" ), is( Integer.toString( systemUnderTest.properties().movesRemaining().get() ) ) );
+   }//End Method
 }//End Class

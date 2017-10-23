@@ -28,10 +28,11 @@ public class GnocchiFrameTest {
       Node properties = new Rectangle();
       
       systemUnderTest.setContent( grid, properties );
-      assertThat( systemUnderTest.getChildren().contains( grid ), is( true ) );
+      assertThat( systemUnderTest.getChildren().contains( systemUnderTest.gridWrapper() ), is( true ) );
+      assertThat( systemUnderTest.gridWrapper().getCenter(), is( grid ) );
       assertThat( systemUnderTest.getChildren().contains( properties ), is( true ) );
       
-      assertThat( GridPane.getRowSpan( grid ), is( 2 ) );
+      assertThat( GridPane.getRowSpan( systemUnderTest.gridWrapper() ), is( 2 ) );
       
       shouldProvideLogo();
    }//End Method
@@ -40,9 +41,10 @@ public class GnocchiFrameTest {
       Node grid = new Rectangle();
       
       systemUnderTest.setContent( grid, null );
-      assertThat( systemUnderTest.getChildren().contains( grid ), is( true ) );
+      assertThat( systemUnderTest.getChildren().contains( systemUnderTest.gridWrapper() ), is( true ) );
+      assertThat( systemUnderTest.gridWrapper().getCenter(), is( grid ) );
       
-      assertThat( GridPane.getRowSpan( grid ), is( 2 ) );
+      assertThat( GridPane.getRowSpan( systemUnderTest.gridWrapper() ), is( 2 ) );
       
       shouldProvideLogo();
    }//End Method

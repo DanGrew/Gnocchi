@@ -5,7 +5,10 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class GameProperties {
 
+   static final String PROPERTY_MOVES = "Moves Allowed";
+   
    public static final int DEFAULT_MOVES = 25;
+   
    private final ObjectProperty< Integer > movesRemaining;
    
    public GameProperties() {
@@ -36,6 +39,10 @@ public class GameProperties {
 
    public void reset() {
       this.movesRemaining.set( DEFAULT_MOVES );
+   }//End Method
+   
+   public void configureInformation( GameInformation information ) {
+      information.putProperty( PROPERTY_MOVES, movesRemaining().get().toString() );
    }//End Method
 
 }//End Class

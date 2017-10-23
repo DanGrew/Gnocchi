@@ -5,16 +5,16 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GridSelectionContentTest {
+public class GameLevelInformationTest {
 
-   private GridSelection systemUnderTest;
+   private GameLevelInformation systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      systemUnderTest = new GridSelection( null );
+      systemUnderTest = new GameLevelInformation();
    }//End Method
 
    @Test public void test() {
       fail( "Not yet implemented" );
    }//End Method
-   
+
 }//End Class

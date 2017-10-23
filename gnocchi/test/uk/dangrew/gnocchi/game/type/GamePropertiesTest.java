@@ -34,9 +34,15 @@ public class GamePropertiesTest {
    }//End Method
    
    @Test public void shouldReset(){
-      assertThat( systemUnderTest.movesRemaining(), is( 0 ) );
+      assertThat( systemUnderTest.movesRemaining().get(), is( 0 ) );
       systemUnderTest.reset();
-      assertThat( systemUnderTest.movesRemaining(), is( GameProperties.DEFAULT_MOVES ) );
+      assertThat( systemUnderTest.movesRemaining().get(), is( GameProperties.DEFAULT_MOVES ) );
    }//End Method
-
+   
+   @Test public void shouldProvideInformation(){
+      GameInformation information = new GameInformation();
+      systemUnderTest.configureInformation( information );
+      assertThat( information.valueFor( GameProperties.PROPERTY_MOVES ), is( Integer.toString( systemUnderTest.movesRemaining().get() ) ) );
+   }//End Method
+   
 }//End Class
